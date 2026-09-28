@@ -1,0 +1,325 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Drafts and published content are separate so unfinished edits never leak.
+model WebsiteContent {
+  id                String   @id
+  draft             Json
+  published         Json
+  revision          Int      @default(1)
+  publishedRevision Int      @default(0)
+  publishedAt       DateTime?
+  updatedAt         DateTime @updatedAt
+}
+
+model WebsiteImage {
+  id          String   @id @default(cuid())
+  publicId    String?  @unique
+  imageUrl    String
+  contentHash String?  @unique
+  width       Int?
+  height      Int?
+  bytes       Int?
+  format      String   @default("webp")
+  title       String
+  alt         String
+  caption     String   @default("")
+  category    String   @default("welfare")
+  status      String   @default("draft")
+  inGallery   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  revision    Int      @default(1)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([inGallery, status, deletedAt, sortOrder])
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite has no native enum support in Prisma, so status fields below are
+// plain strings. The allowed values are enforced in each route handler:
+//   Volunteer / PartnerInquiry status: pending | approved | rejected
+//   BloodRequest status:               pending | needs_info | approved | rejected | closed
+//   BloodRequestResponse status:       notified | accepted | declined | unavailable | reached_hospital | completed
+//   ContactMessage status:             unread | read | replied
+//   Event status:                      draft | published
+//   EventRegistration status:          pending | confirmed | cancelled
+//   EventFeedback rating:              1-5 (integer)
+//
+// Soft deletes: every model with a `deletedAt` field is deleted via
+// server/src/lib/prisma.js's middleware, which transparently turns
+// `.delete()` into `.update({ deletedAt: now })` and filters deletedAt-set
+// rows out of reads. Route code just calls `.delete()` as normal — see
+// that file for the full explanation.
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
+
+model Volunteer {
+  id          String    @id @default(cuid())
+  volunteerId String?   @unique // e.g. "MLF202500001" — assigned when status becomes "approved"
+  passwordHash String?  // portal login password, set alongside volunteerId on first approval
+
+  // Forgot-password flow — token is single-use and time-limited (1 hour),
+  // cleared once used or on any subsequent successful reset.
+  passwordResetToken   String?   @unique
+  passwordResetExpires DateTime?
+
+  // Personal details
+  fullName String
+  dob      DateTime
+  gender   String
+  aadhaar  String?
+  photoUrl String?
+  mobile   String
+  whatsapp String?
+  email    String
+
+  // Address
+  address   String
+  state     String
+  district  String
+  taluk     String
+  panchayat String
+  ward      String
+  pin       String
+
+  // Emergency contact
+  emergencyName         String
+  emergencyRelationship String
+  emergencyPhone        String
+
+  skills String // comma-separated: Disaster Relief, Event Management, Medical Support, Social Media, Photography, Fundraising, Teaching, Others
+
+  // Blood donation
+  bloodGroup             String?
+  isBloodDonor           Boolean   @default(false)
+  lastBloodDonationDate  DateTime? // self-reported on the registration form; superseded by BloodDonationRecord history once any exist
+  bloodDonationAvailable Boolean   @default(true) // self-service toggle; auto-set false after a completed donation until next eligible date
+  weight                 Float?
+  medicalConditions      String?
+
+  // Geocoded once (on approval) from their address, for "nearby volunteers" blood-request targeting
+  lat Float?
+  lng Float?
+
+  availableTime String // comma-separated: Morning, Afternoon, Weekend, Full Time
+
+  // Social media (optional handles/links)
+  instagram String?
+  facebook  String?
+  linkedin  String?
+
+  // ID verification
+  idType     String? // Aadhaar | Driving License | Passport
+  idUploadUrl String?
+
+  message   String?
+  status    String   @default("pending")
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendances           Attendance[]
+  notifications         Notification[]
+  bloodDonations        BloodDonationRecord[]
+  bloodRequestResponses BloodRequestResponse[]
+  pushSubscriptions     PushSubscription[]
+}
+
+model BloodRequest {
+  id            String   @id @default(cuid())
+  patientName   String
+  bloodGroup    String
+  units         Int
+  urgency       String // "Emergency Level": Emergency — within hours | Urgent — within 24 hours | Planned — date scheduled
+  hospital      String
+  district      String
+  location      String // additional address detail (landmark, ward, etc.)
+  doctorName    String?
+  phone         String
+  documentUrls  String? // comma-separated Cloudinary URLs (referral letters, prescriptions, ID)
+  status        String   @default("pending") // pending | needs_info | approved | rejected | closed
+  adminNote     String? // used for "need more information" feedback to whoever can see the request in admin
+
+  // Geocoded once (on creation) from hospital + district, for "nearby volunteers" targeting
+  lat Float?
+  lng Float?
+
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  responses BloodRequestResponse[]
+  donations BloodDonationRecord[]
+}
+
+// One row per volunteer notified about a blood request. Tracks their
+// response and, once accepted, their progress toward actually donating.
+model BloodRequestResponse {
+  id             String    @id @default(cuid())
+  bloodRequestId String
+  bloodRequest   BloodRequest @relation(fields: [bloodRequestId], references: [id], onDelete: Cascade)
+  volunteerId    String
+  volunteer      Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  response       String? // null until they respond: accept | decline | already_donated | unavailable
+  status         String    @default("notified") // notified | accepted | declined | unavailable | reached_hospital | completed
+  respondedAt    DateTime?
+  deletedAt      DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([bloodRequestId, volunteerId])
+}
+
+// A volunteer's donation history. Created automatically when admin marks a
+// BloodRequestResponse "completed", or logged manually for camp donations
+// not tied to any specific request.
+model BloodDonationRecord {
+  id             String    @id @default(cuid())
+  volunteerId    String
+  volunteer      Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  donationDate   DateTime
+  location       String?
+  notes          String?
+  bloodRequestId String?
+  bloodRequest   BloodRequest? @relation(fields: [bloodRequestId], references: [id], onDelete: SetNull)
+  deletedAt      DateTime?
+  createdAt      DateTime  @default(now())
+}
+
+// Web Push subscription, one per browser the volunteer opted in from.
+model PushSubscription {
+  id          String    @id @default(cuid())
+  volunteerId String
+  volunteer   Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  endpoint    String    @unique
+  p256dh      String
+  auth        String
+  createdAt   DateTime  @default(now())
+}
+
+model PartnerInquiry {
+  id            String   @id @default(cuid())
+  organization  String
+  contactPerson String
+  email         String
+  message       String
+  status        String   @default("pending")
+  deletedAt     DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  email     String
+  subject   String
+  message   String
+  status    String   @default("unread")
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model Event {
+  id            String               @id @default(cuid())
+  title         String
+  category      String
+  description   String
+  location      String
+  eventDate     DateTime
+  startTime     String
+  endTime       String
+  durationHours Float? // hours credited to every volunteer checked in via QR scan
+  imageUrl      String?
+  photoAlbumUrl String? // optional link to an external photo album (e.g. Google Drive folder) for this event
+  capacity      Int?
+  status        String               @default("draft")
+  deletedAt     DateTime?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  registrations EventRegistration[]
+  attendances   Attendance[]
+  feedback      EventFeedback[]
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  phone     String
+  status    String   @default("pending")
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Created when an admin scans a volunteer's ID-card QR code at an event.
+// hoursCredited snapshots Event.durationHours at check-in time so a later
+// edit to the event's duration doesn't retroactively change past totals.
+model Attendance {
+  id            String    @id @default(cuid())
+  volunteerId   String
+  volunteer     Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  eventId       String
+  event         Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  hoursCredited Float      @default(0)
+  checkedInAt   DateTime  @default(now())
+
+  // Set by an admin from the check-in list — attendance alone doesn't grant
+  // a certificate, issuing is a deliberate manual action.
+  certificateIssued   Boolean   @default(false)
+  certificateIssuedAt DateTime?
+
+  @@unique([volunteerId, eventId])
+}
+
+// Public, no-login feedback on a past event — loosely matched by name/email,
+// same trust model as EventRegistration (no Volunteer relation required).
+model EventFeedback {
+  id        String    @id @default(cuid())
+  eventId   String
+  event     Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  rating    Int // 1-5
+  comment   String?
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+// audience "all" = broadcast to every volunteer; "volunteer" = targeted at
+// one specific volunteerId.
+model Notification {
+  id          String     @id @default(cuid())
+  title       String
+  message     String
+  audience    String     @default("all")
+  volunteerId String?
+  volunteer   Volunteer? @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  deletedAt   DateTime?
+  createdAt   DateTime   @default(now())
+}

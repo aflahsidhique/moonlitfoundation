@@ -1,0 +1,46 @@
+import { useEffect, useState } from "react";
+import { adminFetch } from "../lib/adminApi";
+import { invalidateWebsite } from "../../lib/websiteCache";
+import { useToast } from "../../hooks/useToast";
+import AdminModal from "../components/AdminModal";
+import { checkImage, uploadWebsiteImage } from "../lib/websiteImages";
+import "../../styles/content-management.css";
+const categories={blood:"Blood donation",welfare:"Community welfare",relief:"Disaster relief",environment:"Environment",youth:"Youth development"};
+
+function PhotoEditor({image,onClose,onSaved}) {
+  const [values,setValues]=useState(image?{title:image.title,alt:image.alt,caption:image.caption,category:image.category,status:image.status,sortOrder:image.sortOrder,inGallery:image.inGallery}:{title:"",alt:"",caption:"",category:"welfare",status:"draft",sortOrder:0,inGallery:true});
+  const [file,setFile]=useState(null),[preview,setPreview]=useState(image?.imageUrl||""),[busy,setBusy]=useState(false),[error,setError]=useState("");
+  useEffect(()=>{if(!file)return;const url=URL.createObjectURL(file);setPreview(url);return()=>URL.revokeObjectURL(url);},[file]);
+  const field=name=>({value:values[name],onChange:event=>setValues(current=>({...current,[name]:name==="sortOrder"?Number(event.target.value):event.target.value}))});
+  async function save(event) {
+    event.preventDefault();setError("");setBusy(true);
+    try {
+      let result;
+      if(image) result=await adminFetch(`/website/images/${image.id}`,{method:"PATCH",body:JSON.stringify({...values,revision:image.revision})});
+      else {
+        if(!file)throw new Error("Choose a photo to upload.");
+        result=await uploadWebsiteImage(file,{...values,status:"draft"});
+        if(result.deduplicated){onSaved("This photo is already in your library. The existing file was reused.");return;}
+        if(values.status==="published"||values.sortOrder) result=await adminFetch(`/website/images/${result.image.id}`,{method:"PATCH",body:JSON.stringify({...values,revision:result.image.revision})});
+      }
+      invalidateWebsite();onSaved(values.status==="published"&&values.inGallery?"Photo published to the website gallery.":"Photo saved to your library.");
+    }catch(err){setError(err.message);}finally{setBusy(false);}
+  }
+  return <AdminModal open onClose={onClose} title={image?"Edit photo":"Upload a photo"} busy={busy} wide><form onSubmit={save} className="cms-photo-form"><fieldset disabled={busy}>
+    {preview&&<img className="cms-photo-preview" src={preview} alt="Selected photo preview"/>}
+    {!image&&<label className="cms-dropzone">Choose a photo<input type="file" accept="image/jpeg,image/png,image/webp" required onChange={event=>{setError("");const chosen=event.target.files[0];if(!chosen)return;try{checkImage(chosen);setFile(chosen);}catch(err){setError(err.message);event.target.value="";setFile(null);setPreview("");}}}/><small>JPG, PNG or WebP · up to 5 MB. Converted to WebP and stored in Cloudinary.</small></label>}
+    <div className="cms-field-grid"><label className="cms-field"><span className="mf-label">Photo title</span><input className="mf-input" required maxLength={150} {...field("title")}/></label><label className="cms-field"><span className="mf-label">Category</span><select className="mf-input" {...field("category")}>{Object.entries(categories).map(([key,label])=><option key={key} value={key}>{label}</option>)}</select></label><label className="cms-field cms-field-wide"><span className="mf-label">Image description (alt text)</span><input className="mf-input" required maxLength={300} {...field("alt")}/><small>Describe what is in the photo for people using screen readers.</small></label><label className="cms-field cms-field-wide"><span className="mf-label">Caption</span><textarea className="mf-input" rows={3} maxLength={1000} {...field("caption")}/></label><label className="cms-field"><span className="mf-label">Visibility</span><select className="mf-input" {...field("status")}><option value="draft">Draft — hidden from the gallery</option><option value="published">Published — visible in the gallery</option></select></label><label className="cms-field"><span className="mf-label">Display order</span><input className="mf-input" type="number" min={0} max={100000} step={1} {...field("sortOrder")}/><small>Lower numbers appear first.</small></label></div><label className="cms-checkbox"><input type="checkbox" checked={values.inGallery} onChange={event=>setValues(current=>({...current,inGallery:event.target.checked}))}/> Include this photo in the website gallery</label>
+    </fieldset>{error&&<p role="alert" className="ws-error">{error}</p>}<div className="cms-modal-actions"><button type="button" className="mf-btn mf-btn-outline" disabled={busy} onClick={onClose}>Cancel</button><button type="submit" className="mf-btn mf-btn-primary" disabled={busy}>{busy?"Saving photo…":image?"Save changes":"Upload photo"}</button></div></form></AdminModal>;
+}
+export default function GalleryManagement() {
+  const [images,setImages]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(""),[editing,setEditing]=useState(undefined),[query,setQuery]=useState(""),[filter,setFilter]=useState("gallery"),[busy,setBusy]=useState(null);
+  const toast=useToast();
+  async function load(){try{const result=await adminFetch("/website/images",{force:true});if(!Array.isArray(result.images))throw new Error("The image library is unavailable. Check that the latest server migration is installed.");setImages(result.images);setError("");}catch(err){setError(err.message);}finally{setLoading(false);}}
+  useEffect(()=>{load();},[]);
+  async function mutate(image,remove=false){
+    setBusy(image.id);try{await adminFetch(`/website/images/${image.id}`,{method:remove?"DELETE":"PATCH",body:JSON.stringify({revision:image.revision,...(!remove&&{status:image.status==="published"?"draft":"published"})})});invalidateWebsite();await load();toast(remove?"Photo removed from the library and gallery.":"Gallery visibility updated.");}catch(err){toast(err.message);}finally{setBusy(null);}
+  }
+  const visible=images.filter(image=>(filter==="library"||filter==="gallery"&&image.inGallery||filter===image.status&&image.inGallery)&&`${image.title} ${image.caption} ${categories[image.category]}`.toLowerCase().includes(query.toLowerCase()));
+  return <><div className="cms-intro"><span className="cms-intro-icon"><i className="fa-regular fa-images" aria-hidden="true"/></span><div><h2>Moments worth sharing.</h2><p>Upload photos, write captions and choose what appears in your public gallery.</p></div><a className="mf-admin-btn mf-admin-btn-neutral" href="/gallery" target="_blank" rel="noopener noreferrer">View gallery ↗</a></div><div className="ws-toolbar"><div className="ws-toolbar-filters"><input type="search" className="mf-input" aria-label="Search photos" placeholder="Search photos or categories…" value={query} onChange={e=>setQuery(e.target.value)}/><select aria-label="Filter photos" className="mf-input" value={filter} onChange={e=>setFilter(e.target.value)}><option value="gallery">Gallery photos</option><option value="published">Published</option><option value="draft">Drafts</option><option value="library">All website images</option></select></div><button className="mf-btn mf-btn-primary" onClick={()=>setEditing(null)}><i className="fa-solid fa-plus" aria-hidden="true"/>Upload photo</button></div>
+    {error&&<p className="ws-error" role="alert">{error} <button onClick={load}>Retry</button></p>}{loading?<p className="ws-empty" role="status">Loading your image library…</p>:!visible.length?<p className="ws-empty">{images.length?"No photos match this view.":"Your gallery starts here. Upload the first moment."}</p>:<div className="cms-gallery-grid">{visible.map(image=><article className="cms-photo-card" key={image.id}><div className="cms-photo-cover"><img src={image.imageUrl} alt={image.alt} loading="lazy"/><span className={`cms-status ${image.status==="published"&&image.inGallery?"is-live":""}`}>{!image.inGallery?"Website image":image.status==="published"?"Published":"Draft"}</span></div><div className="cms-photo-copy"><p className="ws-eyebrow">{categories[image.category]}</p><h2>{image.title}</h2><p>{image.caption||image.alt}</p><small>{image.format==="webp"?`WEBP · ${image.width} × ${image.height} · ${Math.round((image.bytes||0)/1024)} KB`:"Existing website image"} · Order {image.sortOrder}</small></div><div className="cms-photo-actions"><button className="mf-admin-btn mf-admin-btn-neutral" disabled={busy===image.id} onClick={()=>setEditing(image)}>Edit</button>{image.inGallery&&<button className="mf-admin-btn mf-admin-btn-neutral" disabled={busy===image.id} onClick={()=>mutate(image)}>{image.status==="published"?"Hide":"Publish"}</button>}<button className="ws-icon-button ws-delete" aria-label={`Remove ${image.title}`} disabled={busy===image.id} onClick={()=>{if(window.confirm(`Remove “${image.title}” from the library and gallery? Pages already using this image will keep it.`))mutate(image,true);}}><i className="fa-regular fa-trash-can" aria-hidden="true"/></button></div></article>)}</div>}{editing!==undefined&&<PhotoEditor key={editing?.id||"new"} image={editing} onClose={()=>setEditing(undefined)} onSaved={message=>{setEditing(undefined);toast(message);invalidateWebsite();load();}}/>}</>;
+}

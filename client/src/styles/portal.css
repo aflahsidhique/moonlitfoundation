@@ -1,0 +1,140 @@
+/* ============================================================
+   MOONLIT FOUNDATION — portal.css
+   Volunteer-portal styles, layered on /assets/custom.css so it
+   shares the same --mf-* tokens and mf-* components (mf-btn,
+   mf-input, mf-label, mf-form-card, mf-toast, ...).
+   ============================================================ */
+
+body { background: var(--mf-bg); }
+
+/* ---------- shell / sidebar (mirrors admin's layout) ---------- */
+.mf-portal-shell { display: flex; min-height: 100vh; align-items: flex-start; }
+.mf-portal-sidebar {
+  width: 250px; flex-shrink: 0; background: var(--mf-navy); color: #fff;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column;
+}
+.mf-portal-brand { padding: 1.5rem 1.25rem 1rem; display: flex; align-items: center; gap: .7rem; }
+.mf-portal-nav { flex: 1; padding: .5rem 0; }
+.mf-portal-nav-link {
+  display: flex; align-items: center; gap: .75rem; padding: .7rem 1.25rem;
+  color: #B9C6E2; font-size: .88rem; font-weight: 500; cursor: pointer;
+  border-left: 3px solid transparent; transition: all .2s ease;
+}
+.mf-portal-nav-link i { width: 18px; text-align: center; }
+.mf-portal-nav-link:hover { color: #fff; background: rgba(255,255,255,.06); }
+.mf-portal-nav-link.is-active { color: #fff; background: rgba(255,255,255,.1); border-left-color: var(--mf-yellow); }
+.mf-portal-nav-link.is-disabled { opacity: .45; cursor: default; }
+.mf-portal-nav-link .mf-portal-soon { margin-left: auto; font-size: .62rem; background: rgba(255,255,255,.15); padding: .1rem .4rem; border-radius: 99px; }
+.mf-portal-sidebar-footer { padding: 1rem 1.25rem; border-top: 1px solid rgba(255,255,255,.12); font-size: .8rem; }
+.mf-portal-main { flex: 1; padding: 2rem; min-width: 0; }
+.mf-portal-section-title { font-size: 1.4rem; font-weight: 700; color: var(--mf-dark); margin-bottom: 1.5rem; }
+
+/* mobile top bar + hamburger — hidden on desktop, shown below the sidebar breakpoint */
+.mf-portal-mobile-topbar {
+  display: none; align-items: center; justify-content: space-between; gap: .75rem;
+  background: var(--mf-navy); padding: .9rem 1.1rem; position: sticky; top: 0; z-index: 80;
+}
+.mf-portal-menu-btn { color: #fff; font-size: 1.3rem; line-height: 1; background: none; border: none; padding: .25rem; }
+.mf-portal-sidebar-close { display: none; margin-left: auto; color: #B9C6E2; font-size: 1.2rem; background: none; border: none; }
+
+@media (max-width: 900px) {
+  .mf-portal-mobile-topbar { display: flex; }
+  .mf-portal-shell { flex-direction: column; }
+  .mf-portal-sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; max-width: 85vw; height: 100vh;
+    transform: translateX(-100%); transition: transform .3s ease; z-index: 90;
+  }
+  .mf-portal-sidebar.open { transform: translateX(0); }
+  .mf-portal-sidebar-close { display: block; }
+  .mf-portal-nav { display: block; overflow-x: visible; overflow-y: auto; }
+  .mf-portal-nav-link { border-left: 3px solid transparent; border-bottom: none; white-space: normal; }
+  .mf-portal-nav-link.is-active { border-left-color: var(--mf-yellow); border-bottom-color: transparent; }
+  .mf-portal-main { padding: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .mf-portal-main { padding: 1rem .85rem; }
+  .mf-portal-section-title { font-size: 1.2rem; }
+  .mf-portal-stats-row { grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .mf-portal-stat-card { padding: 1rem 1.1rem; }
+  .mf-portal-stat-num { font-size: 1.4rem; }
+  .mf-cert-card { padding: 1.75rem 1.25rem; }
+}
+
+@media (max-width: 340px) {
+  .mf-portal-stats-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- profile (existing read-only view) ---------- */
+.mf-pf-header { display: flex; gap: 1.25rem; align-items: center; margin-bottom: 1.5rem; }
+.mf-pf-photo { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; background: #F1F5F9; flex-shrink: 0; box-shadow: var(--mf-shadow); }
+.mf-pf-section { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mf-blue); margin: 1.5rem 0 .6rem; padding-bottom: .4rem; border-bottom: 1.5px solid #E3E9F5; }
+.mf-pf-section:first-of-type { margin-top: 0; }
+.mf-pf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .7rem 1.5rem; font-size: .88rem; }
+.mf-pf-grid dt { font-size: .72rem; color: var(--mf-text); }
+.mf-pf-grid dd { font-weight: 500; color: var(--mf-dark); }
+.mf-pf-chip { display: inline-block; background: #EEF2FA; color: var(--mf-blue); font-size: .75rem; font-weight: 600; padding: .25rem .7rem; border-radius: 99px; margin: 0 .3rem .3rem 0; }
+
+/* ---------- overview stat cards ---------- */
+.mf-portal-stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.75rem; }
+.mf-portal-stat-card { background: #fff; border-radius: 16px; padding: 1.25rem 1.4rem; box-shadow: var(--mf-shadow); }
+.mf-portal-stat-num { font-size: 1.7rem; font-weight: 700; color: var(--mf-navy); }
+.mf-portal-stat-label { font-size: .78rem; color: var(--mf-text); margin-top: .2rem; }
+
+/* ---------- digital volunteer ID card ---------- */
+.mf-id-card {
+  max-width: 340px; margin: 0 auto; border-radius: 20px; overflow: hidden;
+  box-shadow: var(--mf-shadow-lg); background: #fff; border: 1px solid #E3E9F5;
+}
+.mf-id-card-header {
+  background: linear-gradient(115deg,var(--mf-navy) 0%,var(--mf-navy-2) 55%,#183a7e 100%);
+  color: #fff; padding: 1rem 1.25rem; display: flex; align-items: center; gap: .6rem;
+}
+.mf-id-card-header .name { font-weight: 700; letter-spacing: .05em; font-size: .95rem; }
+.mf-id-card-body { padding: 1.5rem 1.25rem; text-align: center; }
+.mf-id-card-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin: 0 auto .9rem; border: 4px solid var(--mf-yellow); background: #F1F5F9; }
+.mf-id-card-vname { font-size: 1.05rem; font-weight: 700; color: var(--mf-dark); }
+.mf-id-card-vid { font-size: .82rem; color: var(--mf-blue); font-weight: 600; margin-top: .15rem; }
+.mf-id-card-row { display: flex; justify-content: center; gap: 1.5rem; margin-top: .9rem; font-size: .8rem; }
+.mf-id-card-row div dt { color: var(--mf-text); font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; }
+.mf-id-card-row div dd { font-weight: 700; color: var(--mf-dark); }
+.mf-id-card-qr { margin: 1.1rem auto 0; width: 150px; height: 150px; border-radius: 12px; border: 1px solid #E3E9F5; }
+.mf-id-card-status {
+  display: inline-block; margin-top: .9rem; padding: .3rem 1rem; border-radius: 99px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .06em; background: #D1FAE5; color: #065F46;
+}
+.mf-id-card-footer { padding: .8rem 1.25rem; text-align: center; font-size: .68rem; color: var(--mf-text); border-top: 1px dashed #E3E9F5; }
+
+/* ---------- notifications feed ---------- */
+.mf-notif-item { background: #fff; border-radius: 14px; padding: 1rem 1.25rem; box-shadow: var(--mf-shadow); margin-bottom: .75rem; }
+.mf-notif-item .title { font-weight: 700; color: var(--mf-dark); font-size: .92rem; }
+.mf-notif-item .meta { font-size: .72rem; color: var(--mf-text); margin-top: .1rem; }
+.mf-notif-item .msg { font-size: .86rem; margin-top: .5rem; color: var(--mf-dark); }
+
+/* ---------- generic list rows (events / attendance) ---------- */
+.mf-portal-row { background: #fff; border-radius: 14px; padding: 1rem 1.25rem; box-shadow: var(--mf-shadow); margin-bottom: .75rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.mf-portal-row .title { font-weight: 700; color: var(--mf-dark); font-size: .9rem; }
+.mf-portal-row .meta { font-size: .78rem; color: var(--mf-text); margin-top: .15rem; }
+
+/* ---------- status badges (blood requests / event registrations) ---------- */
+.mf-status-badge { display: inline-block; padding: .22rem .7rem; border-radius: 99px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+.mf-status-pending, .mf-status-notified { background: #DBEAFE; color: #1E40AF; }
+.mf-status-needs_info, .mf-status-unavailable { background: #FEF3C7; color: #92400E; }
+.mf-status-approved, .mf-status-confirmed, .mf-status-accepted, .mf-status-reached_hospital, .mf-status-fulfilled { background: #D1FAE5; color: #065F46; }
+.mf-status-rejected, .mf-status-cancelled, .mf-status-closed, .mf-status-declined { background: #FEE2E2; color: #991B1B; }
+.mf-status-completed { background: #E0E7FF; color: #3730A3; }
+
+/* ---------- compact action buttons (blood alert respond row) ---------- */
+.mf-blood-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.mf-blood-actions .mf-btn { padding: .45rem 1rem; font-size: .78rem; }
+
+/* ---------- certificate of participation ---------- */
+.mf-cert-card {
+  max-width: 480px; margin: 0 auto; border-radius: 20px; padding: 2.5rem 2rem; text-align: center;
+  background: #fff; border: 2px solid var(--mf-yellow); box-shadow: var(--mf-shadow-lg);
+}
+
+@media print {
+  .mf-portal-sidebar, .mf-portal-topbar, .mf-portal-mobile-topbar, #mfDownloadIdBtn, #mfCertBack, #mfCertPrint { display: none !important; }
+  .mf-portal-main { padding: 0; }
+}

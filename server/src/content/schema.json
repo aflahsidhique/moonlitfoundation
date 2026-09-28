@@ -1,0 +1,3444 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "home",
+      "label": "Home",
+      "path": "/",
+      "fields": [
+        {
+          "key": "home.hero.young-minds-shared-purpose",
+          "label": "YOUNG MINDS. SHARED PURPOSE.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "YOUNG MINDS. SHARED PURPOSE.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.small-acts",
+          "label": "Small acts.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Small acts.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.extraordinary",
+          "label": "Extraordinary",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Extraordinary",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.change",
+          "label": "change",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "change",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.we-re-a-youth-led-movement-turning-compassion",
+          "label": "We’re a youth-led movement turning compassion into action. Come explore,",
+          "group": "Small acts. Extraordinary change",
+          "type": "textarea",
+          "default": "We’re a youth-led movement turning compassion into action. Come explore, give back, and leave the world a little better than you found it.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.hero.find-your-purpose",
+          "label": "Find your purpose",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Find your purpose",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.meet-moonlit",
+          "label": "Meet Moonlit",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Meet Moonlit",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.image-images-together-webp",
+          "label": "Image: /images/together.webp",
+          "group": "Small acts. Extraordinary change",
+          "type": "image",
+          "default": "/images/together.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.hero.image-images-volunteers-webp",
+          "label": "Image: /images/volunteers.webp",
+          "group": "Small acts. Extraordinary change",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.hero.image-images-community-webp",
+          "label": "Image: /images/community.webp",
+          "group": "Small acts. Extraordinary change",
+          "type": "image",
+          "default": "/images/community.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.hero.2-000-changemakers",
+          "label": "2,000+ changemakers.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "2,000+ changemakers.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.there-s-a-place-here-for-you",
+          "label": "There’s a place here for you.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "There’s a place here for you.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.image-images-community-webp-2",
+          "label": "Image: /images/community.webp",
+          "group": "Small acts. Extraordinary change",
+          "type": "image",
+          "default": "/images/community.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.hero.image-description-two-moonlit-volunteers-coll",
+          "label": "Image description: Two Moonlit volunteers collecting litter on Kozhikode beach at su",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Two Moonlit volunteers collecting litter on Kozhikode beach at sunset",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.on-the-ground-making-a-difference",
+          "label": "ON THE GROUND. MAKING A DIFFERENCE.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "ON THE GROUND. MAKING A DIFFERENCE.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.a-little-good",
+          "label": "A little good.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "A little good.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.endless-possibility",
+          "label": "Endless possibility.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Endless possibility.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.image-images-volunteers-webp-2",
+          "label": "Image: /images/volunteers.webp",
+          "group": "Small acts. Extraordinary change",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.hero.image-description-our-beach-cleanup-volunteer",
+          "label": "Image description: Our beach cleanup volunteers together",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Our beach cleanup volunteers together",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.good-people",
+          "label": "Good people.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Good people.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.great-things",
+          "label": "Great things.",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "Great things.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.11-2588-n-75-7804-e",
+          "label": "11.2588° N 75.7804° E",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "11.2588° N 75.7804° E",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.rooted-in-kerala-india",
+          "label": "ROOTED IN KERALA, INDIA",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "ROOTED IN KERALA, INDIA",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.scroll-to-feel-the-difference",
+          "label": "SCROLL TO FEEL THE DIFFERENCE",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "SCROLL TO FEEL THE DIFFERENCE",
+          "maxLength": 300
+        },
+        {
+          "key": "home.hero.a-youth-led-nonprofit-since-2021",
+          "label": "A YOUTH-LED NONPROFIT · SINCE 2021",
+          "group": "Small acts. Extraordinary change",
+          "type": "text",
+          "default": "A YOUTH-LED NONPROFIT · SINCE 2021",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.title-a-little-of-you-a-life-for-someone",
+          "label": "title: A little of you.\nA life for someone.",
+          "group": "Programs",
+          "type": "textarea",
+          "default": "A little of you.\nA life for someone.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.programs.category-blood-donation",
+          "label": "category: Blood donation",
+          "group": "Programs",
+          "type": "text",
+          "default": "Blood donation",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.image-images-together-webp",
+          "label": "image: /images/together.webp",
+          "group": "Programs",
+          "type": "image",
+          "default": "/images/together.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.programs.alt-moonlit-volunteers-at-a-blood-donation-ce",
+          "label": "alt: Moonlit volunteers at a blood donation centre",
+          "group": "Programs",
+          "type": "text",
+          "default": "Moonlit volunteers at a blood donation centre",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.description-connecting-willing-donors-with-th",
+          "label": "description: Connecting willing donors with the people who need them most.",
+          "group": "Programs",
+          "type": "text",
+          "default": "Connecting willing donors with the people who need them most.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.title-for-a-greener-kinder-tomorrow",
+          "label": "title: For a greener,\nkinder tomorrow.",
+          "group": "Programs",
+          "type": "textarea",
+          "default": "For a greener,\nkinder tomorrow.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.programs.category-environment",
+          "label": "category: Environment",
+          "group": "Programs",
+          "type": "text",
+          "default": "Environment",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.image-images-community-webp",
+          "label": "image: /images/community.webp",
+          "group": "Programs",
+          "type": "image",
+          "default": "/images/community.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.programs.alt-moonlit-volunteers-cleaning-kozhikode-bea",
+          "label": "alt: Moonlit volunteers cleaning Kozhikode beach at sunset",
+          "group": "Programs",
+          "type": "text",
+          "default": "Moonlit volunteers cleaning Kozhikode beach at sunset",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.description-cleaner-shores-more-trees-a-share",
+          "label": "description: Cleaner shores. More trees. A shared responsibility for our plane",
+          "group": "Programs",
+          "type": "text",
+          "default": "Cleaner shores. More trees. A shared responsibility for our planet.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.title-young-people-limitless-potential",
+          "label": "title: Young people.\nLimitless potential.",
+          "group": "Programs",
+          "type": "textarea",
+          "default": "Young people.\nLimitless potential.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.programs.category-youth-development",
+          "label": "category: Youth development",
+          "group": "Programs",
+          "type": "text",
+          "default": "Youth development",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.image-images-volunteers-webp",
+          "label": "image: /images/volunteers.webp",
+          "group": "Programs",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.programs.alt-the-moonlit-volunteer-community-gathered-",
+          "label": "alt: The Moonlit volunteer community gathered on the beach",
+          "group": "Programs",
+          "type": "text",
+          "default": "The Moonlit volunteer community gathered on the beach",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.description-turning-curiosity-and-compassion-",
+          "label": "description: Turning curiosity and compassion into the confidence to lead.",
+          "group": "Programs",
+          "type": "text",
+          "default": "Turning curiosity and compassion into the confidence to lead.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.count-2000",
+          "label": "count: 2000",
+          "group": "Stats",
+          "type": "number",
+          "default": 2000,
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.label-volunteers-one-purpose",
+          "label": "label: Volunteers, one purpose",
+          "group": "Stats",
+          "type": "text",
+          "default": "Volunteers, one purpose",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.note-a-community-that-shows-up",
+          "label": "note: A community that shows up",
+          "group": "Stats",
+          "type": "text",
+          "default": "A community that shows up",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.count-1000",
+          "label": "count: 1000",
+          "group": "Stats",
+          "type": "number",
+          "default": 1000,
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.label-families-supported",
+          "label": "label: Families supported",
+          "group": "Stats",
+          "type": "text",
+          "default": "Families supported",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.note-care-that-reaches-further",
+          "label": "note: Care that reaches further",
+          "group": "Stats",
+          "type": "text",
+          "default": "Care that reaches further",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.count-30",
+          "label": "count: 30",
+          "group": "Stats",
+          "type": "number",
+          "default": 30,
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.label-communities-reached",
+          "label": "label: Communities reached",
+          "group": "Stats",
+          "type": "text",
+          "default": "Communities reached",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.note-change-close-to-home",
+          "label": "note: Change, close to home",
+          "group": "Stats",
+          "type": "text",
+          "default": "Change, close to home",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.count-120",
+          "label": "count: 120",
+          "group": "Stats",
+          "type": "number",
+          "default": 120,
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.label-relief-campaigns",
+          "label": "label: Relief campaigns",
+          "group": "Stats",
+          "type": "text",
+          "default": "Relief campaigns",
+          "maxLength": 300
+        },
+        {
+          "key": "home.stats.note-together-when-it-matters",
+          "label": "note: Together, when it matters",
+          "group": "Stats",
+          "type": "text",
+          "default": "Together, when it matters",
+          "maxLength": 300
+        },
+        {
+          "key": "home.our-impact.the-difference-we-make",
+          "label": "THE DIFFERENCE WE MAKE",
+          "group": "Small beginnings. Real impact.",
+          "type": "text",
+          "default": "THE DIFFERENCE WE MAKE",
+          "maxLength": 300
+        },
+        {
+          "key": "home.our-impact.small-beginnings",
+          "label": "Small beginnings.",
+          "group": "Small beginnings. Real impact.",
+          "type": "text",
+          "default": "Small beginnings.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.our-impact.real-impact",
+          "label": "Real impact.",
+          "group": "Small beginnings. Real impact.",
+          "type": "text",
+          "default": "Real impact.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.our-impact.behind-every-number-a-human-story",
+          "label": "Behind every number, a human story.",
+          "group": "Small beginnings. Real impact.",
+          "type": "text",
+          "default": "Behind every number, a human story.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.image-images-volunteers-webp",
+          "label": "Image: /images/volunteers.webp",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.story.image-description-moonlit-s-project-sulaimani",
+          "label": "Image description: Moonlit's Project Sulaimani beach cleanup community",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Moonlit's Project Sulaimani beach cleanup community",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.a-shared-purpose",
+          "label": "A shared purpose.",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "A shared purpose.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.a-thousand-possibilities",
+          "label": "A thousand possibilities.",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "A thousand possibilities.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.link-https-www-instagram-com-reel-dxtm9gmd8yb",
+          "label": "Link: https://www.instagram.com/reel/DXTm9GmD8yb/",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "url",
+          "default": "https://www.instagram.com/reel/DXTm9GmD8yb/",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.story.life-at-moonlit",
+          "label": "Life at Moonlit",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Life at Moonlit",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.this-is-moonlit",
+          "label": "THIS IS MOONLIT",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "THIS IS MOONLIT",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.big-hearts",
+          "label": "Big hearts.",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Big hearts.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.bigger",
+          "label": "Bigger",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Bigger",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.possibilities",
+          "label": "possibilities.",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "possibilities.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.we-believe-the-world-changes-when-ordinary-pe",
+          "label": "We believe the world changes when ordinary people decide to do something",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "We believe the world changes when ordinary people decide to do something extraordinary.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.born-in-kerala-in-2021-moonlit-brings-young-p",
+          "label": "Born in Kerala in 2021, Moonlit brings young people together through tra",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "textarea",
+          "default": "Born in Kerala in 2021, Moonlit brings young people together through travel, volunteering, and a shared desire to do good. From a beach cleanup to a life-saving blood donation, we turn small moments of care into lasting change.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.story.the-story-behind-the-movement",
+          "label": "The story behind the movement",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "The story behind the movement",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.people-first",
+          "label": "People first",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "People first",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.purpose-always",
+          "label": "Purpose always",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Purpose always",
+          "maxLength": 300
+        },
+        {
+          "key": "home.story.youth-powered",
+          "label": "Youth powered",
+          "group": "Big hearts. Bigger possibilities.",
+          "type": "text",
+          "default": "Youth powered",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.many-ways-to-make-a-difference",
+          "label": "MANY WAYS TO MAKE A DIFFERENCE",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "MANY WAYS TO MAKE A DIFFERENCE",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.good-comes-in",
+          "label": "Good comes in",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "Good comes in",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.many-forms",
+          "label": "many forms.",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "many forms.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.find-the-cause-that-moves-you",
+          "label": "Find the cause that moves you.",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "Find the cause that moves you.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.we-ll-find-a-way-to-move-it-forward-together",
+          "label": "We’ll find a way to move it forward, together.",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "We’ll find a way to move it forward, together.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.explore-our-work",
+          "label": "Explore our work",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "Explore our work",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.and-wherever-else-we-re-needed",
+          "label": "And wherever else we’re needed.",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "And wherever else we’re needed.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.community-welfare",
+          "label": "Community welfare",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "Community welfare",
+          "maxLength": 300
+        },
+        {
+          "key": "home.programs.disaster-relief",
+          "label": "Disaster relief",
+          "group": "Good comes in many forms.",
+          "type": "text",
+          "default": "Disaster relief",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.not-just-volunteering-belonging",
+          "label": "NOT JUST VOLUNTEERING. BELONGING.",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "NOT JUST VOLUNTEERING. BELONGING.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.find-your-people",
+          "label": "Find your people.",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "Find your people.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.find-your",
+          "label": "Find your",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "Find your",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.purpose",
+          "label": "purpose.",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "purpose.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.new-places-lasting-friendships-a-chance-to-do",
+          "label": "New places. Lasting friendships. A chance to do something that matters. ",
+          "group": "Find your people. Find your purpose.",
+          "type": "textarea",
+          "default": "New places. Lasting friendships. A chance to do something that matters. Your next chapter could change someone else’s life.",
+          "maxLength": 4000
+        },
+        {
+          "key": "home.belong.come-be-part-of-it",
+          "label": "Come be part of it",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "Come be part of it",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.see-upcoming-experiences",
+          "label": "See upcoming experiences",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "See upcoming experiences",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.image-images-volunteers-webp",
+          "label": "Image: /images/volunteers.webp",
+          "group": "Find your people. Find your purpose.",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.belong.strangers-our-people",
+          "label": "strangers → our people",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "strangers → our people",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.image-images-together-webp",
+          "label": "Image: /images/together.webp",
+          "group": "Find your people. Find your purpose.",
+          "type": "image",
+          "default": "/images/together.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.belong.a-little-time-a-lot-of-heart",
+          "label": "a little time. a lot of heart.",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "a little time. a lot of heart.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.belong.your-people-are-here",
+          "label": "Your people are here. ↗",
+          "group": "Find your people. Find your purpose.",
+          "type": "text",
+          "default": "Your people are here. ↗",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.postcards-from-the-ground",
+          "label": "POSTCARDS FROM THE GROUND",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "POSTCARDS FROM THE GROUND",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.the-good",
+          "label": "The good,",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "The good,",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.in-motion",
+          "label": "in motion.",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "in motion.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.link-https-www-instagram-com-moonlit-foundati",
+          "label": "Link: https://www.instagram.com/moonlit_foundation/",
+          "group": "The good, in motion.",
+          "type": "url",
+          "default": "https://www.instagram.com/moonlit_foundation/",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.journal.moonlit-foundation",
+          "label": "@moonlit_foundation",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "@moonlit_foundation",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.link-https-www-instagram-com-reel-dxtm9gmd8yb",
+          "label": "Link: https://www.instagram.com/reel/DXTm9GmD8yb/",
+          "group": "The good, in motion.",
+          "type": "url",
+          "default": "https://www.instagram.com/reel/DXTm9GmD8yb/",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.journal.image-images-community-webp",
+          "label": "Image: /images/community.webp",
+          "group": "The good, in motion.",
+          "type": "image",
+          "default": "/images/community.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.journal.image-description-volunteers-making-kozhikode",
+          "label": "Image description: Volunteers making Kozhikode beach cleaner",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "Volunteers making Kozhikode beach cleaner",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.kozhikode-kerala",
+          "label": "KOZHIKODE, KERALA",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "KOZHIKODE, KERALA",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.environment",
+          "label": "ENVIRONMENT",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "ENVIRONMENT",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.project-sulaimani",
+          "label": "PROJECT SULAIMANI",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "PROJECT SULAIMANI",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.one-beach-many-hands",
+          "label": "One beach. Many hands.",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "One beach. Many hands.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.a-cleaner-tomorrow",
+          "label": "A cleaner tomorrow.",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "A cleaner tomorrow.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.link-https-www-instagram-com-reel-dxjxmsek-tn",
+          "label": "Link: https://www.instagram.com/reel/DXjxmsek_TN/",
+          "group": "The good, in motion.",
+          "type": "url",
+          "default": "https://www.instagram.com/reel/DXjxmsek_TN/",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.journal.image-images-volunteers-webp",
+          "label": "Image: /images/volunteers.webp",
+          "group": "The good, in motion.",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "home.journal.image-description-young-volunteers-coming-tog",
+          "label": "Image description: Young volunteers coming together for Project Sulaimani",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "Young volunteers coming together for Project Sulaimani",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.kozhikode-kerala-2",
+          "label": "KOZHIKODE, KERALA",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "KOZHIKODE, KERALA",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.our-community",
+          "label": "OUR COMMUNITY",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "OUR COMMUNITY",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.better-together",
+          "label": "BETTER TOGETHER",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "BETTER TOGETHER",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.show-up-for-a-cause",
+          "label": "Show up for a cause.",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "Show up for a cause.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.journal.leave-with-a-community",
+          "label": "Leave with a community.",
+          "group": "The good, in motion.",
+          "type": "text",
+          "default": "Leave with a community.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.instagram-reels.real-people-real-moments",
+          "label": "REAL PEOPLE. REAL MOMENTS.",
+          "group": "A little closer to the action.",
+          "type": "text",
+          "default": "REAL PEOPLE. REAL MOMENTS.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.instagram-reels.a-little-closer-to",
+          "label": "A little closer to",
+          "group": "A little closer to the action.",
+          "type": "text",
+          "default": "A little closer to",
+          "maxLength": 300
+        },
+        {
+          "key": "home.instagram-reels.the-action",
+          "label": "the action.",
+          "group": "A little closer to the action.",
+          "type": "text",
+          "default": "the action.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.the-next-good-thing-starts-with-you",
+          "label": "THE NEXT GOOD THING STARTS WITH YOU",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "THE NEXT GOOD THING STARTS WITH YOU",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.be-someone-s",
+          "label": "Be someone’s",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "Be someone’s",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.reason-to-hope",
+          "label": "reason to hope.",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "reason to hope.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.your-time-your-kindness-your-support",
+          "label": "Your time, your kindness, your support.",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "Your time, your kindness, your support.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.it-all-makes-a-difference",
+          "label": "It all makes a difference.",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "It all makes a difference.",
+          "maxLength": 300
+        },
+        {
+          "key": "home.home-final-cta.let-s-make-a-difference",
+          "label": "Let’s make a difference",
+          "group": "Be someone’s reason to hope.",
+          "type": "text",
+          "default": "Let’s make a difference",
+          "maxLength": 300
+        },
+        {
+          "key": "home.page-content.travel-with-purpose",
+          "label": "Travel with purpose",
+          "group": "Page content",
+          "type": "text",
+          "default": "Travel with purpose",
+          "maxLength": 300
+        },
+        {
+          "key": "home.page-content.volunteer-with-heart",
+          "label": "Volunteer with heart",
+          "group": "Page content",
+          "type": "text",
+          "default": "Volunteer with heart",
+          "maxLength": 300
+        },
+        {
+          "key": "home.page-content.grow-together",
+          "label": "Grow together",
+          "group": "Page content",
+          "type": "text",
+          "default": "Grow together",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "path": "/about",
+      "fields": [
+        {
+          "key": "about.page-introduction.eyebrow-who-we-are",
+          "label": "eyebrow: Who We Are",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Who We Are",
+          "maxLength": 300
+        },
+        {
+          "key": "about.page-introduction.driven-by-compassion",
+          "label": "Driven by Compassion,",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Driven by Compassion,",
+          "maxLength": 300
+        },
+        {
+          "key": "about.page-introduction.powered-by",
+          "label": "Powered by",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Powered by",
+          "maxLength": 300
+        },
+        {
+          "key": "about.page-introduction.youth",
+          "label": "Youth",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Youth",
+          "maxLength": 300
+        },
+        {
+          "key": "about.page-introduction.description-we-are-a-collective-of-young-volu",
+          "label": "description: We are a collective of young volunteers from Kerala who believe s",
+          "group": "Page introduction",
+          "type": "textarea",
+          "default": "We are a collective of young volunteers from Kerala who believe small acts of service, repeated across communities, can light up thousands of lives.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.values.title-compassion",
+          "label": "title: Compassion",
+          "group": "Values",
+          "type": "text",
+          "default": "Compassion",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.text-we-lead-with-empathy-every-person-we-ser",
+          "label": "text: We lead with empathy — every person we serve is treated with dign",
+          "group": "Values",
+          "type": "text",
+          "default": "We lead with empathy — every person we serve is treated with dignity and warmth.",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.title-integrity",
+          "label": "title: Integrity",
+          "group": "Values",
+          "type": "text",
+          "default": "Integrity",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.text-every-rupee-every-relief-kit-and-every-p",
+          "label": "text: Every rupee, every relief kit and every promise is accounted for,",
+          "group": "Values",
+          "type": "text",
+          "default": "Every rupee, every relief kit and every promise is accounted for, openly.",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.title-action",
+          "label": "title: Action",
+          "group": "Values",
+          "type": "text",
+          "default": "Action",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.text-we-move-fast-when-it-matters-hours-count",
+          "label": "text: We move fast when it matters — hours count in an emergency, not d",
+          "group": "Values",
+          "type": "text",
+          "default": "We move fast when it matters — hours count in an emergency, not days.",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.title-community",
+          "label": "title: Community",
+          "group": "Values",
+          "type": "text",
+          "default": "Community",
+          "maxLength": 300
+        },
+        {
+          "key": "about.values.text-change-is-built-together-with-local-peop",
+          "label": "text: Change is built together — with local people, for local people.",
+          "group": "Values",
+          "type": "text",
+          "default": "Change is built together — with local people, for local people.",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.year-2021",
+          "label": "year: 2021",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2021",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-national-integration-camp-bihar",
+          "label": "title: National Integration Camp, Bihar",
+          "group": "Timeline",
+          "type": "text",
+          "default": "National Integration Camp, Bihar",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-youth-programs-in-india-that-bring-stude",
+          "label": "text: Youth programs in India that bring students together from differe",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "Youth programs in India that bring students together from different states to promote unity, cultural sharing, and leadership.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.timeline.year-2022",
+          "label": "year: 2022",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2022",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-international-cultural-fest-nifaa-hariy",
+          "label": "title: International Cultural Fest, NIFAA-Hariyana",
+          "group": "Timeline",
+          "type": "text",
+          "default": "International Cultural Fest, NIFAA-Hariyana",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-nifaa-organizes-haryana-s-renowned-inter",
+          "label": "text: NIFAA organizes Haryana’s renowned international cultural festiva",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "NIFAA organizes Haryana’s renowned international cultural festivals, uniting youth through vibrant traditions, arts, and cultural exchange.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.timeline.year-2023",
+          "label": "year: 2023",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2023",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-cultural-exchange-program-tripura",
+          "label": "title: Cultural Exchange Program, Tripura",
+          "group": "Timeline",
+          "type": "text",
+          "default": "Cultural Exchange Program, Tripura",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-a-cultural-exchange-program-in-tripura-p",
+          "label": "text: A cultural exchange program in Tripura promotes unity, friendship",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "A cultural exchange program in Tripura promotes unity, friendship, and understanding by celebrating diverse traditions, customs, languages, arts, and heritage.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.timeline.year-2024",
+          "label": "year: 2024",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2024",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-adventure-camp-odissa",
+          "label": "title: Adventure Camp, Odissa",
+          "group": "Timeline",
+          "type": "text",
+          "default": "Adventure Camp, Odissa",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-adventure-camp-in-odisha-offers-exciting",
+          "label": "text: Adventure Camp in Odisha offers exciting experiences through trek",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "Adventure Camp in Odisha offers exciting experiences through trekking, nature exploration, outdoor activities, teamwork, and learning while enjoying the beautiful environment.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.timeline.year-2025",
+          "label": "year: 2025",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2025",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-workshop-on-flagship-scheme-keralam",
+          "label": "title: Workshop On Flagship Scheme, Keralam",
+          "group": "Timeline",
+          "type": "text",
+          "default": "Workshop On Flagship Scheme, Keralam",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-the-workshop-on-flagship-schemes-in-kera",
+          "label": "text: The workshop on flagship schemes in Kerala creates awareness abou",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "The workshop on flagship schemes in Kerala creates awareness about government initiatives, their benefits, implementation, and opportunities for public participation and development.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.timeline.year-2026",
+          "label": "year: 2026",
+          "group": "Timeline",
+          "type": "text",
+          "default": "2026",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.title-project-sulaimani-keralam",
+          "label": "title: Project Sulaimani, Keralam",
+          "group": "Timeline",
+          "type": "text",
+          "default": "Project Sulaimani, Keralam",
+          "maxLength": 300
+        },
+        {
+          "key": "about.timeline.text-project-sulaimani-is-a-community-driven-",
+          "label": "text: Project Sulaimani is a community-driven coastal cleanup initiativ",
+          "group": "Timeline",
+          "type": "textarea",
+          "default": "Project Sulaimani is a community-driven coastal cleanup initiative launched in April 2026 by the Moonlight Foundation to remove plastic and marine litter from Kozhikode Beach.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.team.name-arjun-krishnan",
+          "label": "name: Arjun Krishnan",
+          "group": "Team",
+          "type": "text",
+          "default": "Arjun Krishnan",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-founder-president",
+          "label": "role: Founder & President",
+          "group": "Team",
+          "type": "text",
+          "default": "Founder & President",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-men-22-",
+          "label": "img: https://randomuser.me/api/portraits/men/22.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/men/22.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-nithya-menon",
+          "label": "name: Nithya Menon",
+          "group": "Team",
+          "type": "text",
+          "default": "Nithya Menon",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-vice-president",
+          "label": "role: Vice President",
+          "group": "Team",
+          "type": "text",
+          "default": "Vice President",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-women-2",
+          "label": "img: https://randomuser.me/api/portraits/women/28.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/women/28.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-rahul-suresh",
+          "label": "name: Rahul Suresh",
+          "group": "Team",
+          "type": "text",
+          "default": "Rahul Suresh",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-blood-donation-lead",
+          "label": "role: Blood Donation Lead",
+          "group": "Team",
+          "type": "text",
+          "default": "Blood Donation Lead",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-men-45-",
+          "label": "img: https://randomuser.me/api/portraits/men/45.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/men/45.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-fathima-ashraf",
+          "label": "name: Fathima Ashraf",
+          "group": "Team",
+          "type": "text",
+          "default": "Fathima Ashraf",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-welfare-coordinator",
+          "label": "role: Welfare Coordinator",
+          "group": "Team",
+          "type": "text",
+          "default": "Welfare Coordinator",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-women-5",
+          "label": "img: https://randomuser.me/api/portraits/women/51.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/women/51.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-vishnu-prasad",
+          "label": "name: Vishnu Prasad",
+          "group": "Team",
+          "type": "text",
+          "default": "Vishnu Prasad",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-disaster-response-lead",
+          "label": "role: Disaster Response Lead",
+          "group": "Team",
+          "type": "text",
+          "default": "Disaster Response Lead",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-men-61-",
+          "label": "img: https://randomuser.me/api/portraits/men/61.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/men/61.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-anjali-thomas",
+          "label": "name: Anjali Thomas",
+          "group": "Team",
+          "type": "text",
+          "default": "Anjali Thomas",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-environment-lead",
+          "label": "role: Environment Lead",
+          "group": "Team",
+          "type": "text",
+          "default": "Environment Lead",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-women-6",
+          "label": "img: https://randomuser.me/api/portraits/women/62.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/women/62.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-sreejith-nair",
+          "label": "name: Sreejith Nair",
+          "group": "Team",
+          "type": "text",
+          "default": "Sreejith Nair",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-youth-programs-lead",
+          "label": "role: Youth Programs Lead",
+          "group": "Team",
+          "type": "text",
+          "default": "Youth Programs Lead",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-men-72-",
+          "label": "img: https://randomuser.me/api/portraits/men/72.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/men/72.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.team.name-devika-raj",
+          "label": "name: Devika Raj",
+          "group": "Team",
+          "type": "text",
+          "default": "Devika Raj",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.role-volunteer-coordinator",
+          "label": "role: Volunteer Coordinator",
+          "group": "Team",
+          "type": "text",
+          "default": "Volunteer Coordinator",
+          "maxLength": 300
+        },
+        {
+          "key": "about.team.img-https-randomuser-me-api-portraits-women-1",
+          "label": "img: https://randomuser.me/api/portraits/women/12.jpg",
+          "group": "Team",
+          "type": "image",
+          "default": "https://randomuser.me/api/portraits/women/12.jpg",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.max-w-7xl.image-images-volunteers-webp",
+          "label": "Image: /images/volunteers.webp",
+          "group": "A spark that became a movement",
+          "type": "image",
+          "default": "/images/volunteers.webp",
+          "maxLength": 2048
+        },
+        {
+          "key": "about.max-w-7xl.image-description-moonlit-volunteers-gathered",
+          "label": "Image description: Moonlit volunteers gathered for the Project Sulaimani beach clean",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "Moonlit volunteers gathered for the Project Sulaimani beach cleanup",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.since",
+          "label": "Since",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "Since",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.2021",
+          "label": "2021",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "2021",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.our-story",
+          "label": "Our Story",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "Our Story",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.a-spark-that-became-a",
+          "label": "A spark that became a",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "A spark that became a",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.movement",
+          "label": "movement",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "movement",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.moonlit-foundation-founded-in-2021-is-a-youth",
+          "label": "Moonlit Foundation, founded in 2021, is a youth development and non-gove",
+          "group": "A spark that became a movement",
+          "type": "textarea",
+          "default": "Moonlit Foundation, founded in 2021, is a youth development and non-governmental organization based in Kerala, India, with initiatives extending to other states. The organization focuses on empowering young people through rural internships, leadership development, community engagement, and opportunities to build global friendships. It actively contributes to society by organizing blood donation drives, cloth donation campaigns, and disaster relief activities.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.max-w-7xl.moonlit-foundation-also-conducts-camps-and-ev",
+          "label": "Moonlit Foundation also conducts camps and events, including the Nationa",
+          "group": "A spark that became a movement",
+          "type": "textarea",
+          "default": "Moonlit Foundation also conducts camps and events, including the National Integration Camp, which promotes cultural exchange, national unity, and appreciation of India’s rich heritage. Through these initiatives, the foundation strives to nurture responsible, socially aware, confident, and compassionate young leaders.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.max-w-7xl.join-our-journey",
+          "label": "Join Our Journey",
+          "group": "A spark that became a movement",
+          "type": "text",
+          "default": "Join Our Journey",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.our-mission",
+          "label": "Our Mission",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Our Mission",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.to-inspire-young-individuals-to-travel-with-a",
+          "label": "To inspire young individuals to travel with a purpose — combining explor",
+          "group": "Page sections",
+          "type": "textarea",
+          "default": "To inspire young individuals to travel with a purpose — combining exploration with compassion by engaging in community development, women empowerment, education and child protection activities across rural and underprivileged areas of India.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.max-w-7xl.our-vision",
+          "label": "Our Vision",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Our Vision",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.to-create-a-compassionate-and-inclusive-socie",
+          "label": "To create a compassionate and inclusive society where youth-led voluntee",
+          "group": "Page sections",
+          "type": "textarea",
+          "default": "To create a compassionate and inclusive society where youth-led volunteerism drives social change, uplifts marginalized communities and restores dignity and opportunity for all — especially women, children and the rural and urban poor.",
+          "maxLength": 4000
+        },
+        {
+          "key": "about.max-w-7xl.what-guides-us",
+          "label": "What Guides Us",
+          "group": "Our Core Values",
+          "type": "text",
+          "default": "What Guides Us",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.our-core",
+          "label": "Our Core",
+          "group": "Our Core Values",
+          "type": "text",
+          "default": "Our Core",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.values",
+          "label": "Values",
+          "group": "Our Core Values",
+          "type": "text",
+          "default": "Values",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.our-journey",
+          "label": "Our Journey",
+          "group": "Milestones that shaped us",
+          "type": "text",
+          "default": "Our Journey",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.milestones-that-shaped",
+          "label": "Milestones that shaped",
+          "group": "Milestones that shaped us",
+          "type": "text",
+          "default": "Milestones that shaped",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.us",
+          "label": "us",
+          "group": "Milestones that shaped us",
+          "type": "text",
+          "default": "us",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.from-one-blood-camp-to-twenty-five-communitie",
+          "label": "From one blood camp to twenty-five communities — each year taught us som",
+          "group": "Milestones that shaped us",
+          "type": "text",
+          "default": "From one blood camp to twenty-five communities — each year taught us something new about service.",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.the-people-behind-the-mission",
+          "label": "The People Behind the Mission",
+          "group": "Meet the Team",
+          "type": "text",
+          "default": "The People Behind the Mission",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.meet-the",
+          "label": "Meet the",
+          "group": "Meet the Team",
+          "type": "text",
+          "default": "Meet the",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.team",
+          "label": "Team",
+          "group": "Meet the Team",
+          "type": "text",
+          "default": "Team",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.ready-to-be-part-of-the",
+          "label": "Ready to be part of the",
+          "group": "Ready to be part of the story?",
+          "type": "text",
+          "default": "Ready to be part of the",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.story",
+          "label": "story?",
+          "group": "Ready to be part of the story?",
+          "type": "text",
+          "default": "story?",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.become-a-volunteer",
+          "label": "Become a Volunteer",
+          "group": "Ready to be part of the story?",
+          "type": "text",
+          "default": "Become a Volunteer",
+          "maxLength": 300
+        },
+        {
+          "key": "about.max-w-7xl.talk-to-us",
+          "label": "Talk to Us",
+          "group": "Ready to be part of the story?",
+          "type": "text",
+          "default": "Talk to Us",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "programs",
+      "label": "Programs",
+      "path": "/programs",
+      "fields": [
+        {
+          "key": "programs.page-introduction.eyebrow-what-we-do",
+          "label": "eyebrow: What We Do",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "What We Do",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.page-introduction.programs-that-create",
+          "label": "Programs that create",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Programs that create",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.page-introduction.impact",
+          "label": "Impact",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Impact",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.page-introduction.description-five-focused-programs-one-goal-me",
+          "label": "description: Five focused programs, one goal — meaningful, lasting change for ",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Five focused programs, one goal — meaningful, lasting change for the communities of Kerala.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.image-https-images-unsplash-com-photo-1615461",
+          "label": "image: https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=60",
+          "group": "Overview",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=600&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.overview.alt-blood-donation-camp-in-progress",
+          "label": "alt: Blood donation camp in progress",
+          "group": "Overview",
+          "type": "text",
+          "default": "Blood donation camp in progress",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.title-blood-donation",
+          "label": "title: Blood Donation",
+          "group": "Overview",
+          "type": "text",
+          "default": "Blood Donation",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.description-a-single-unit-of-blood-can-save-u",
+          "label": "description: A single unit of blood can save up to three lives.",
+          "group": "Overview",
+          "type": "text",
+          "default": "A single unit of blood can save up to three lives.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.image-https-images-unsplash-com-photo-1593113",
+          "label": "image: https://images.unsplash.com/photo-1593113598332-cd288d649433?w=60",
+          "group": "Overview",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.overview.alt-volunteers-packing-food-kits",
+          "label": "alt: Volunteers packing food kits",
+          "group": "Overview",
+          "type": "text",
+          "default": "Volunteers packing food kits",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.title-community-welfare",
+          "label": "title: Community Welfare",
+          "group": "Overview",
+          "type": "text",
+          "default": "Community Welfare",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.description-hardship-rarely-announces-itself",
+          "label": "description: Hardship rarely announces itself.",
+          "group": "Overview",
+          "type": "text",
+          "default": "Hardship rarely announces itself.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.image-https-images-unsplash-com-photo-1547683",
+          "label": "image: https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q",
+          "group": "Overview",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.overview.alt-rescue-boat-during-flood-response",
+          "label": "alt: Rescue boat during flood response",
+          "group": "Overview",
+          "type": "text",
+          "default": "Rescue boat during flood response",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.title-disaster-relief",
+          "label": "title: Disaster Relief",
+          "group": "Overview",
+          "type": "text",
+          "default": "Disaster Relief",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.description-when-floods-or-emergencies-strike",
+          "label": "description: When floods or emergencies strike, hours matter.",
+          "group": "Overview",
+          "type": "text",
+          "default": "When floods or emergencies strike, hours matter.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.image-https-images-unsplash-com-photo-1618477",
+          "label": "image: https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=60",
+          "group": "Overview",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=600&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.overview.alt-volunteers-cleaning-a-beach",
+          "label": "alt: Volunteers cleaning a beach",
+          "group": "Overview",
+          "type": "text",
+          "default": "Volunteers cleaning a beach",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.title-environment",
+          "label": "title: Environment",
+          "group": "Overview",
+          "type": "text",
+          "default": "Environment",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.description-we-protect-the-kerala-we-love-one",
+          "label": "description: We protect the Kerala we love — one sapling, one cleaned beach, o",
+          "group": "Overview",
+          "type": "text",
+          "default": "We protect the Kerala we love — one sapling, one cleaned beach, one aware classroom at a time.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.image-https-images-unsplash-com-photo-1529390",
+          "label": "image: https://images.unsplash.com/photo-1529390079861-591de354faf5?w=60",
+          "group": "Overview",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.overview.alt-students-in-a-leadership-workshop",
+          "label": "alt: Students in a leadership workshop",
+          "group": "Overview",
+          "type": "text",
+          "default": "Students in a leadership workshop",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.title-youth-development",
+          "label": "title: Youth Development",
+          "group": "Overview",
+          "type": "text",
+          "default": "Youth Development",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.overview.description-every-program-we-run-is-powered-b",
+          "label": "description: Every program we run is powered by young people — so we invest in",
+          "group": "Overview",
+          "type": "text",
+          "default": "Every program we run is powered by young people — so we invest in them.",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.eyebrow-blood-donation-program",
+          "label": "eyebrow: Blood Donation Program",
+          "group": "blood",
+          "type": "text",
+          "default": "Blood Donation Program",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.titlelead-blood",
+          "label": "titleLead: Blood",
+          "group": "blood",
+          "type": "text",
+          "default": "Blood",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.titlehighlight-donation",
+          "label": "titleHighlight: Donation",
+          "group": "blood",
+          "type": "text",
+          "default": "Donation",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.image-https-images-unsplash-com-photo-1615461",
+          "label": "Image: https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=10",
+          "group": "blood",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=1000&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.blood.image-description-blood-donation-camp-in-prog",
+          "label": "Image description: Blood donation camp in progress",
+          "group": "blood",
+          "type": "text",
+          "default": "Blood donation camp in progress",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.description-a-single-unit-of-blood-can-save-u",
+          "label": "description: A single unit of blood can save up to three lives. Our donor netw",
+          "group": "blood",
+          "type": "textarea",
+          "default": "A single unit of blood can save up to three lives. Our donor network connects hospitals and families with verified, willing donors — often within hours of a request.",
+          "maxLength": 4000
+        },
+        {
+          "key": "programs.blood.donor-registration-drives-in-colleges-and-wor",
+          "label": "Donor registration drives in colleges and workplaces",
+          "group": "blood",
+          "type": "text",
+          "default": "Donor registration drives in colleges and workplaces",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.24-7-emergency-donor-response-network-across-",
+          "label": "24/7 emergency donor response network across districts",
+          "group": "blood",
+          "type": "text",
+          "default": "24/7 emergency donor response network across districts",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.blood-group-awareness-camps-and-donor-health-",
+          "label": "Blood group awareness camps and donor health checks",
+          "group": "blood",
+          "type": "text",
+          "default": "Blood group awareness camps and donor health checks",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.value-1800",
+          "label": "value: 1800+",
+          "group": "blood",
+          "type": "text",
+          "default": "1800+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.label-donors-registered",
+          "label": "label: Donors Registered",
+          "group": "blood",
+          "type": "text",
+          "default": "Donors Registered",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.value-950",
+          "label": "value: 950+",
+          "group": "blood",
+          "type": "text",
+          "default": "950+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.blood.label-emergency-requests-met",
+          "label": "label: Emergency Requests Met",
+          "group": "blood",
+          "type": "text",
+          "default": "Emergency Requests Met",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.eyebrow-community-welfare-program",
+          "label": "eyebrow: Community Welfare Program",
+          "group": "welfare",
+          "type": "text",
+          "default": "Community Welfare Program",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.titlelead-community",
+          "label": "titleLead: Community",
+          "group": "welfare",
+          "type": "text",
+          "default": "Community",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.titlehighlight-welfare",
+          "label": "titleHighlight: Welfare",
+          "group": "welfare",
+          "type": "text",
+          "default": "Welfare",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.image-https-images-unsplash-com-photo-1593113",
+          "label": "Image: https://images.unsplash.com/photo-1593113598332-cd288d649433?w=10",
+          "group": "welfare",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1000&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.welfare.image-description-volunteers-packing-food-kit",
+          "label": "Image description: Volunteers packing food kits",
+          "group": "welfare",
+          "type": "text",
+          "default": "Volunteers packing food kits",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.description-hardship-rarely-announces-itself-",
+          "label": "description: Hardship rarely announces itself. Our welfare wing runs steady, y",
+          "group": "welfare",
+          "type": "textarea",
+          "default": "Hardship rarely announces itself. Our welfare wing runs steady, year-round support — food kits, clothing drives and education help for families working through difficult times.",
+          "maxLength": 4000
+        },
+        {
+          "key": "programs.welfare.monthly-food-and-grocery-kit-distribution",
+          "label": "Monthly food and grocery kit distribution",
+          "group": "welfare",
+          "type": "text",
+          "default": "Monthly food and grocery kit distribution",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.cloth-donation-drives-with-dignity-first-dist",
+          "label": "Cloth donation drives with dignity-first distribution",
+          "group": "welfare",
+          "type": "text",
+          "default": "Cloth donation drives with dignity-first distribution",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.school-kit-and-fee-support-for-children-in-ne",
+          "label": "School kit and fee support for children in need",
+          "group": "welfare",
+          "type": "text",
+          "default": "School kit and fee support for children in need",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.value-3500",
+          "label": "value: 3500+",
+          "group": "welfare",
+          "type": "text",
+          "default": "3500+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.label-families-supported",
+          "label": "label: Families Supported",
+          "group": "welfare",
+          "type": "text",
+          "default": "Families Supported",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.value-120",
+          "label": "value: 120+",
+          "group": "welfare",
+          "type": "text",
+          "default": "120+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.welfare.label-relief-campaigns",
+          "label": "label: Relief Campaigns",
+          "group": "welfare",
+          "type": "text",
+          "default": "Relief Campaigns",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.eyebrow-disaster-relief-program",
+          "label": "eyebrow: Disaster Relief Program",
+          "group": "relief",
+          "type": "text",
+          "default": "Disaster Relief Program",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.titlelead-disaster",
+          "label": "titleLead: Disaster",
+          "group": "relief",
+          "type": "text",
+          "default": "Disaster",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.titlehighlight-relief",
+          "label": "titleHighlight: Relief",
+          "group": "relief",
+          "type": "text",
+          "default": "Relief",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.image-https-images-unsplash-com-photo-1547683",
+          "label": "Image: https://images.unsplash.com/photo-1547683905-f686c993aae5?w=1000&",
+          "group": "relief",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=1000&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.relief.image-description-rescue-boat-during-flood-re",
+          "label": "Image description: Rescue boat during flood response",
+          "group": "relief",
+          "type": "text",
+          "default": "Rescue boat during flood response",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.description-when-floods-or-emergencies-strike",
+          "label": "description: When floods or emergencies strike, hours matter. Our trained resp",
+          "group": "relief",
+          "type": "textarea",
+          "default": "When floods or emergencies strike, hours matter. Our trained response teams mobilize relief kits, shelter support and cleanup crews — then stay for the rebuilding.",
+          "maxLength": 4000
+        },
+        {
+          "key": "programs.relief.rapid-response-relief-kits-food-water-medicin",
+          "label": "Rapid-response relief kits: food, water, medicine, essentials",
+          "group": "relief",
+          "type": "text",
+          "default": "Rapid-response relief kits: food, water, medicine, essentials",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.temporary-shelter-coordination-with-local-aut",
+          "label": "Temporary shelter coordination with local authorities",
+          "group": "relief",
+          "type": "text",
+          "default": "Temporary shelter coordination with local authorities",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.post-disaster-cleanup-and-home-rebuilding-sup",
+          "label": "Post-disaster cleanup and home rebuilding support",
+          "group": "relief",
+          "type": "text",
+          "default": "Post-disaster cleanup and home rebuilding support",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.value-48hr",
+          "label": "value: 48hr",
+          "group": "relief",
+          "type": "text",
+          "default": "48hr",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.label-average-response-time",
+          "label": "label: Average Response Time",
+          "group": "relief",
+          "type": "text",
+          "default": "Average Response Time",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.value-30",
+          "label": "value: 30+",
+          "group": "relief",
+          "type": "text",
+          "default": "30+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.relief.label-rebuilds-supported",
+          "label": "label: Rebuilds Supported",
+          "group": "relief",
+          "type": "text",
+          "default": "Rebuilds Supported",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.eyebrow-environment-program",
+          "label": "eyebrow: Environment Program",
+          "group": "environment",
+          "type": "text",
+          "default": "Environment Program",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.titlelead-environment",
+          "label": "titleLead: Environment",
+          "group": "environment",
+          "type": "text",
+          "default": "Environment",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.titlehighlight-drives",
+          "label": "titleHighlight: Drives",
+          "group": "environment",
+          "type": "text",
+          "default": "Drives",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.image-https-images-unsplash-com-photo-1618477",
+          "label": "Image: https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=10",
+          "group": "environment",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=1000&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.environment.image-description-volunteers-cleaning-a-beach",
+          "label": "Image description: Volunteers cleaning a beach",
+          "group": "environment",
+          "type": "text",
+          "default": "Volunteers cleaning a beach",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.description-we-protect-the-kerala-we-love-one",
+          "label": "description: We protect the Kerala we love — one sapling, one cleaned beach, o",
+          "group": "environment",
+          "type": "textarea",
+          "default": "We protect the Kerala we love — one sapling, one cleaned beach, one aware classroom at a time. Our green drives pair action with education so the change outlives the event.",
+          "maxLength": 4000
+        },
+        {
+          "key": "programs.environment.tree-plantation-drives-with-schools-and-resid",
+          "label": "Tree plantation drives with schools and residents' groups",
+          "group": "environment",
+          "type": "text",
+          "default": "Tree plantation drives with schools and residents' groups",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.coastal-and-river-cleanup-campaigns",
+          "label": "Coastal and river cleanup campaigns",
+          "group": "environment",
+          "type": "text",
+          "default": "Coastal and river cleanup campaigns",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.waste-segregation-and-plastic-free-awareness-",
+          "label": "Waste segregation and plastic-free awareness sessions",
+          "group": "environment",
+          "type": "text",
+          "default": "Waste segregation and plastic-free awareness sessions",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.value-5000",
+          "label": "value: 5000+",
+          "group": "environment",
+          "type": "text",
+          "default": "5000+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.label-trees-planted",
+          "label": "label: Trees Planted",
+          "group": "environment",
+          "type": "text",
+          "default": "Trees Planted",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.value-40",
+          "label": "value: 40+",
+          "group": "environment",
+          "type": "text",
+          "default": "40+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.environment.label-cleanup-drives",
+          "label": "label: Cleanup Drives",
+          "group": "environment",
+          "type": "text",
+          "default": "Cleanup Drives",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.eyebrow-youth-development-program",
+          "label": "eyebrow: Youth Development Program",
+          "group": "youth",
+          "type": "text",
+          "default": "Youth Development Program",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.titlelead-youth",
+          "label": "titleLead: Youth",
+          "group": "youth",
+          "type": "text",
+          "default": "Youth",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.titlehighlight-development",
+          "label": "titleHighlight: Development",
+          "group": "youth",
+          "type": "text",
+          "default": "Development",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.image-https-images-unsplash-com-photo-1529390",
+          "label": "Image: https://images.unsplash.com/photo-1529390079861-591de354faf5?w=10",
+          "group": "youth",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1000&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.youth.image-description-students-in-a-leadership-wo",
+          "label": "Image description: Students in a leadership workshop",
+          "group": "youth",
+          "type": "text",
+          "default": "Students in a leadership workshop",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.description-every-program-we-run-is-powered-b",
+          "label": "description: Every program we run is powered by young people — so we invest in",
+          "group": "youth",
+          "type": "textarea",
+          "default": "Every program we run is powered by young people — so we invest in them. Leadership camps, skill workshops and mentorship turn first-time volunteers into community organizers.",
+          "maxLength": 4000
+        },
+        {
+          "key": "programs.youth.leadership-and-public-speaking-workshops",
+          "label": "Leadership and public-speaking workshops",
+          "group": "youth",
+          "type": "text",
+          "default": "Leadership and public-speaking workshops",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.career-and-skill-development-mentorship",
+          "label": "Career and skill-development mentorship",
+          "group": "youth",
+          "type": "text",
+          "default": "Career and skill-development mentorship",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.campus-volunteer-chapters-in-colleges-across-",
+          "label": "Campus volunteer chapters in colleges across Kerala",
+          "group": "youth",
+          "type": "text",
+          "default": "Campus volunteer chapters in colleges across Kerala",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.value-2500",
+          "label": "value: 2500+",
+          "group": "youth",
+          "type": "text",
+          "default": "2500+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.label-volunteers-engaged",
+          "label": "label: Volunteers Engaged",
+          "group": "youth",
+          "type": "text",
+          "default": "Volunteers Engaged",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.value-85",
+          "label": "value: 85+",
+          "group": "youth",
+          "type": "text",
+          "default": "85+",
+          "maxLength": 300
+        },
+        {
+          "key": "programs.youth.label-workshops-conducted",
+          "label": "label: Workshops Conducted",
+          "group": "youth",
+          "type": "text",
+          "default": "Workshops Conducted",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "label": "Events introduction",
+      "path": "/events",
+      "fields": [
+        {
+          "key": "events.page-introduction.eyebrow-our-events",
+          "label": "eyebrow: Our Events",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Our Events",
+          "maxLength": 300
+        },
+        {
+          "key": "events.page-introduction.moments-that",
+          "label": "Moments that",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Moments that",
+          "maxLength": 300
+        },
+        {
+          "key": "events.page-introduction.matter",
+          "label": "Matter",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Matter",
+          "maxLength": 300
+        },
+        {
+          "key": "events.page-introduction.description-from-blood-camps-to-beach-cleanup",
+          "label": "description: From blood camps to beach cleanups — here's where you'll find us ",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "From blood camps to beach cleanups — here's where you'll find us next, and what we've been up to.",
+          "maxLength": 300
+        },
+        {
+          "key": "events.page-content.loading-events",
+          "label": "Loading events…",
+          "group": "Page content",
+          "type": "text",
+          "default": "Loading events…",
+          "maxLength": 300
+        },
+        {
+          "key": "events.page-content.couldn-t-load-events-right-now-please-try-aga",
+          "label": "Couldn't load events right now — please try again shortly.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Couldn't load events right now — please try again shortly.",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.upcoming",
+          "label": "Upcoming",
+          "group": "Upcoming Events",
+          "type": "text",
+          "default": "Upcoming",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.events",
+          "label": "Events",
+          "group": "Upcoming Events",
+          "type": "text",
+          "default": "Events",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.no-upcoming-events-right-now-check-back-soon-",
+          "label": "No upcoming events right now — check back soon, or follow our newsletter",
+          "group": "Upcoming Events",
+          "type": "text",
+          "default": "No upcoming events right now — check back soon, or follow our newsletter below.",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.past",
+          "label": "Past",
+          "group": "Past Events",
+          "type": "text",
+          "default": "Past",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.events-2",
+          "label": "Events",
+          "group": "Past Events",
+          "type": "text",
+          "default": "Events",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.no-past-events-on-record-yet",
+          "label": "No past events on record yet.",
+          "group": "Past Events",
+          "type": "text",
+          "default": "No past events on record yet.",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.want-to-organize-an-event",
+          "label": "Want to organize an event",
+          "group": "Want to organize an event with us?",
+          "type": "text",
+          "default": "Want to organize an event",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.with-us",
+          "label": "with us?",
+          "group": "Want to organize an event with us?",
+          "type": "text",
+          "default": "with us?",
+          "maxLength": 300
+        },
+        {
+          "key": "events.max-w-7xl.partner-with-us",
+          "label": "Partner With Us",
+          "group": "Want to organize an event with us?",
+          "type": "text",
+          "default": "Partner With Us",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery introduction",
+      "path": "/gallery",
+      "fields": [
+        {
+          "key": "gallery.page-introduction.eyebrow-gallery",
+          "label": "eyebrow: Gallery",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Gallery",
+          "maxLength": 300
+        },
+        {
+          "key": "gallery.page-introduction.captured-moments-of",
+          "label": "Captured Moments of",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Captured Moments of",
+          "maxLength": 300
+        },
+        {
+          "key": "gallery.page-introduction.hope",
+          "label": "Hope",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Hope",
+          "maxLength": 300
+        },
+        {
+          "key": "gallery.page-introduction.description-a-look-at-the-hands-faces-and-mom",
+          "label": "description: A look at the hands, faces and moments behind our work across Ker",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "A look at the hands, faces and moments behind our work across Kerala.",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "get-involved",
+      "label": "Get involved",
+      "path": "/get-involved",
+      "fields": [
+        {
+          "key": "get-involved.page-introduction.eyebrow-get-involved",
+          "label": "eyebrow: Get Involved",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Get Involved",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.page-introduction.be-part-of-the",
+          "label": "Be Part of the",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Be Part of the",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.page-introduction.change",
+          "label": "Change",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Change",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.page-introduction.description-three-ways-to-stand-with-us-give-",
+          "label": "description: Three ways to stand with us — give your time, ask for help when y",
+          "group": "Page introduction",
+          "type": "textarea",
+          "default": "Three ways to stand with us — give your time, ask for help when you need it, or bring your organization on board.",
+          "maxLength": 4000
+        },
+        {
+          "key": "get-involved.max-w-7xl.become-a-volunteer",
+          "label": "Become a Volunteer",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Become a Volunteer",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.max-w-7xl.join-2-500-young-people-serving-communities-a",
+          "label": "Join 2,500+ young people serving communities across Kerala.",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Join 2,500+ young people serving communities across Kerala.",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.max-w-7xl.request-blood",
+          "label": "Request Blood",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Request Blood",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.max-w-7xl.need-blood-support-urgently-our-donor-network",
+          "label": "Need blood support urgently? Our donor network responds fast.",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Need blood support urgently? Our donor network responds fast.",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.max-w-7xl.partner-with-us",
+          "label": "Partner With Us",
+          "group": "Page sections",
+          "type": "text",
+          "default": "Partner With Us",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.max-w-7xl.csr-programs-campus-chapters-and-ngo-collabor",
+          "label": "CSR programs, campus chapters and NGO collaborations.",
+          "group": "Page sections",
+          "type": "text",
+          "default": "CSR programs, campus chapters and NGO collaborations.",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.volunteer-with-us",
+          "label": "Volunteer With Us",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Volunteer With Us",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.give-your-time",
+          "label": "Give your time,",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Give your time,",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.gain-a",
+          "label": "gain a",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "gain a",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.community",
+          "label": "community",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "community",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.whether-you-can-give-one-weekend-a-month-or-o",
+          "label": "Whether you can give one weekend a month or one hour online, there's a p",
+          "group": "Give your time, gain a community",
+          "type": "textarea",
+          "default": "Whether you can give one weekend a month or one hour online, there's a place for you at Moonlit. As a volunteer you'll get:",
+          "maxLength": 4000
+        },
+        {
+          "key": "get-involved.volunteer.hands-on-roles-across-all-five-programs-match",
+          "label": "Hands-on roles across all five programs, matched to your interests",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Hands-on roles across all five programs, matched to your interests",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.free-training-in-first-response-event-managem",
+          "label": "Free training in first response, event management and leadership",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Free training in first response, event management and leadership",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.volunteer-certificates-and-letters-of-recomme",
+          "label": "Volunteer certificates and letters of recommendation",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Volunteer certificates and letters of recommendation",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.a-statewide-network-of-friends-who-show-up-fo",
+          "label": "A statewide network of friends who show up for each other",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "A statewide network of friends who show up for each other",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.volunteer.image-https-images-unsplash-com-photo-1559027",
+          "label": "Image: https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q",
+          "group": "Give your time, gain a community",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
+          "maxLength": 2048
+        },
+        {
+          "key": "get-involved.volunteer.image-description-moonlit-volunteers-together",
+          "label": "Image description: Moonlit volunteers together",
+          "group": "Give your time, gain a community",
+          "type": "text",
+          "default": "Moonlit volunteers together",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.blood-support",
+          "label": "Blood Support",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "Blood Support",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.need-blood",
+          "label": "Need blood?",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "Need blood?",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.we-re",
+          "label": "We're",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "We're",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.here-to-help",
+          "label": "here to help.",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "here to help.",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.fill-in-the-request-and-our-donor-coordinatio",
+          "label": "Fill in the request and our donor coordination team will start contactin",
+          "group": "Need blood? We're here to help.",
+          "type": "textarea",
+          "default": "Fill in the request and our donor coordination team will start contacting matching donors immediately. There is no charge for this service — ever.",
+          "maxLength": 4000
+        },
+        {
+          "key": "get-involved.blood.for-emergencies-call-us-directly",
+          "label": "For emergencies, call us directly:",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "For emergencies, call us directly:",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.link-tel-919048414851",
+          "label": "Link: tel:+919048414851",
+          "group": "Need blood? We're here to help.",
+          "type": "url",
+          "default": "tel:+919048414851",
+          "maxLength": 2048
+        },
+        {
+          "key": "get-involved.blood.91-9048-414-851",
+          "label": "+91 9048 414 851",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "+91 9048 414 851",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.blood.available-24-7",
+          "label": "— available 24/7",
+          "group": "Need blood? We're here to help.",
+          "type": "text",
+          "default": "— available 24/7",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.partnerships",
+          "label": "Partnerships",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "Partnerships",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.stronger",
+          "label": "Stronger",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "Stronger",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.together",
+          "label": "together",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "together",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.we-work-with-companies-colleges-and-fellow-ng",
+          "label": "We work with companies, colleges and fellow NGOs to scale what works. Wa",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "We work with companies, colleges and fellow NGOs to scale what works. Ways to partner with Moonlit Foundation:",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.csr-partnerships",
+          "label": "CSR partnerships",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "CSR partnerships",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.sponsor-relief-campaigns-plantation-drives-or",
+          "label": "— sponsor relief campaigns, plantation drives or blood camps",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "— sponsor relief campaigns, plantation drives or blood camps",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.campus-chapters",
+          "label": "Campus chapters",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "Campus chapters",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.start-a-moonlit-volunteer-unit-in-your-colleg",
+          "label": "— start a Moonlit volunteer unit in your college",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "— start a Moonlit volunteer unit in your college",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.ngo-collaborations",
+          "label": "NGO collaborations",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "NGO collaborations",
+          "maxLength": 300
+        },
+        {
+          "key": "get-involved.partner.joint-drives-shared-donor-networks-faster-res",
+          "label": "— joint drives, shared donor networks, faster response",
+          "group": "Stronger together",
+          "type": "text",
+          "default": "— joint drives, shared donor networks, faster response",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "path": "/contact",
+      "fields": [
+        {
+          "key": "contact.page-introduction.eyebrow-contact-us",
+          "label": "eyebrow: Contact Us",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Contact Us",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.page-introduction.let-s",
+          "label": "Let's",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Let's",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.page-introduction.connect",
+          "label": "Connect",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Connect",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.page-introduction.description-questions-ideas-requests-we-read-",
+          "label": "description: Questions, ideas, requests — we read everything and reply fast. R",
+          "group": "Page introduction",
+          "type": "text",
+          "default": "Questions, ideas, requests — we read everything and reply fast. Reach us any way that suits you.",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.title-visit-us",
+          "label": "title: Visit Us",
+          "group": "Info cards",
+          "type": "text",
+          "default": "Visit Us",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.moonlit-foundation-india",
+          "label": "Moonlit Foundation, India",
+          "group": "Info cards",
+          "type": "text",
+          "default": "Moonlit Foundation, India",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.title-call-us",
+          "label": "title: Call Us",
+          "group": "Info cards",
+          "type": "text",
+          "default": "Call Us",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.link-tel-919048414851",
+          "label": "Link: tel:+919048414851",
+          "group": "Info cards",
+          "type": "url",
+          "default": "tel:+919048414851",
+          "maxLength": 2048
+        },
+        {
+          "key": "contact.info-cards.91-9048-414-851",
+          "label": "+91 9048 414 851",
+          "group": "Info cards",
+          "type": "text",
+          "default": "+91 9048 414 851",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.emergency-blood-line-24-7",
+          "label": "Emergency blood line: 24/7",
+          "group": "Info cards",
+          "type": "text",
+          "default": "Emergency blood line: 24/7",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.title-email-us",
+          "label": "title: Email Us",
+          "group": "Info cards",
+          "type": "text",
+          "default": "Email Us",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.link-mailto-moonlitfoundation-gmail-com",
+          "label": "Link: mailto:moonlitfoundation@gmail.com",
+          "group": "Info cards",
+          "type": "url",
+          "default": "mailto:moonlitfoundation@gmail.com",
+          "maxLength": 2048
+        },
+        {
+          "key": "contact.info-cards.moonlitfoundation-gmail-com",
+          "label": "moonlitfoundation@gmail.com",
+          "group": "Info cards",
+          "type": "text",
+          "default": "moonlitfoundation@gmail.com",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.info-cards.we-reply-within-2-working-days",
+          "label": "We reply within 2 working days",
+          "group": "Info cards",
+          "type": "text",
+          "default": "We reply within 2 working days",
+          "maxLength": 300
+        },
+        {
+          "key": "contact.max-w-7xl.link-https-www-instagram-com-moonlit-foundati",
+          "label": "Link: https://www.instagram.com/moonlit_foundation/",
+          "group": "Page sections",
+          "type": "url",
+          "default": "https://www.instagram.com/moonlit_foundation/",
+          "maxLength": 2048
+        },
+        {
+          "key": "contact.max-w-7xl.image-https-maps-google-com-maps-q-india-z-5-",
+          "label": "Location map embed URL",
+          "group": "Page sections",
+          "type": "url",
+          "default": "https://maps.google.com/maps?q=India&z=5&output=embed",
+          "maxLength": 2048
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "label": "Footer",
+      "path": "/",
+      "fields": [
+        {
+          "key": "footer.page-content.good-people-greater-possibilities",
+          "label": "GOOD PEOPLE. GREATER POSSIBILITIES.",
+          "group": "Page content",
+          "type": "text",
+          "default": "GOOD PEOPLE. GREATER POSSIBILITIES.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.link-https-www-instagram-com-moonlit-foundati",
+          "label": "Link: https://www.instagram.com/moonlit_foundation/",
+          "group": "Page content",
+          "type": "url",
+          "default": "https://www.instagram.com/moonlit_foundation/",
+          "maxLength": 2048
+        },
+        {
+          "key": "footer.page-content.follow-the-journey",
+          "label": "Follow the journey",
+          "group": "Page content",
+          "type": "text",
+          "default": "Follow the journey",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.a-little-compassion-goes-a-long-way",
+          "label": "A little compassion goes a long way.",
+          "group": "Page content",
+          "type": "text",
+          "default": "A little compassion goes a long way.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.let-s-see-how-far-we-can-go-together",
+          "label": "Let's see how far we can go together.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Let's see how far we can go together.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.rooted-in-kerala-open-to-the-world",
+          "label": "Rooted in Kerala. Open to the world.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Rooted in Kerala. Open to the world.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.explore",
+          "label": "Explore",
+          "group": "Page content",
+          "type": "text",
+          "default": "Explore",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.our-story",
+          "label": "Our story",
+          "group": "Page content",
+          "type": "text",
+          "default": "Our story",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.our-work",
+          "label": "Our work",
+          "group": "Page content",
+          "type": "text",
+          "default": "Our work",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.events-experiences",
+          "label": "Events & experiences",
+          "group": "Page content",
+          "type": "text",
+          "default": "Events & experiences",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.our-gallery",
+          "label": "Our gallery",
+          "group": "Page content",
+          "type": "text",
+          "default": "Our gallery",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.get-in-touch",
+          "label": "Get in touch",
+          "group": "Page content",
+          "type": "text",
+          "default": "Get in touch",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.be-part-of-it",
+          "label": "Be part of it",
+          "group": "Page content",
+          "type": "text",
+          "default": "Be part of it",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.become-a-volunteer",
+          "label": "Become a volunteer",
+          "group": "Page content",
+          "type": "text",
+          "default": "Become a volunteer",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.request-blood",
+          "label": "Request blood",
+          "group": "Page content",
+          "type": "text",
+          "default": "Request blood",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.partner-with-us",
+          "label": "Partner with us",
+          "group": "Page content",
+          "type": "text",
+          "default": "Partner with us",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.support-our-work",
+          "label": "Support our work",
+          "group": "Page content",
+          "type": "text",
+          "default": "Support our work",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.volunteer-portal",
+          "label": "Volunteer portal",
+          "group": "Page content",
+          "type": "text",
+          "default": "Volunteer portal",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.a-little-good-in-your-inbox",
+          "label": "A little good in your inbox.",
+          "group": "Page content",
+          "type": "text",
+          "default": "A little good in your inbox.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.stories-new-experiences-and-ways-to-help",
+          "label": "Stories, new experiences, and ways to help.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Stories, new experiences, and ways to help.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.link-mailto-moonlitfoundation-gmail-com",
+          "label": "Link: mailto:moonlitfoundation@gmail.com",
+          "group": "Page content",
+          "type": "url",
+          "default": "mailto:moonlitfoundation@gmail.com",
+          "maxLength": 2048
+        },
+        {
+          "key": "footer.page-content.moonlitfoundation-gmail-com",
+          "label": "moonlitfoundation@gmail.com",
+          "group": "Page content",
+          "type": "text",
+          "default": "moonlitfoundation@gmail.com",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.link-tel-919048414851",
+          "label": "Link: tel:+919048414851",
+          "group": "Page content",
+          "type": "url",
+          "default": "tel:+919048414851",
+          "maxLength": 2048
+        },
+        {
+          "key": "footer.page-content.91-9048-414-851",
+          "label": "+91 9048 414 851",
+          "group": "Page content",
+          "type": "text",
+          "default": "+91 9048 414 851",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.moonlit-foundation-made-for-a-better-tomorrow",
+          "label": "Moonlit Foundation. Made for a better tomorrow.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Moonlit Foundation. Made for a better tomorrow.",
+          "maxLength": 300
+        },
+        {
+          "key": "footer.page-content.small-acts-lasting-impact",
+          "label": "Small acts. Lasting impact.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Small acts. Lasting impact.",
+          "maxLength": 300
+        }
+      ]
+    },
+    {
+      "id": "impact",
+      "label": "Shared impact figures",
+      "path": "/programs",
+      "fields": [
+        {
+          "key": "impact.stats.count-2000",
+          "label": "count: 2000",
+          "group": "Stats",
+          "type": "number",
+          "default": 2000,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.volunteers",
+          "label": "Volunteers",
+          "group": "Stats",
+          "type": "text",
+          "default": "Volunteers",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.engaged",
+          "label": "Engaged",
+          "group": "Stats",
+          "type": "text",
+          "default": "Engaged",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.count-800",
+          "label": "count: 800",
+          "group": "Stats",
+          "type": "number",
+          "default": 800,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.blood-donors",
+          "label": "Blood Donors",
+          "group": "Stats",
+          "type": "text",
+          "default": "Blood Donors",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.registered",
+          "label": "Registered",
+          "group": "Stats",
+          "type": "text",
+          "default": "Registered",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.count-1000",
+          "label": "count: 1000",
+          "group": "Stats",
+          "type": "number",
+          "default": 1000,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.families",
+          "label": "Families",
+          "group": "Stats",
+          "type": "text",
+          "default": "Families",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.supported",
+          "label": "Supported",
+          "group": "Stats",
+          "type": "text",
+          "default": "Supported",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.count-120",
+          "label": "count: 120",
+          "group": "Stats",
+          "type": "number",
+          "default": 120,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.relief",
+          "label": "Relief",
+          "group": "Stats",
+          "type": "text",
+          "default": "Relief",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.campaigns",
+          "label": "Campaigns",
+          "group": "Stats",
+          "type": "text",
+          "default": "Campaigns",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.count-1000-2",
+          "label": "count: 1000",
+          "group": "Stats",
+          "type": "number",
+          "default": 1000,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.trees",
+          "label": "Trees",
+          "group": "Stats",
+          "type": "text",
+          "default": "Trees",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.planted",
+          "label": "Planted",
+          "group": "Stats",
+          "type": "text",
+          "default": "Planted",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.count-30",
+          "label": "count: 30",
+          "group": "Stats",
+          "type": "number",
+          "default": 30,
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.communities",
+          "label": "Communities",
+          "group": "Stats",
+          "type": "text",
+          "default": "Communities",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.stats.reached",
+          "label": "Reached",
+          "group": "Stats",
+          "type": "text",
+          "default": "Reached",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.page-content.our-impact",
+          "label": "Our Impact",
+          "group": "Page content",
+          "type": "text",
+          "default": "Our Impact",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.page-content.creating-change",
+          "label": "Creating change",
+          "group": "Page content",
+          "type": "text",
+          "default": "Creating change",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.page-content.that",
+          "label": "that",
+          "group": "Page content",
+          "type": "text",
+          "default": "that",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.page-content.matters",
+          "label": "matters",
+          "group": "Page content",
+          "type": "text",
+          "default": "matters",
+          "maxLength": 300
+        },
+        {
+          "key": "impact.page-content.real-people-real-impact",
+          "label": "Real people. Real impact.",
+          "group": "Page content",
+          "type": "text",
+          "default": "Real people. Real impact.",
+          "maxLength": 300
+        }
+      ]
+    }
+  ]
+}
