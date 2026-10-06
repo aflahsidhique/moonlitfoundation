@@ -6,7 +6,7 @@ import StarRating from "../components/StarRating";
 import { fmtDate } from "../lib/format";
 
 export default function Feedback() {
-  const { rows, loading, error, refresh } = useAdminList("/event-feedback", "feedback");
+  const { rows, loading, fetching, error, refresh, pagination, pageSize, setPage, setPageSize } = useAdminList("/event-feedback", "feedback");
 
   function remove(id) {
     adminFetch(`/event-feedback/${id}`, { method: "DELETE" }).then(refresh);
@@ -26,6 +26,11 @@ export default function Feedback() {
         { label: "Submitted", render: (f) => fmtDate(f.createdAt) },
         { label: "Actions", isActions: true, render: (f) => <DeleteButton onDelete={() => remove(f.id)} /> },
       ]}
+      pagination={pagination}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      busy={fetching}
     />
   );
 }

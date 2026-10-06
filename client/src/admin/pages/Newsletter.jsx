@@ -5,7 +5,7 @@ import { DeleteButton } from "../components/AdminButtons";
 import { fmtDate } from "../lib/format";
 
 export default function Newsletter() {
-  const { rows, loading, error, refresh } = useAdminList("/newsletter", "subscribers");
+  const { rows, loading, fetching, error, refresh, pagination, pageSize, setPage, setPageSize } = useAdminList("/newsletter", "subscribers");
 
   function remove(id) {
     adminFetch(`/newsletter/${id}`, { method: "DELETE" }).then(refresh);
@@ -22,6 +22,11 @@ export default function Newsletter() {
         { label: "Subscribed", render: (s) => fmtDate(s.createdAt) },
         { label: "Actions", isActions: true, render: (s) => <DeleteButton onDelete={() => remove(s.id)} /> },
       ]}
+      pagination={pagination}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      busy={fetching}
     />
   );
 }

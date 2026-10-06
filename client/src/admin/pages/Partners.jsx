@@ -9,10 +9,10 @@ import { fmtDate } from "../lib/format";
 
 export default function Partners() {
   const { setCount } = useOutletContext();
-  const { rows, loading, error, refresh } = useAdminList("/partners", "partners");
+  const { rows, loading, fetching, error, refresh, pagination, summary, pageSize, setPage, setPageSize } = useAdminList("/partners", "partners");
 
   useEffect(() => {
-    if (!loading) setCount("partners", rows.filter((p) => p.status === "pending").length);
+    if (!loading) setCount("partners", summary.pending || 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows, loading]);
 
@@ -37,6 +37,11 @@ export default function Partners() {
         { label: "Status", render: (p) => <StatusBadge status={p.status} /> },
         { label: "Actions", isActions: true, render: (p) => <ApproveRejectButtons status={p.status} onApprove={() => updateStatus(p.id, "approved")} onReject={() => updateStatus(p.id, "rejected")} onDelete={() => remove(p.id)} /> },
       ]}
+      pagination={pagination}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      busy={fetching}
     />
   );
 }

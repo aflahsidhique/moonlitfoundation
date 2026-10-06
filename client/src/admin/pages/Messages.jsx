@@ -10,10 +10,10 @@ const STATUSES = ["unread", "read", "replied"];
 
 export default function Messages() {
   const { setCount } = useOutletContext();
-  const { rows, loading, error, refresh } = useAdminList("/contact", "messages");
+  const { rows, loading, fetching, error, refresh, pagination, summary, pageSize, setPage, setPageSize } = useAdminList("/contact", "messages");
 
   useEffect(() => {
-    if (!loading) setCount("messages", rows.filter((m) => m.status === "unread").length);
+    if (!loading) setCount("messages", summary.unread || 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows, loading]);
 
@@ -38,6 +38,11 @@ export default function Messages() {
         { label: "Status", render: (m) => <StatusSelect value={m.status} statuses={STATUSES} onChange={(v) => updateStatus(m.id, v)} /> },
         { label: "Actions", isActions: true, render: (m) => <DeleteButton onDelete={() => remove(m.id)} /> },
       ]}
+      pagination={pagination}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      busy={fetching}
     />
   );
 }

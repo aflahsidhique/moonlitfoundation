@@ -7,6 +7,7 @@ import AdminDataTable from "../components/AdminDataTable";
 import StatusBadge from "../components/StatusBadge";
 import { AdminBtn, ApproveRejectButtons } from "../components/AdminButtons";
 import VolunteerDetailModal from "../components/VolunteerDetailModal";
+import VolunteerExportModal from "../components/VolunteerExportModal";
 import { fmtDate, resolveFileUrl } from "../lib/format";
 
 // Volunteer approve/resend responses include a volunteerId + notifications
@@ -24,11 +25,12 @@ function approvalToastMessage(body) {
 export default function Volunteers() {
   const { setCount } = useOutletContext();
   const showToast = useToast();
-  const { rows, loading, error, refresh } = useAdminList("/volunteers", "volunteers");
+  const { rows, loading, fetching, error, refresh, pagination, summary, pageSize, setPage, setPageSize } = useAdminList("/volunteers", "volunteers");
   const [detailId, setDetailId] = useState(null);
+  const [exportOpen, setExportOpen] = useState(false);
 
   useEffect(() => {
-    if (!loading) setCount("volunteers", rows.filter((v) => v.status === "pending").length);
+    if (!loading) setCount("volunteers", summary.pending || 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows, loading]);
 
@@ -55,6 +57,12 @@ export default function Volunteers() {
 
   return (
     <>
+      <div className="ws-toolbar ws-volunteer-toolbar">
+        <p className="ws-description">{pagination.total} volunteer record{pagination.total === 1 ? "" : "s"}</p>
+        <button type="button" className="mf-btn mf-btn-primary" onClick={() => setExportOpen(true)} disabled={!pagination.total}>
+          <i className="fa-solid fa-download" aria-hidden="true" /> Export volunteers
+        </button>
+      </div>
       <AdminDataTable
         rows={rows}
         columns={[
@@ -82,8 +90,20 @@ export default function Volunteers() {
           badge: <StatusBadge status={v.status} />,
           onClick: () => setDetailId(v.id),
         })}
+        pagination={pagination}
+        onPageChange={setPage}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        busy={fetching}
       />
       <VolunteerDetailModal volunteer={detail} onClose={() => setDetailId(null)} />
+      <VolunteerExportModal
+        open={exportOpen}
+        count={pagination.total}
+        loadVolunteers={() => adminFetch("/volunteers/export", { force: true }).then((body) => body.volunteers || [])}
+        onClose={() => setExportOpen(false)}
+        onExported={showToast}
+      />
     </>
   );
 }

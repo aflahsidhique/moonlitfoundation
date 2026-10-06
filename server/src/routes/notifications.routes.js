@@ -2,6 +2,7 @@ const express = require("express");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -32,11 +33,11 @@ router.post("/", requireAuth, async (req, res, next) => {
 // Admin — everything sent, newest first.
 router.get("/", requireAuth, async (req, res, next) => {
   try {
-    const notifications = await prisma.notification.findMany({
+    const { rows: notifications, pagination } = await paginated(prisma.notification, req.query, {
       orderBy: { createdAt: "desc" },
       include: { volunteer: { select: { fullName: true, volunteerId: true } } }
     });
-    res.json({ notifications });
+    res.json({ notifications, pagination });
   } catch (err) {
     next(err);
   }

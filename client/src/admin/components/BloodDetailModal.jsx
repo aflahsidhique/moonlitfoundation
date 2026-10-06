@@ -6,6 +6,7 @@ import { VdSection, VdGrid, VdField, FileLink } from "./VdHelpers";
 import { fmtDate } from "../lib/format";
 import { adminFetch } from "../lib/adminApi";
 import { useToast } from "../../hooks/useToast";
+import AdminPagination from "./AdminPagination";
 
 const RESPONSE_STATUSES = ["notified", "accepted", "declined", "unavailable", "reached_hospital", "completed"];
 
@@ -22,19 +23,36 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
   const [radius, setRadius] = useState("20");
   const [notifying, setNotifying] = useState(false);
   const [responses, setResponses] = useState(null);
+  const [responsePagination, setResponsePagination] = useState(null);
+  const [responsePage, setResponsePage] = useState(1);
+  const [responsePageSize, setResponsePageSize] = useState(20);
 
   useEffect(() => {
     if (!b) { setResponses(null); return; }
     setNote(b.adminNote || "");
     setStrategy("all");
-    loadResponses(b.id);
+    setResponsePage(1);
+    loadResponses(b.id, 1, responsePageSize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [b?.id]);
 
-  function loadResponses(id) {
-    adminFetch(`/blood-requests/${id}/responses`)
-      .then((body) => setResponses(body.responses))
+  function loadResponses(id, page = responsePage, pageSize = responsePageSize) {
+    setResponses(null);
+    adminFetch(`/blood-requests/${id}/responses?page=${page}&pageSize=${pageSize}`, { force: true })
+      .then((body) => { setResponses(body.responses); setResponsePagination(body.pagination); })
       .catch((err) => setResponses([]) || showToast(err.message));
+  }
+
+  function changeResponsePage(page) {
+    setResponsePage(page);
+    loadResponses(b.id, page, responsePageSize);
+  }
+
+  function changeResponsePageSize(pageSize) {
+    const size = Number(pageSize);
+    setResponsePage(1);
+    setResponsePageSize(size);
+    loadResponses(b.id, 1, size);
   }
 
   function setStatus(status) {
@@ -54,7 +72,8 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
       .then((body) => {
         const s = body.summary;
         showToast(`Notified ${s.targeted} volunteer(s) — SMS ${s.sms.sent}/${s.sms.sent + s.sms.failed}, Email ${s.email.sent}/${s.email.sent + s.email.failed}.`);
-        loadResponses(b.id);
+        setResponsePage(1);
+        loadResponses(b.id, 1, responsePageSize);
       })
       .catch((err) => showToast(err.message))
       .finally(() => setNotifying(false));
@@ -147,6 +166,7 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
               </table>
             </div>
           )}
+          <AdminPagination pagination={responsePagination} onPageChange={changeResponsePage} pageSize={responsePageSize} onPageSizeChange={changeResponsePageSize} busy={responses === null} />
         </div>
       )}
     </AdminModal>

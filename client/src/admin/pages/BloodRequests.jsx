@@ -12,11 +12,11 @@ import { fmtDate } from "../lib/format";
 export default function BloodRequests() {
   const { setCount } = useOutletContext();
   const showToast = useToast();
-  const { rows, setRows, loading, error, refresh } = useAdminList("/blood-requests", "bloodRequests");
+  const { rows, setRows, loading, fetching, error, refresh, pagination, summary, pageSize, setPage, setPageSize } = useAdminList("/blood-requests", "bloodRequests");
   const [detailId, setDetailId] = useState(null);
 
   useEffect(() => {
-    if (!loading) setCount("blood", rows.filter((b) => b.status === "pending").length);
+    if (!loading) setCount("blood", summary.pending || 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows, loading]);
 
@@ -56,6 +56,11 @@ export default function BloodRequests() {
           badge: <StatusBadge status={b.status} />,
           onClick: () => setDetailId(b.id),
         })}
+        pagination={pagination}
+        onPageChange={setPage}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        busy={fetching}
       />
       <BloodDetailModal
         bloodRequest={detail}

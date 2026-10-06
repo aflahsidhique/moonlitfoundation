@@ -2,6 +2,7 @@ const express = require("express");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -33,8 +34,8 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", requireAuth, async (req, res, next) => {
   try {
-    const subscribers = await prisma.newsletterSubscriber.findMany({ orderBy: { createdAt: "desc" } });
-    res.json({ subscribers });
+    const { rows: subscribers, pagination } = await paginated(prisma.newsletterSubscriber, req.query, { orderBy: { createdAt: "desc" } });
+    res.json({ subscribers, pagination });
   } catch (err) {
     next(err);
   }

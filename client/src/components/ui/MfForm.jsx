@@ -29,6 +29,7 @@ function formToPayload(form) {
 // the original markup instead of a full controlled-form rewrite.
 export default function MfForm({ endpoint, successMessage = "Thank you! We'll get back to you soon.", onSuccess, validate, className = "", children, ...rest }) {
   const formRef = useRef(null);
+  const submittingRef = useRef(false);
   const [submitting, setSubmitting] = useState(false);
   const showToast = useToast();
 
@@ -51,9 +52,12 @@ export default function MfForm({ endpoint, successMessage = "Thank you! We'll ge
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (submittingRef.current) return;
+
     const form = formRef.current;
     if (!runValidation(form)) return;
 
+    submittingRef.current = true;
     setSubmitting(true);
     try {
       const hasFile = !!form.querySelector('input[type="file"]');
@@ -64,13 +68,14 @@ export default function MfForm({ endpoint, successMessage = "Thank you! We'll ge
     } catch (err) {
       showToast(err.message || "Couldn't reach the server — please try again shortly.");
     } finally {
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }
 
   return (
     <form ref={formRef} className={className} onSubmit={handleSubmit} data-submitting={submitting || undefined} {...rest}>
-      {children}
+      {typeof children === "function" ? children({ submitting }) : children}
     </form>
   );
 }

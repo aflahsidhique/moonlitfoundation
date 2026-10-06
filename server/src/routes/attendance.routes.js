@@ -3,6 +3,7 @@ const { publicCache } = require("../middleware/cache");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -44,12 +45,12 @@ router.post("/check-in", requireAuth, async (req, res, next) => {
 // Admin — who's checked in for a given event.
 router.get("/event/:eventId", requireAuth, async (req, res, next) => {
   try {
-    const attendances = await prisma.attendance.findMany({
+    const { rows: attendances, pagination } = await paginated(prisma.attendance, req.query, {
       where: { eventId: req.params.eventId },
       include: { volunteer: { select: { fullName: true, volunteerId: true, mobile: true } } },
       orderBy: { checkedInAt: "desc" }
-    });
-    res.json({ attendances });
+    }, { softDelete: false });
+    res.json({ attendances, pagination });
   } catch (err) {
     next(err);
   }

@@ -1,9 +1,11 @@
+import AdminPagination from "./AdminPagination";
+
 // Ports the legacy admin.js renderTable(): a real <table> always renders;
 // when `cardConfig` is given, a parallel .mf-admin-card-grid also renders
 // (CSS-swapped below the sidebar breakpoint — see styles/admin.css). Cards
 // reuse whichever column is marked `isActions` for their own action row,
 // so the two views can't drift out of sync.
-export default function AdminDataTable({ rows, columns, cardConfig }) {
+export default function AdminDataTable({ rows, columns, cardConfig, pagination, onPageChange, pageSize, onPageSizeChange, busy }) {
   if (!rows.length) return <p className="mf-admin-empty">Nothing here yet.</p>;
 
   const actionsCol = columns.find((c) => c.isActions);
@@ -32,7 +34,7 @@ export default function AdminDataTable({ rows, columns, cardConfig }) {
             return (
               <div key={row.id} className="mf-admin-card" onClick={c.onClick}>
                 {c.photo
-                  ? <img className="mf-admin-card-photo" src={c.photo} alt="" />
+                  ? <img className="mf-admin-card-photo" src={c.photo} alt="" loading="lazy" decoding="async" />
                   : <div className="mf-admin-card-photo mf-admin-card-photo-ph"><i className={`fa-solid fa-${c.icon || "user"}`}></i></div>}
                 <p className="mf-admin-card-title">{c.title}</p>
                 {c.subtitle && <p className="mf-admin-card-subtitle">{c.subtitle}</p>}
@@ -47,6 +49,7 @@ export default function AdminDataTable({ rows, columns, cardConfig }) {
           })}
         </div>
       )}
+      <AdminPagination pagination={pagination} onPageChange={onPageChange} pageSize={pageSize} onPageSizeChange={onPageSizeChange} busy={busy} />
     </>
   );
 }

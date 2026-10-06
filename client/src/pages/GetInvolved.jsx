@@ -74,6 +74,7 @@ export default function GetInvolved() {
         </div>
 
         <MfForm endpoint="/volunteers" onSuccess={() => setIsBloodDonor(false)} successMessage="Welcome aboard! Our volunteer team will contact you within 3 days." className="mf-form-card mf-fade">
+          {({ submitting }) => <>
           <h3 className="text-xl mb-6">Volunteer Registration</h3>
           <div className="grid sm:grid-cols-2 gap-5">
             <h4 className="mf-form-section sm:col-span-2">Personal Details</h4>
@@ -150,7 +151,10 @@ export default function GetInvolved() {
 
             <TextareaField label="Message" name="message" span rows={3} placeholder="Tell us a little about yourself (optional)" />
           </div>
-          <button className="mf-btn mf-btn-primary mt-6 w-full justify-center">Join as a Volunteer <i className="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" className="mf-btn mf-btn-primary mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <>Join as a Volunteer <i className="fa-solid fa-arrow-right"></i></>}
+          </button>
+          </>}
         </MfForm>
       </section>
 
@@ -168,6 +172,7 @@ export default function GetInvolved() {
         </div>
 
         <MfForm endpoint="/blood-requests" successMessage="Request received. Our donor team is on it — expect a call shortly." className="mf-form-card mf-fade lg:order-1">
+          {({ submitting }) => <>
           <h3 className="text-xl mb-6">Blood Request Form</h3>
           <div className="grid sm:grid-cols-2 gap-5">
             <TextField label="Patient Name" name="patientName" required placeholder="Patient's full name" error="Please enter the patient's name." />
@@ -189,7 +194,10 @@ export default function GetInvolved() {
             <TextField label="Contact Number" name="phone" type="tel" required placeholder="+91 ..." error="Please enter a contact number." />
             <FileField label="Supporting Documents" name="documents" span hint="(prescription, referral — JPG or PNG, up to 3 files, 5MB each)" multiple />
           </div>
-          <button className="mf-btn mf-btn-red-solid mt-6 w-full justify-center"><i className="fa-solid fa-droplet"></i> Submit Request</button>
+          <button type="submit" className="mf-btn mf-btn-red-solid mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <><i className="fa-solid fa-droplet"></i> Submit Request</>}
+          </button>
+          </>}
         </MfForm>
       </section>
 
@@ -207,6 +215,7 @@ export default function GetInvolved() {
           </ul>
         </div>
         <MfForm endpoint="/partners" successMessage="Thank you! Our partnerships team will reach out within a week." className="mf-form-card mf-fade">
+          {({ submitting }) => <>
           <h3 className="text-xl mb-6">Partnership Inquiry</h3>
           <div className="grid gap-5">
             <TextField label="Organization" name="organization" required placeholder="Company / college / NGO name" error="Please enter your organization." />
@@ -214,7 +223,10 @@ export default function GetInvolved() {
             <TextField label="Email" name="email" type="email" required placeholder="you@organization.com" />
             <TextareaField label="Message" name="message" required rows={4} placeholder="Tell us what you have in mind" error="Please add a short message." />
           </div>
-          <button className="mf-btn mf-btn-primary mt-6 w-full justify-center">Send Inquiry <i className="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" className="mf-btn mf-btn-primary mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <>Send Inquiry <i className="fa-solid fa-arrow-right"></i></>}
+          </button>
+          </>}
         </MfForm>
       </section>
 

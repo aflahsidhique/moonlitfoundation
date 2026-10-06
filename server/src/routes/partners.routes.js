@@ -2,6 +2,8 @@ const express = require("express");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
+const { makeSubmissionKey, normalizeEmail, isUniqueConstraintError } = require("../lib/dedupe");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -10,11 +12,22 @@ router.post("/", async (req, res, next) => {
   try {
     requireFields(req.body, ["organization", "contactPerson", "email", "message"]);
     const { organization, contactPerson, email, message } = req.body;
+    const normalizedEmail = normalizeEmail(email);
+    const submissionKey = makeSubmissionKey([normalizedEmail, organization, contactPerson, message]);
+
+    const duplicate = await prisma.partnerInquiry.findFirst({ where: { submissionKey }, select: { id: true } });
+    if (duplicate) {
+      return res.status(409).json({ error: "This partnership inquiry was already submitted. Please wait before submitting it again." });
+    }
+
     const partner = await prisma.partnerInquiry.create({
-      data: { organization, contactPerson, email, message }
+      data: { submissionKey, organization, contactPerson, email: normalizedEmail, message }
     });
     res.status(201).json({ partner });
   } catch (err) {
+    if (isUniqueConstraintError(err)) {
+      return res.status(409).json({ error: "This partnership inquiry was already submitted. Please wait before submitting it again." });
+    }
     next(err);
   }
 });
@@ -22,11 +35,11 @@ router.post("/", async (req, res, next) => {
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
-    const partners = await prisma.partnerInquiry.findMany({
-      where: status ? { status } : undefined,
-      orderBy: { createdAt: "desc" }
-    });
-    res.json({ partners });
+    const [{ rows: partners, pagination }, pending] = await Promise.all([
+      paginated(prisma.partnerInquiry, req.query, { where: status ? { status } : undefined, orderBy: { createdAt: "desc" } }),
+      prisma.partnerInquiry.count({ where: { status: "pending", deletedAt: null } })
+    ]);
+    res.json({ partners, pagination, summary: { pending } });
   } catch (err) {
     next(err);
   }

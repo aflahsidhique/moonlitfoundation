@@ -4,6 +4,7 @@ const { requireAuth } = require("../middleware/auth");
 const { upload, storeWebp } = require("../lib/upload");
 const { convertToWebp } = require("../lib/webp");
 const { schema, defaults, categories, bad, revision, validateContent, imageFields, createSnapshotCache } = require("../lib/website");
+const { paginated } = require("../lib/pagination");
 const snapshots = createSnapshotCache(prisma);
 const wrap = (fn) => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(error => {
   if (error.code === "P2002" || error.code === "P2025") error = bad("This item changed in another session. Reload before saving again.",409);
@@ -50,8 +51,13 @@ router.post("/pages/:id/publish",wrap(async(req,res)=>{
 }));
 
 router.get("/images",wrap(async(req,res)=>{
-  const images=await prisma.websiteImage.findMany({where:{deletedAt:null},orderBy:[{sortOrder:"asc"},{createdAt:"desc"}]});
-  res.json({images,categories});
+  const {filter="gallery",q=""}=req.query;
+  const where={
+    ...(filter==="gallery"?{inGallery:true}:filter==="published"?{inGallery:true,status:"published"}:filter==="draft"?{inGallery:true,status:"draft"}:{}),
+    ...(q.trim()?{OR:[{title:{contains:q.trim(),mode:"insensitive"}},{caption:{contains:q.trim(),mode:"insensitive"}},{category:{contains:q.trim(),mode:"insensitive"}}]}:{})
+  };
+  const {rows:images,pagination}=await paginated(prisma.websiteImage,req.query,{where,orderBy:[{sortOrder:"asc"},{createdAt:"desc"}]});
+  res.json({images,categories,pagination});
 }));
 function parseImage(req,res,next) {
   upload.single("image")(req,res,error=>{

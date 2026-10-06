@@ -9,7 +9,7 @@ import { fmtDate } from "../lib/format";
 
 export default function Notifications() {
   const showToast = useToast();
-  const { rows, loading, error, refresh } = useAdminList("/notifications", "notifications");
+  const { rows, loading, fetching, error, refresh, pagination, pageSize, setPage, setPageSize } = useAdminList("/notifications", "notifications");
   const [formOpen, setFormOpen] = useState(false);
 
   function remove(id) {
@@ -32,6 +32,11 @@ export default function Notifications() {
           { label: "Sent", render: (n) => fmtDate(n.createdAt) },
           { label: "Actions", isActions: true, render: (n) => <DeleteButton onDelete={() => remove(n.id)} /> },
         ]}
+        pagination={pagination}
+        onPageChange={setPage}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        busy={fetching}
       />
       <NotificationFormModal
         open={formOpen}

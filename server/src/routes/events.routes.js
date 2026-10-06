@@ -5,6 +5,7 @@ const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { parseEventImage, storeEventImage } = require("../lib/eventImage");
 const { emailConfigured, recipientsFor, shareEvent, safeUrl } = require("../lib/eventEmail");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -50,11 +51,25 @@ router.get("/", publicCache({ maxAge: 60, swr: 600 }), async (req, res, next) =>
 // Admin — every event regardless of status, with registration counts.
 router.get("/admin", requireAuth, async (req, res, next) => {
   try {
-    const events = await prisma.event.findMany({
-      orderBy: { eventDate: "desc" },
-      include: { _count: { select: { registrations: true } } }
-    });
-    res.json({ events });
+    const { status, q, from, order } = req.query;
+    const where = {
+      ...(status && status !== "all" ? { status } : {}),
+      ...(from ? { eventDate: { gte: new Date(from) } } : {}),
+      ...(q?.trim() ? { OR: [
+        { title: { contains: q.trim(), mode: "insensitive" } },
+        { category: { contains: q.trim(), mode: "insensitive" } },
+        { location: { contains: q.trim(), mode: "insensitive" } }
+      ] } : {})
+    };
+    const [{ rows: events, pagination }, published] = await Promise.all([
+      paginated(prisma.event, req.query, {
+        where,
+        orderBy: { eventDate: order === "asc" ? "asc" : "desc" },
+        include: { _count: { select: { registrations: true } } }
+      }),
+      prisma.event.count({ where: { status: "published", deletedAt: null } })
+    ]);
+    res.json({ events, pagination, summary: { published } });
   } catch (err) {
     next(err);
   }
@@ -202,11 +217,11 @@ router.post("/:id/feedback", async (req, res, next) => {
 // Admin — registrations for one event.
 router.get("/:id/registrations", requireAuth, async (req, res, next) => {
   try {
-    const registrations = await prisma.eventRegistration.findMany({
+    const { rows: registrations, pagination } = await paginated(prisma.eventRegistration, req.query, {
       where: { eventId: req.params.id },
       orderBy: { createdAt: "desc" }
     });
-    res.json({ registrations });
+    res.json({ registrations, pagination });
   } catch (err) {
     next(err);
   }

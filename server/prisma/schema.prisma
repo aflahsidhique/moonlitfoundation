@@ -82,9 +82,9 @@ model Volunteer {
   gender   String
   aadhaar  String?
   photoUrl String?
-  mobile   String
+  mobile   String @unique
   whatsapp String?
-  email    String
+  email    String @unique
 
   // Address
   address   String
@@ -140,6 +140,7 @@ model Volunteer {
 
 model BloodRequest {
   id            String   @id @default(cuid())
+  submissionKey String? @unique
   patientName   String
   bloodGroup    String
   units         Int
@@ -212,6 +213,7 @@ model PushSubscription {
 
 model PartnerInquiry {
   id            String   @id @default(cuid())
+  submissionKey String?  @unique
   organization  String
   contactPerson String
   email         String

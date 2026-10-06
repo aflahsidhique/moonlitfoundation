@@ -9,6 +9,8 @@ const { generatePassword } = require("../lib/password");
 const { sendApprovalEmail, sendApprovalSms } = require("../lib/notify");
 const { geocodeAddress } = require("../lib/geocode");
 const { computeEligibility } = require("../lib/eligibility");
+const { normalizeEmail, normalizePhone, isUniqueConstraintError } = require("../lib/dedupe");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -69,6 +71,16 @@ router.post("/", upload.fields([{ name: "photo", maxCount: 1 }, { name: "idUploa
     requireFields(req.body, REQUIRED_FIELDS);
     const b = req.body;
     const files = req.files || {};
+    const email = normalizeEmail(b.email);
+    const mobile = normalizePhone(b.mobile);
+
+    const duplicate = await prisma.volunteer.findFirst({
+      where: { OR: [{ email }, { mobile }] },
+      select: { id: true }
+    });
+    if (duplicate) {
+      return res.status(409).json({ error: "A volunteer registration already exists with this email or mobile number." });
+    }
 
     const [photoUrl, idUploadUrl] = await Promise.all([
       files.photo && files.photo[0] ? uploadToCloudinary(files.photo[0], "moonlit/volunteer-photos") : null,
@@ -82,9 +94,9 @@ router.post("/", upload.fields([{ name: "photo", maxCount: 1 }, { name: "idUploa
         gender: b.gender,
         aadhaar: b.aadhaar || null,
         photoUrl: photoUrl,
-        mobile: b.mobile,
+        mobile,
         whatsapp: b.whatsapp || null,
-        email: b.email,
+        email,
         address: b.address,
         state: b.state,
         district: b.district,
@@ -112,6 +124,9 @@ router.post("/", upload.fields([{ name: "photo", maxCount: 1 }, { name: "idUploa
     });
     res.status(201).json({ volunteer: omitPassword(volunteer) });
   } catch (err) {
+    if (isUniqueConstraintError(err)) {
+      return res.status(409).json({ error: "A volunteer registration already exists with this email or mobile number." });
+    }
     next(err);
   }
 });
@@ -140,16 +155,31 @@ router.get("/verify/:volunteerId", publicCache({ maxAge: 300, swr: 3600 }), asyn
 });
 
 // Admin — list, optionally filtered by status.
-router.get("/", requireAuth, async (req, res, next) => {
+router.get("/export", requireAuth, async (req, res, next) => {
   try {
-    const { status } = req.query;
     const volunteers = await prisma.volunteer.findMany({
-      where: status ? { status } : undefined,
       orderBy: { createdAt: "desc" },
       include: { bloodDonations: { orderBy: { donationDate: "desc" } } }
     });
+    res.json({ volunteers: volunteers.map((v) => Object.assign(omitPassword(v), computeEligibility(v, v.bloodDonations))) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/", requireAuth, async (req, res, next) => {
+  try {
+    const { status } = req.query;
+    const [{ rows: volunteers, pagination }, pending] = await Promise.all([
+      paginated(prisma.volunteer, req.query, {
+        where: status ? { status } : undefined,
+        orderBy: { createdAt: "desc" },
+        include: { bloodDonations: { orderBy: { donationDate: "desc" } } }
+      }),
+      prisma.volunteer.count({ where: { status: "pending", deletedAt: null } })
+    ]);
     const withEligibility = volunteers.map((v) => Object.assign(omitPassword(v), computeEligibility(v, v.bloodDonations)));
-    res.json({ volunteers: withEligibility });
+    res.json({ volunteers: withEligibility, pagination, summary: { pending } });
   } catch (err) {
     next(err);
   }

@@ -4,6 +4,7 @@ import { useAdminList } from "../hooks/useAdminList";
 import { adminFetch } from "../lib/adminApi";
 import { useToast } from "../../hooks/useToast";
 import { AdminBtn } from "../components/AdminButtons";
+import AdminPagination from "../components/AdminPagination";
 import { fmtDate } from "../lib/format";
 
 // Prefers the native BarcodeDetector API (fast, hardware-backed where
@@ -87,9 +88,10 @@ function useQrScanner(videoRef, active, onDecode) {
 
 export default function Checkin() {
   const showToast = useToast();
-  const { rows: events, loading, error } = useAdminList("/events/admin", "events");
+  const { rows: events, loading, error } = useAdminList("/events/admin", "events", { pageSize: 100 });
   const [eventId, setEventId] = useState("");
-  const [attendances, setAttendances] = useState([]);
+  const attendanceList = useAdminList(`/attendance/event/${eventId}`, "attendances", { enabled: Boolean(eventId) });
+  const { rows: attendances, fetching: attendanceFetching, refresh: refreshAttendances, pagination: attendancePagination, pageSize: attendancePageSize, setPage: setAttendancePage, setPageSize: setAttendancePageSize } = attendanceList;
   const [manualVid, setManualVid] = useState("");
   const [result, setResult] = useState(null);
   const videoRef = useRef(null);
@@ -98,12 +100,6 @@ export default function Checkin() {
     if (events.length && !eventId) setEventId(events[0].id);
   }, [events, eventId]);
 
-  const loadAttendances = (id) => {
-    if (!id) return;
-    adminFetch(`/attendance/event/${id}`).then((body) => setAttendances(body.attendances));
-  };
-  useEffect(() => { loadAttendances(eventId); }, [eventId]);
-
   function doCheckIn(volunteerId) {
     if (!eventId) return;
     adminFetch("/attendance/check-in", { method: "POST", body: JSON.stringify({ eventId, volunteerId }) })
@@ -111,7 +107,7 @@ export default function Checkin() {
         const msg = `${body.alreadyCheckedIn ? "Already checked in: " : "Checked in: "}${body.volunteer.fullName} (${body.volunteer.volunteerId})`;
         showToast(msg);
         setResult({ ok: true, msg });
-        loadAttendances(eventId);
+        refreshAttendances();
       })
       .catch((err) => { showToast(err.message); setResult({ ok: false, msg: err.message }); });
   }
@@ -121,7 +117,7 @@ export default function Checkin() {
   function toggleCertificate(a) {
     const issued = !a.certificateIssued;
     adminFetch(`/attendance/${a.id}/certificate`, { method: "PATCH", body: JSON.stringify({ issued }) })
-      .then(() => { showToast(issued ? "Certificate issued." : "Certificate revoked."); loadAttendances(eventId); })
+      .then(() => { showToast(issued ? "Certificate issued." : "Certificate revoked."); refreshAttendances(); })
       .catch((err) => showToast(err.message));
   }
 
@@ -166,6 +162,7 @@ export default function Checkin() {
           </div>
         )) : <p className="text-[13px] text-[#9CA3AF]">No one checked in yet.</p>}
       </div>
+      <AdminPagination pagination={attendancePagination} onPageChange={setAttendancePage} pageSize={attendancePageSize} onPageSizeChange={setAttendancePageSize} busy={attendanceFetching} />
     </div>
   );
 }

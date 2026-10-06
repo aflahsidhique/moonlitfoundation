@@ -7,7 +7,7 @@ import { fmtDate } from "../lib/format";
 const STATUSES = ["pending", "confirmed", "cancelled"];
 
 export default function Registrations() {
-  const { rows, loading, error, refresh } = useAdminList("/event-registrations", "registrations");
+  const { rows, loading, fetching, error, refresh, pagination, pageSize, setPage, setPageSize } = useAdminList("/event-registrations", "registrations");
 
   function updateStatus(id, status) {
     adminFetch(`/event-registrations/${id}`, { method: "PATCH", body: JSON.stringify({ status }) }).then(refresh);
@@ -30,6 +30,11 @@ export default function Registrations() {
         { label: "Status", render: (r) => <StatusSelect value={r.status} statuses={STATUSES} onChange={(v) => updateStatus(r.id, v)} /> },
         { label: "Actions", isActions: true, render: (r) => <DeleteButton onDelete={() => remove(r.id)} /> },
       ]}
+      pagination={pagination}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      busy={fetching}
     />
   );
 }

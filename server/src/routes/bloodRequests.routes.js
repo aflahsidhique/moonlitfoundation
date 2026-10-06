@@ -8,6 +8,8 @@ const { haversineKm } = require("../lib/distance");
 const { computeEligibility } = require("../lib/eligibility");
 const { sendBloodAlertSms, sendBloodAlertEmail } = require("../lib/notify");
 const { sendPush } = require("../lib/push");
+const { makeSubmissionKey, normalizePhone, isUniqueConstraintError } = require("../lib/dedupe");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -27,6 +29,15 @@ router.post("/", upload.fields([{ name: "documents", maxCount: 3 }]), async (req
     requireFields(req.body, ["patientName", "bloodGroup", "units", "urgency", "hospital", "district", "location", "phone"]);
     const { patientName, bloodGroup, units, urgency, hospital, district, location, doctorName, phone } = req.body;
     const files = req.files && req.files.documents ? req.files.documents : [];
+    const normalizedPhone = normalizePhone(phone);
+    const submissionKey = makeSubmissionKey([
+      normalizedPhone, patientName, bloodGroup, units, urgency, hospital, district, location, doctorName
+    ]);
+
+    const duplicate = await prisma.bloodRequest.findFirst({ where: { submissionKey }, select: { id: true } });
+    if (duplicate) {
+      return res.status(409).json({ error: "This blood request was already submitted. Please wait before submitting it again." });
+    }
 
     const documentUrls = await Promise.all(
       files.map((f) => uploadToCloudinary(f, "moonlit/blood-request-documents"))
@@ -36,6 +47,7 @@ router.post("/", upload.fields([{ name: "documents", maxCount: 3 }]), async (req
 
     const bloodRequest = await prisma.bloodRequest.create({
       data: {
+        submissionKey,
         patientName,
         bloodGroup,
         units: Number(units),
@@ -44,7 +56,7 @@ router.post("/", upload.fields([{ name: "documents", maxCount: 3 }]), async (req
         district,
         location,
         doctorName: doctorName || null,
-        phone,
+        phone: normalizedPhone,
         documentUrls: documentUrls.length ? documentUrls.join(",") : null,
         lat: geo ? geo.lat : null,
         lng: geo ? geo.lng : null
@@ -52,6 +64,9 @@ router.post("/", upload.fields([{ name: "documents", maxCount: 3 }]), async (req
     });
     res.status(201).json({ bloodRequest });
   } catch (err) {
+    if (isUniqueConstraintError(err)) {
+      return res.status(409).json({ error: "This blood request was already submitted. Please wait before submitting it again." });
+    }
     next(err);
   }
 });
@@ -60,12 +75,15 @@ router.post("/", upload.fields([{ name: "documents", maxCount: 3 }]), async (req
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
-    const bloodRequests = await prisma.bloodRequest.findMany({
-      where: status ? { status } : undefined,
-      orderBy: { createdAt: "desc" },
-      include: { _count: { select: { responses: true, donations: true } } }
-    });
-    res.json({ bloodRequests });
+    const [{ rows: bloodRequests, pagination }, pending] = await Promise.all([
+      paginated(prisma.bloodRequest, req.query, {
+        where: status ? { status } : undefined,
+        orderBy: { createdAt: "desc" },
+        include: { _count: { select: { responses: true, donations: true } } }
+      }),
+      prisma.bloodRequest.count({ where: { status: "pending", deletedAt: null } })
+    ]);
+    res.json({ bloodRequests, pagination, summary: { pending } });
   } catch (err) {
     next(err);
   }
@@ -175,12 +193,12 @@ router.post("/:id/notify", requireAuth, async (req, res, next) => {
 // Admin — everyone notified about a request and where they're at.
 router.get("/:id/responses", requireAuth, async (req, res, next) => {
   try {
-    const responses = await prisma.bloodRequestResponse.findMany({
+    const { rows: responses, pagination } = await paginated(prisma.bloodRequestResponse, req.query, {
       where: { bloodRequestId: req.params.id },
       include: { volunteer: { select: { fullName: true, volunteerId: true, mobile: true, bloodGroup: true } } },
       orderBy: { createdAt: "desc" }
     });
-    res.json({ responses });
+    res.json({ responses, pagination });
   } catch (err) {
     next(err);
   }

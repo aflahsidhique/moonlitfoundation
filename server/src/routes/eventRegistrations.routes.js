@@ -2,6 +2,7 @@ const express = require("express");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
+const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
 
@@ -9,12 +10,12 @@ const router = express.Router();
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
-    const registrations = await prisma.eventRegistration.findMany({
+    const { rows: registrations, pagination } = await paginated(prisma.eventRegistration, req.query, {
       where: status ? { status } : undefined,
       orderBy: { createdAt: "desc" },
       include: { event: { select: { id: true, title: true, eventDate: true } } }
     });
-    res.json({ registrations });
+    res.json({ registrations, pagination });
   } catch (err) {
     next(err);
   }
