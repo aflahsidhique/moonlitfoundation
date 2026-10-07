@@ -7,6 +7,8 @@ Open **Website Content** (`/admin/website`), choose a page, and expand its secti
 - **Save draft** stores edits without changing the public website.
 - **Publish page** saves any remaining edits and publishes that page. **View live page** opens the current public page.
 - **Upload image** converts a new image to WebP and selects it for the draft. **Choose from library** reuses an existing admin upload. **Use image URL** accepts a direct HTTPS image URL. **Remove image** clears the draft image.
+- In **About → Team**, use **Add person** to create a profile card. Each card has a name, role, photo, row number, and position within that row. Row and position determine the public page layout; each row/position combination must be unique.
+- In **About → Timeline**, use **Add milestone** to create an image-led journey card. Edit its year, optional month, title, description, image, and same-date order. The public timeline is sorted chronologically automatically.
 - If another administrator changes the page, saving returns a conflict instead of overwriting their work. Copy any unsaved changes before reloading the editor.
 
 Open **Gallery & Images** (`/admin/gallery`) to upload photos. Add a title, meaningful image description, optional caption, category, display order and visibility. Lower order numbers appear first. New photos default to Draft. Publish, hide, edit or remove photos from their cards. The **All website images** view includes images uploaded from the content editor; select **Include this photo in the website gallery** if one should also appear there.
@@ -34,6 +36,10 @@ npm run build
 ```
 
 Migration `20261007120000_remove_fallback_images` clears legacy fallback URLs, removes external seeded gallery rows, and clears event covers that did not come from the admin uploader. It preserves uploaded Cloudinary files and all non-image records. It has been applied to the database configured in this workspace.
+
+Migration `20261007160000_dynamic_team_members` converts the fixed About-page team fields into reusable member cards while preserving existing names, roles, and image URLs. It has also been applied to the configured database.
+
+Migration `20261007170000_dynamic_journey_timeline` converts the fixed journey copy into chronological milestone cards ready for administrator-uploaded images. It has also been applied to the configured database.
 
 Use the existing server-only `DATABASE_URL`, `JWT_SECRET`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. Cloudinary credentials never enter the frontend bundle. The public frontend origin must be listed in `CORS_ORIGINS`. CORS exposes `ETag` for conditional content reads.
 

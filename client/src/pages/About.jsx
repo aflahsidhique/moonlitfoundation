@@ -4,6 +4,8 @@ import PageHero from "../components/ui/PageHero";
 import Button from "../components/ui/Button";
 import Img from "../components/ui/Img";
 
+const MONTHS=["","January","February","March","April","May","June","July","August","September","October","November","December"];
+
 export default function About() {
   const { field: cms } = useWebsite();
   const VALUES = [
@@ -12,24 +14,11 @@ export default function About() {
     { icon: "bolt", accent: "yellow", title: cms("about.values.title-action"), text: cms("about.values.text-we-move-fast-when-it-matters-hours-count") },
     { icon: "people-group", accent: "green", title: cms("about.values.title-community"), text: cms("about.values.text-change-is-built-together-with-local-peop") },
   ];
-  const TIMELINE = [
-    { year: cms("about.timeline.year-2021"), title: cms("about.timeline.title-national-integration-camp-bihar"), text: cms("about.timeline.text-youth-programs-in-india-that-bring-stude") },
-    { year: cms("about.timeline.year-2022"), title: cms("about.timeline.title-international-cultural-fest-nifaa-hariy"), text: cms("about.timeline.text-nifaa-organizes-haryana-s-renowned-inter") },
-    { year: cms("about.timeline.year-2023"), title: cms("about.timeline.title-cultural-exchange-program-tripura"), text: cms("about.timeline.text-a-cultural-exchange-program-in-tripura-p") },
-    { year: cms("about.timeline.year-2024"), title: cms("about.timeline.title-adventure-camp-odissa"), text: cms("about.timeline.text-adventure-camp-in-odisha-offers-exciting") },
-    { year: cms("about.timeline.year-2025"), title: cms("about.timeline.title-workshop-on-flagship-scheme-keralam"), text: cms("about.timeline.text-the-workshop-on-flagship-schemes-in-kera") },
-    { year: cms("about.timeline.year-2026"), title: cms("about.timeline.title-project-sulaimani-keralam"), text: cms("about.timeline.text-project-sulaimani-is-a-community-driven-") },
-  ];
-  const TEAM = [
-    { name: cms("about.team.name-arjun-krishnan"), role: cms("about.team.role-founder-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-22-") },
-    { name: cms("about.team.name-nithya-menon"), role: cms("about.team.role-vice-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-2") },
-    { name: cms("about.team.name-rahul-suresh"), role: cms("about.team.role-blood-donation-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-45-") },
-    { name: cms("about.team.name-fathima-ashraf"), role: cms("about.team.role-welfare-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-5") },
-    { name: cms("about.team.name-vishnu-prasad"), role: cms("about.team.role-disaster-response-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-61-") },
-    { name: cms("about.team.name-anjali-thomas"), role: cms("about.team.role-environment-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-6") },
-    { name: cms("about.team.name-sreejith-nair"), role: cms("about.team.role-youth-programs-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-72-") },
-    { name: cms("about.team.name-devika-raj"), role: cms("about.team.role-volunteer-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-1") },
-  ];
+  const journeyContent=cms("about.timeline.items");
+  const TIMELINE=(Array.isArray(journeyContent)?journeyContent:[]).filter(item=>item?.title).sort((left,right)=>left.year-right.year||(left.month||0)-(right.month||0)||left.order-right.order||left.title.localeCompare(right.title));
+  const teamContent=cms("about.team.members");
+  const TEAM = (Array.isArray(teamContent)?teamContent:[]).filter(member=>member?.name).sort((left,right)=>left.row-right.row||left.order-right.order||left.name.localeCompare(right.name));
+  const TEAM_ROWS = TEAM.reduce((rows,member)=>{const current=rows.at(-1);if(current?.[0].row===member.row)current.push(member);else rows.push([member]);return rows;},[]);
 
   return (
     <PageFx>
@@ -95,20 +84,21 @@ export default function About() {
       </section>
 
       {/* JOURNEY TIMELINE */}
-      <section className="max-w-7xl mx-auto px-5 pb-16 lg:pb-24 grid lg:grid-cols-[38%_1fr] gap-12">
-        <div className="mf-fade">
+      <section className="max-w-7xl mx-auto px-5 pb-16 lg:pb-24">
+        <div className="mf-journey-heading text-center mf-fade">
           <p className="mf-eyebrow mb-3">{cms("about.max-w-7xl.our-journey")}</p>
           <h2 className="text-3xl md:text-4xl">{cms("about.max-w-7xl.milestones-that-shaped")}{" "}<span className="mf-hl mf-stroke">{cms("about.max-w-7xl.us")}</span></h2>
           <p className="mt-5 text-[15px]">{cms("about.max-w-7xl.from-one-blood-camp-to-twenty-five-communitie")}</p>
         </div>
-        <div className="mf-timeline mf-fade">
-          {TIMELINE.map((t) => (
-            <div key={t.year} className="mf-tl-item">
-              <p className="mf-tl-year">{t.year}</p>
-              <h4 className="mb-1">{t.title}</h4>
-              <p className="text-[14px]">{t.text}</p>
+        <div className="mf-journey-timeline">
+          {TIMELINE.map((item,index) => <article key={item.id} className={"mf-journey-item "+(index%2?"is-right":"is-left")}>
+            <div className="mf-journey-card">
+              {item.image&&<Img src={item.image} alt={item.title} className="mf-journey-image"/>}
+              <div className="mf-journey-copy"><h3>{item.title}</h3><p>{item.text}</p></div>
             </div>
-          ))}
+            <div className="mf-journey-date"><strong>{item.year}</strong>{item.month&&<span>{MONTHS[item.month]}</span>}</div>
+            <span className="mf-journey-marker" aria-hidden="true"/>
+          </article>)}
         </div>
       </section>
 
@@ -118,14 +108,14 @@ export default function About() {
           <p className="mf-eyebrow mb-3">{cms("about.max-w-7xl.the-people-behind-the-mission")}</p>
           <h2 className="text-3xl md:text-4xl">{cms("about.max-w-7xl.meet-the")}{" "}<span className="mf-hl mf-stroke">{cms("about.max-w-7xl.team")}</span></h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {TEAM.map((m) => (
-            <div key={m.name} className="mf-card p-6 text-center mf-fade">
-              <Img className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-[#F5B921]/40" src={m.img} alt={m.name} />
+        <div className="mf-team-rows">
+          {TEAM_ROWS.map((row) => <div className="mf-team-row" key={row[0].row}>{row.map((m) => (
+            <div key={m.id} className="mf-card mf-team-card p-6 text-center mf-fade">
+              <Img className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-[#F5B921]/40" src={m.image} alt={m.name} />
               <h4 className="text-base">{m.name}</h4>
               <p className="text-xs text-[#14338C] font-semibold mt-1">{m.role}</p>
             </div>
-          ))}
+          ))}</div>)}
         </div>
       </section>
 

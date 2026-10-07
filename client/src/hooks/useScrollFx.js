@@ -30,6 +30,21 @@ export function useScrollFx(containerRef) {
           scrollTrigger: { trigger: element, start: "top 94%", once: true },
         });
       });
+      container.querySelectorAll(".mf-journey-timeline").forEach((timeline) => {
+        gsap.fromTo(timeline, { "--journey-scale": 0 }, {
+          "--journey-scale": 1, ease: "none",
+          scrollTrigger: { trigger: timeline, start: "top 78%", end: "bottom 72%", scrub: 0.45 },
+        });
+        const desktop = window.matchMedia("(min-width: 701px)").matches;
+        timeline.querySelectorAll(".mf-journey-item").forEach((item) => {
+          const card=item.querySelector(".mf-journey-card"),date=item.querySelector(".mf-journey-date"),marker=item.querySelector(".mf-journey-marker");
+          const direction=desktop?(item.classList.contains("is-right")?1:-1):1;
+          const trigger={trigger:item,start:"top 88%",once:true};
+          gsap.fromTo(card,{x:direction*(desktop?72:34),autoAlpha:0},{x:0,autoAlpha:1,duration:.9,ease:"power3.out",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
+          gsap.fromTo(date,{x:direction*(desktop?-32:20),autoAlpha:0},{x:0,autoAlpha:1,duration:.65,delay:.12,ease:"power2.out",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
+          gsap.fromTo(marker,{scale:0,autoAlpha:0},{scale:1,autoAlpha:1,duration:.45,delay:.18,ease:"back.out(2)",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
+        });
+      });
       counters.forEach((element) => {
         const value = { count: 0 };
         const tween = gsap.to(value, {

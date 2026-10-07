@@ -17,10 +17,40 @@ function isWebsiteImage(value) {
     return !url.username && !url.password && url.protocol === "https:";
   } catch { return false; }
 }
+function cleanTeam(value) {
+  if (!Array.isArray(value)) return undefined;
+  return value.filter(member => member && typeof member === "object" && !Array.isArray(member)).map(member => ({
+    id: typeof member.id === "string" ? member.id : "",
+    name: typeof member.name === "string" ? member.name : "",
+    role: typeof member.role === "string" ? member.role : "",
+    image: isWebsiteImage(member.image) ? member.image : "",
+    row: member.row,
+    order: member.order,
+  }));
+}
+function cleanTimeline(value) {
+  if (!Array.isArray(value)) return undefined;
+  return value.filter(item => item && typeof item === "object" && !Array.isArray(item)).map(item => ({
+    id: typeof item.id === "string" ? item.id : "",
+    year: item.year,
+    month: item.month,
+    order: item.order,
+    title: typeof item.title === "string" ? item.title : "",
+    text: typeof item.text === "string" ? item.text : "",
+    image: isWebsiteImage(item.image) ? item.image : "",
+  }));
+}
 function cleanContent(page, values = {}) {
   if (!page) return {};
-  const imageKeys = new Set(page.fields.filter(field => field.type === "image").map(field => field.key));
-  return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, imageKeys.has(key) && !isWebsiteImage(value) ? "" : value]));
+  const fields = new Map(page.fields.map(field => [field.key, field]));
+  return Object.fromEntries(Object.entries(values).flatMap(([key, value]) => {
+    const field=fields.get(key);
+    if (!field) return [];
+    if (field.type === "image") return [[key,isWebsiteImage(value)?value:""]];
+    if (field.type === "team") { const team=cleanTeam(value);return team ? [[key,team]] : []; }
+    if (field.type === "timeline") { const timeline=cleanTimeline(value);return timeline ? [[key,timeline]] : []; }
+    return [[key,value]];
+  }));
 }
 function validateContent(page, values) {
   if (!values || typeof values !== "object" || Array.isArray(values)) throw bad("Content must be a set of fields.");
@@ -29,6 +59,44 @@ function validateContent(page, values) {
   for (const [key, value] of Object.entries(values)) {
     const field = allowed.get(key);
     if (!field) throw bad("This page contains an unknown field. Reload the editor.");
+    if (field.type === "team") {
+      if (!Array.isArray(value) || value.length > (field.maxItems || 100)) throw bad(`${field.label}: add no more than ${field.maxItems || 100} people.`);
+      const ids=new Set(),positions=new Set();
+      result[key]=value.map((member,index)=>{
+        if (!member || typeof member !== "object" || Array.isArray(member)) throw bad(`${field.label}: person ${index+1} is invalid.`);
+        const {id,name,role,image,row,order}=member;
+        if (typeof id !== "string" || !/^[a-zA-Z0-9_-]{1,100}$/.test(id) || ids.has(id)) throw bad(`${field.label}: person ${index+1} has an invalid identifier.`);
+        if (typeof name !== "string" || !name.trim() || name.length > 150 || name.includes("\u0000")) throw bad(`${field.label}: enter a name of up to 150 characters for person ${index+1}.`);
+        if (typeof role !== "string" || !role.trim() || role.length > 150 || role.includes("\u0000")) throw bad(`${field.label}: enter a role of up to 150 characters for person ${index+1}.`);
+        if (!isWebsiteImage(image)) throw bad(`${field.label}: upload an image or enter a complete HTTPS image URL for ${name.trim()}.`);
+        if (!Number.isSafeInteger(row) || row < 1 || row > 50 || !Number.isSafeInteger(order) || order < 1 || order > 50) throw bad(`${field.label}: row and position must be whole numbers from 1 to 50.`);
+        const position=`${row}:${order}`;
+        if (positions.has(position)) throw bad(`${field.label}: two people cannot use row ${row}, position ${order}.`);
+        ids.add(id);positions.add(position);
+        return {id,name:name.trim(),role:role.trim(),image,row,order};
+      });
+      continue;
+    }
+    if (field.type === "timeline") {
+      if (!Array.isArray(value) || value.length > (field.maxItems || 100)) throw bad(`${field.label}: add no more than ${field.maxItems || 100} milestones.`);
+      const ids=new Set(),positions=new Set();
+      result[key]=value.map((item,index)=>{
+        if (!item || typeof item !== "object" || Array.isArray(item)) throw bad(`${field.label}: milestone ${index+1} is invalid.`);
+        const {id,year,month,order,title,text,image}=item;
+        if (typeof id !== "string" || !/^[a-zA-Z0-9_-]{1,100}$/.test(id) || ids.has(id)) throw bad(`${field.label}: milestone ${index+1} has an invalid identifier.`);
+        if (!Number.isSafeInteger(year) || year < 1900 || year > 2200) throw bad(`${field.label}: enter a year from 1900 to 2200 for milestone ${index+1}.`);
+        if (month !== "" && (!Number.isSafeInteger(month) || month < 1 || month > 12)) throw bad(`${field.label}: choose a valid month for milestone ${index+1}.`);
+        if (!Number.isSafeInteger(order) || order < 1 || order > 50) throw bad(`${field.label}: order must be a whole number from 1 to 50.`);
+        if (typeof title !== "string" || !title.trim() || title.length > 150 || title.includes("\u0000")) throw bad(`${field.label}: enter a title of up to 150 characters for milestone ${index+1}.`);
+        if (typeof text !== "string" || !text.trim() || text.length > 2000 || text.includes("\u0000")) throw bad(`${field.label}: enter a description of up to 2000 characters for ${title.trim()}.`);
+        if (!isWebsiteImage(image)) throw bad(`${field.label}: upload an image or enter a complete HTTPS image URL for ${title.trim()}.`);
+        const position=`${year}:${month||0}:${order}`;
+        if (positions.has(position)) throw bad(`${field.label}: two milestones cannot use the same year, month, and order.`);
+        ids.add(id);positions.add(position);
+        return {id,year,month,order,title:title.trim(),text:text.trim(),image};
+      });
+      continue;
+    }
     if (field.type === "number") {
       if (!Number.isSafeInteger(value) || value < 0 || value > 1_000_000_000) throw bad(`${field.label}: enter a whole number between 0 and 1 billion.`);
     } else {

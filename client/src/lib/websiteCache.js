@@ -2,11 +2,11 @@ import { API_BASE } from "./api";
 
 export const WEBSITE_TTL = 5 * 60_000;
 const MAX_STALE = 24 * 60 * 60_000;
-const key = `mf:website:v3:${API_BASE}`;
+const key = `mf:website:v5:${API_BASE}`;
 const signalKey = `${key}:published`;
 let memory, pending, generation = 0, retryAfter = 0;
 const listeners = new Set();
-const valid = value => value?.version === 3 && value.content && typeof value.content === "object" && Array.isArray(value.gallery);
+const valid = value => value?.version === 5 && value.content && typeof value.content === "object" && Array.isArray(value.gallery);
 function read() {
   if (memory === undefined) {
     try { memory = JSON.parse(localStorage.getItem(key)); } catch { memory = null; }
