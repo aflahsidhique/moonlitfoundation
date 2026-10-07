@@ -6,13 +6,13 @@ const ACCENT_VAR = { red: "var(--mf-red)", green: "var(--mf-green)", blue: "var(
 // One alternating image/copy block on the Programs page — image left or
 // right (`reverse`), colored eyebrow/checklist/CTA matching the program's
 // accent, a couple of headline stats, and a "Join this Program" CTA.
-export default function ProgramDetail({ id, reverse, accent, eyebrow, titleLead, titleHighlight, image, fallback, alt, description, checklist, stats, ctaDark }) {
+export default function ProgramDetail({ id, reverse, accent, eyebrow, titleLead, titleHighlight, image, alt, description, checklist, stats, ctaDark }) {
   return (
     <section id={id} className="max-w-7xl mx-auto px-5 py-14 grid lg:grid-cols-2 gap-14 items-center scroll-mt-24">
       <div className={"relative mf-fade" + (reverse ? " lg:order-2" : "")}>
         <div className="mf-blob-frame">
           <div className="mf-blob h-[280px] md:h-[370px]">
-            <Img src={image} fallback={fallback} alt={alt} />
+            <Img src={image} alt={alt} />
           </div>
         </div>
         <div className={"mf-dots absolute -bottom-4 hidden md:block" + (reverse ? " -right-2" : " -left-2")} aria-hidden="true"></div>

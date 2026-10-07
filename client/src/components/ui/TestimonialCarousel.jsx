@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Img from "./Img";
 
-// items: [{ img, fallback, alt, quote, name }]
+// items: [{ img, alt, quote, name }]
 export default function TestimonialCarousel({ items }) {
   const trackRef = useRef(null);
 
@@ -23,7 +23,7 @@ export default function TestimonialCarousel({ items }) {
       <div ref={trackRef} className="mf-h-scroll flex gap-6 overflow-x-auto snap-x pb-2" style={{ scrollbarWidth: "none" }}>
         {items.map((t, i) => (
           <article key={i} className="mf-card min-w-[260px] md:min-w-[280px] snap-start">
-            <Img className="w-full h-44 object-cover" src={t.img} fallback={t.fallback} alt={t.alt} />
+            <Img className="w-full h-44 object-cover" src={t.img} alt={t.alt} />
             <div className="p-5">
               <i className="fa-solid fa-quote-left mf-quote-icon"></i>
               <p className="text-[13.5px] mt-2 mb-3 leading-relaxed text-[#111827]">"{t.quote}"</p>

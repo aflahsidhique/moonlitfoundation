@@ -21,14 +21,14 @@ export default function About() {
     { year: cms("about.timeline.year-2026"), title: cms("about.timeline.title-project-sulaimani-keralam"), text: cms("about.timeline.text-project-sulaimani-is-a-community-driven-") },
   ];
   const TEAM = [
-    { name: cms("about.team.name-arjun-krishnan"), role: cms("about.team.role-founder-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-22-"), fallback: "https://placehold.co/200x200/14338C/fff?text=AK" },
-    { name: cms("about.team.name-nithya-menon"), role: cms("about.team.role-vice-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-2"), fallback: "https://placehold.co/200x200/14338C/fff?text=NM" },
-    { name: cms("about.team.name-rahul-suresh"), role: cms("about.team.role-blood-donation-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-45-"), fallback: "https://placehold.co/200x200/14338C/fff?text=RS" },
-    { name: cms("about.team.name-fathima-ashraf"), role: cms("about.team.role-welfare-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-5"), fallback: "https://placehold.co/200x200/14338C/fff?text=FA" },
-    { name: cms("about.team.name-vishnu-prasad"), role: cms("about.team.role-disaster-response-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-61-"), fallback: "https://placehold.co/200x200/14338C/fff?text=VP" },
-    { name: cms("about.team.name-anjali-thomas"), role: cms("about.team.role-environment-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-6"), fallback: "https://placehold.co/200x200/14338C/fff?text=AT" },
-    { name: cms("about.team.name-sreejith-nair"), role: cms("about.team.role-youth-programs-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-72-"), fallback: "https://placehold.co/200x200/14338C/fff?text=SN" },
-    { name: cms("about.team.name-devika-raj"), role: cms("about.team.role-volunteer-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-1"), fallback: "https://placehold.co/200x200/14338C/fff?text=DR" },
+    { name: cms("about.team.name-arjun-krishnan"), role: cms("about.team.role-founder-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-22-") },
+    { name: cms("about.team.name-nithya-menon"), role: cms("about.team.role-vice-president"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-2") },
+    { name: cms("about.team.name-rahul-suresh"), role: cms("about.team.role-blood-donation-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-45-") },
+    { name: cms("about.team.name-fathima-ashraf"), role: cms("about.team.role-welfare-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-5") },
+    { name: cms("about.team.name-vishnu-prasad"), role: cms("about.team.role-disaster-response-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-61-") },
+    { name: cms("about.team.name-anjali-thomas"), role: cms("about.team.role-environment-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-6") },
+    { name: cms("about.team.name-sreejith-nair"), role: cms("about.team.role-youth-programs-lead"), img: cms("about.team.img-https-randomuser-me-api-portraits-men-72-") },
+    { name: cms("about.team.name-devika-raj"), role: cms("about.team.role-volunteer-coordinator"), img: cms("about.team.img-https-randomuser-me-api-portraits-women-1") },
   ];
 
   return (
@@ -45,7 +45,7 @@ export default function About() {
         <div className="relative mf-fade">
           <div className="mf-blob-frame">
             <div className="mf-blob h-[300px] md:h-[400px]">
-              <Img src={cms("about.max-w-7xl.image-images-volunteers-webp")} fallback="/images/community.webp" alt={cms("about.max-w-7xl.image-description-moonlit-volunteers-gathered")} />
+              <Img src={cms("about.max-w-7xl.image-images-volunteers-webp")} alt={cms("about.max-w-7xl.image-description-moonlit-volunteers-gathered")} />
             </div>
           </div>
           <div className="mf-dots absolute -bottom-4 -right-2 hidden md:block" aria-hidden="true"></div>
@@ -121,7 +121,7 @@ export default function About() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {TEAM.map((m) => (
             <div key={m.name} className="mf-card p-6 text-center mf-fade">
-              <Img className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-[#F5B921]/40" src={m.img} fallback={m.fallback} alt={m.name} />
+              <Img className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-[#F5B921]/40" src={m.img} alt={m.name} />
               <h4 className="text-base">{m.name}</h4>
               <p className="text-xs text-[#14338C] font-semibold mt-1">{m.role}</p>
             </div>

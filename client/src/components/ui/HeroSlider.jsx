@@ -32,7 +32,7 @@ export default function HeroSlider({ slides, interval = 3000 }) {
           aria-roledescription="slide"
           aria-label={`${i + 1} of ${slides.length}`}
         >
-          <Img src={s.src} fallback={s.fallback} alt={s.alt} loading={i === 0 ? "eager" : "lazy"} />
+          <Img src={s.src} alt={s.alt} loading={i === 0 ? "eager" : "lazy"} />
         </div>
       ))}
 

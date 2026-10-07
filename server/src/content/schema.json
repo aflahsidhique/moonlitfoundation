@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "pages": [
     {
       "id": "home",
@@ -64,26 +64,26 @@
         },
         {
           "key": "home.hero.image-images-together-webp",
-          "label": "Image: /images/together.webp",
+          "label": "Image",
           "group": "Small acts. Extraordinary change",
           "type": "image",
-          "default": "/images/together.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
           "key": "home.hero.image-images-volunteers-webp",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "Small acts. Extraordinary change",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
           "key": "home.hero.image-images-community-webp",
-          "label": "Image: /images/community.webp",
+          "label": "Image",
           "group": "Small acts. Extraordinary change",
           "type": "image",
-          "default": "/images/community.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -104,10 +104,10 @@
         },
         {
           "key": "home.hero.image-images-community-webp-2",
-          "label": "Image: /images/community.webp",
+          "label": "Image",
           "group": "Small acts. Extraordinary change",
           "type": "image",
-          "default": "/images/community.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -144,10 +144,10 @@
         },
         {
           "key": "home.hero.image-images-volunteers-webp-2",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "Small acts. Extraordinary change",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -224,10 +224,10 @@
         },
         {
           "key": "home.programs.image-images-together-webp",
-          "label": "image: /images/together.webp",
+          "label": "Image",
           "group": "Programs",
           "type": "image",
-          "default": "/images/together.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -264,10 +264,10 @@
         },
         {
           "key": "home.programs.image-images-community-webp",
-          "label": "image: /images/community.webp",
+          "label": "Image",
           "group": "Programs",
           "type": "image",
-          "default": "/images/community.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -304,10 +304,10 @@
         },
         {
           "key": "home.programs.image-images-volunteers-webp",
-          "label": "image: /images/volunteers.webp",
+          "label": "Image",
           "group": "Programs",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -456,10 +456,10 @@
         },
         {
           "key": "home.story.image-images-volunteers-webp",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "Big hearts. Bigger possibilities.",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -712,10 +712,10 @@
         },
         {
           "key": "home.belong.image-images-volunteers-webp",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "Find your people. Find your purpose.",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -728,10 +728,10 @@
         },
         {
           "key": "home.belong.image-images-together-webp",
-          "label": "Image: /images/together.webp",
+          "label": "Image",
           "group": "Find your people. Find your purpose.",
           "type": "image",
-          "default": "/images/together.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -800,10 +800,10 @@
         },
         {
           "key": "home.journal.image-images-community-webp",
-          "label": "Image: /images/community.webp",
+          "label": "Image",
           "group": "The good, in motion.",
           "type": "image",
-          "default": "/images/community.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -864,10 +864,10 @@
         },
         {
           "key": "home.journal.image-images-volunteers-webp",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "The good, in motion.",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1287,10 +1287,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-men-22-",
-          "label": "img: https://randomuser.me/api/portraits/men/22.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/men/22.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1311,10 +1311,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-women-2",
-          "label": "img: https://randomuser.me/api/portraits/women/28.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/women/28.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1335,10 +1335,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-men-45-",
-          "label": "img: https://randomuser.me/api/portraits/men/45.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/men/45.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1359,10 +1359,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-women-5",
-          "label": "img: https://randomuser.me/api/portraits/women/51.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/women/51.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1383,10 +1383,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-men-61-",
-          "label": "img: https://randomuser.me/api/portraits/men/61.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/men/61.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1407,10 +1407,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-women-6",
-          "label": "img: https://randomuser.me/api/portraits/women/62.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/women/62.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1431,10 +1431,10 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-men-72-",
-          "label": "img: https://randomuser.me/api/portraits/men/72.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/men/72.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1455,18 +1455,18 @@
         },
         {
           "key": "about.team.img-https-randomuser-me-api-portraits-women-1",
-          "label": "img: https://randomuser.me/api/portraits/women/12.jpg",
+          "label": "Image",
           "group": "Team",
           "type": "image",
-          "default": "https://randomuser.me/api/portraits/women/12.jpg",
+          "default": "",
           "maxLength": 2048
         },
         {
           "key": "about.max-w-7xl.image-images-volunteers-webp",
-          "label": "Image: /images/volunteers.webp",
+          "label": "Image",
           "group": "A spark that became a movement",
           "type": "image",
-          "default": "/images/volunteers.webp",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1726,10 +1726,10 @@
         },
         {
           "key": "programs.overview.image-https-images-unsplash-com-photo-1615461",
-          "label": "image: https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=60",
+          "label": "Image",
           "group": "Overview",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=600&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1758,10 +1758,10 @@
         },
         {
           "key": "programs.overview.image-https-images-unsplash-com-photo-1593113",
-          "label": "image: https://images.unsplash.com/photo-1593113598332-cd288d649433?w=60",
+          "label": "Image",
           "group": "Overview",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1790,10 +1790,10 @@
         },
         {
           "key": "programs.overview.image-https-images-unsplash-com-photo-1547683",
-          "label": "image: https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q",
+          "label": "Image",
           "group": "Overview",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1822,10 +1822,10 @@
         },
         {
           "key": "programs.overview.image-https-images-unsplash-com-photo-1618477",
-          "label": "image: https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=60",
+          "label": "Image",
           "group": "Overview",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=600&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1854,10 +1854,10 @@
         },
         {
           "key": "programs.overview.image-https-images-unsplash-com-photo-1529390",
-          "label": "image: https://images.unsplash.com/photo-1529390079861-591de354faf5?w=60",
+          "label": "Image",
           "group": "Overview",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -1910,10 +1910,10 @@
         },
         {
           "key": "programs.blood.image-https-images-unsplash-com-photo-1615461",
-          "label": "Image: https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=10",
+          "label": "Image",
           "group": "blood",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=1000&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -2014,10 +2014,10 @@
         },
         {
           "key": "programs.welfare.image-https-images-unsplash-com-photo-1593113",
-          "label": "Image: https://images.unsplash.com/photo-1593113598332-cd288d649433?w=10",
+          "label": "Image",
           "group": "welfare",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1000&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -2118,10 +2118,10 @@
         },
         {
           "key": "programs.relief.image-https-images-unsplash-com-photo-1547683",
-          "label": "Image: https://images.unsplash.com/photo-1547683905-f686c993aae5?w=1000&",
+          "label": "Image",
           "group": "relief",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=1000&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -2222,10 +2222,10 @@
         },
         {
           "key": "programs.environment.image-https-images-unsplash-com-photo-1618477",
-          "label": "Image: https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=10",
+          "label": "Image",
           "group": "environment",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=1000&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -2326,10 +2326,10 @@
         },
         {
           "key": "programs.youth.image-https-images-unsplash-com-photo-1529390",
-          "label": "Image: https://images.unsplash.com/photo-1529390079861-591de354faf5?w=10",
+          "label": "Image",
           "group": "youth",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1000&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {
@@ -2731,10 +2731,10 @@
         },
         {
           "key": "get-involved.volunteer.image-https-images-unsplash-com-photo-1559027",
-          "label": "Image: https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q",
+          "label": "Image",
           "group": "Give your time, gain a community",
           "type": "image",
-          "default": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
+          "default": "",
           "maxLength": 2048
         },
         {

@@ -67,7 +67,7 @@ export default function GetInvolved() {
           </ul>
           <div className="relative max-w-sm">
             <div className="mf-blob-frame"><div className="mf-blob h-[240px]">
-              <Img src={cms("get-involved.volunteer.image-https-images-unsplash-com-photo-1559027")} fallback="https://placehold.co/700x500/14338C/fff?text=Volunteers" alt={cms("get-involved.volunteer.image-description-moonlit-volunteers-together")} />
+              <Img src={cms("get-involved.volunteer.image-https-images-unsplash-com-photo-1559027")} alt={cms("get-involved.volunteer.image-description-moonlit-volunteers-together")} />
             </div></div>
             <div className="mf-dots absolute -bottom-4 -right-4 hidden md:block" aria-hidden="true"></div>
           </div>

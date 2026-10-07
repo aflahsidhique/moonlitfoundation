@@ -1,36 +1,34 @@
 import { useState } from "react";
 import { cdnUrl, isDecoded, markDecoded } from "../../lib/images";
 
-// Swaps to a fallback image on load error — replaces the legacy site's
-// global `img[data-fb]` error-listener delegation (assets/main.js) with a
-// plain per-element handler, the React-idiomatic equivalent.
-//
-// Also does the image-cache bookkeeping: a URL already decoded this session
+// Handles image-cache bookkeeping: a URL already decoded this session
 // paints at full opacity immediately (no fade, no flash on back/forward),
 // a new one fades in once it has decoded. `cdnWidth` asks Cloudinary for a
 // resized copy where the URL allows it.
-export default function Img({ src, fallback, alt = "", className, cdnWidth, loading = "lazy", ...rest }) {
+export default function Img({ src, alt = "", className, cdnWidth, loading = "lazy", ...rest }) {
   // cdnWidth (not width) so the plain HTML width attribute still passes
   // through to the element untouched.
   const url = cdnUrl(src, { width: cdnWidth });
-  const [ready, setReady] = useState(() => isDecoded(url));
+  const [loadedUrl, setLoadedUrl] = useState(() => isDecoded(url) ? url : "");
+  const [failedUrl, setFailedUrl] = useState("");
+
+  // Only admin-uploaded sources are rendered; empty and broken sources stay empty.
+  if (!url || failedUrl === url) return null;
+  const ready = loadedUrl === url || isDecoded(url);
 
   return (
     <img
       // An image served from the browser cache can fire `load` before React
       // attaches onLoad, which would leave it stuck at opacity 0 — so check
       // `complete` as soon as the node exists.
-      ref={(el) => { if (el?.complete && !ready) { markDecoded(url); setReady(true); } }}
+      ref={(el) => { if (el?.complete && el.naturalWidth && !ready) { markDecoded(url); setLoadedUrl(url); } }}
       src={url}
       alt={alt}
       className={`mf-img${ready ? " is-ready" : ""}${className ? " " + className : ""}`}
       loading={loading}
       decoding="async"
-      onLoad={() => { markDecoded(url); setReady(true); }}
-      onError={(e) => {
-        if (fallback && e.currentTarget.src !== fallback) e.currentTarget.src = fallback;
-        setReady(true);
-      }}
+      onLoad={() => { markDecoded(url); setLoadedUrl(url); }}
+      onError={() => setFailedUrl(url)}
       {...rest}
     />
   );

@@ -6,14 +6,14 @@ Open **Website Content** (`/admin/website`), choose a page, and expand its secti
 
 - **Save draft** stores edits without changing the public website.
 - **Publish page** saves any remaining edits and publishes that page. **View live page** opens the current public page.
-- **Upload replacement** converts a new image to WebP and selects it for the draft. **Choose from library** reuses an existing image without uploading it again.
+- **Upload image** converts a new image to WebP and selects it for the draft. **Choose from library** reuses an existing admin upload without uploading it again. **Remove image** clears the draft image.
 - If another administrator changes the page, saving returns a conflict instead of overwriting their work. Copy any unsaved changes before reloading the editor.
 
 Open **Gallery & Images** (`/admin/gallery`) to upload photos. Add a title, meaningful image description, optional caption, category, display order and visibility. Lower order numbers appear first. New photos default to Draft. Publish, hide, edit or remove photos from their cards. The **All website images** view includes images uploaded from the content editor; select **Include this photo in the website gallery** if one should also appear there.
 
 Removing a photo removes it from the library and public gallery. Its Cloudinary asset is retained because an existing page or draft may still reference it. To replace a page photo, upload/select a new image and publish the page. To replace a gallery photo, upload the new photo and hide or remove the old entry.
 
-The migration preserves the twelve existing gallery entries as editable records with their original external image URLs. New uploads use Cloudinary and WebP; existing external photographs are not downloaded or rehosted automatically.
+Website pages, the gallery and event covers render only files uploaded through the authenticated admin tools. Empty image fields render nothing; stock, placeholder and external fallback images are not substituted.
 
 ## Server setup and deployment
 
@@ -33,11 +33,11 @@ npm install
 npm run build
 ```
 
-Migration `20260928180000_website_content_gallery` creates `WebsiteContent` and `WebsiteImage` and seeds the existing gallery. It does not reset or modify existing volunteers, events or other application tables. It has been applied to the database configured in this workspace.
+Migration `20261007120000_remove_fallback_images` clears legacy fallback URLs, removes external seeded gallery rows, and clears event covers that did not come from the admin uploader. It preserves uploaded Cloudinary files and all non-image records. It has been applied to the database configured in this workspace.
 
 Use the existing server-only `DATABASE_URL`, `JWT_SECRET`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. Cloudinary credentials never enter the frontend bundle. The public frontend origin must be listed in `CORS_ORIGINS`. CORS exposes `ETag` for conditional content reads.
 
-Sharp decodes JPG, PNG and WebP uploads (up to 5 MB and 36 megapixels), rejects animated/invalid images, orients phone photographs, strips metadata, limits dimensions to 2400 × 2400 without enlarging, and encodes WebP at quality 82. The converted bytes are uploaded into `moonlit/website`. The shared uploader also converts new event and other existing image-upload flows to WebP. Existing event records continue using `Event.imageUrl`.
+Sharp decodes JPG, PNG and WebP uploads (up to 5 MB and 36 megapixels), rejects animated/invalid images, orients phone photographs, strips metadata, limits dimensions to 2400 × 2400 without enlarging, and encodes WebP at quality 82. Website images are uploaded into `moonlit/website`; event covers are uploaded into `moonlit/events`.
 
 CMS images use a content hash to reuse identical uploads and immutable, versioned Cloudinary URLs. Content changes are plain text, numeric fields or validated links; the editor does not accept executable HTML. Admin endpoints require the existing administrator JWT and return `Cache-Control: no-store`.
 

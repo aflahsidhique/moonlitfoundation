@@ -94,7 +94,6 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
           <div><strong>Event cover image</strong><p>JPG, PNG or WebP · Up to 5 MB · Landscape works best</p><input ref={fileInput} id="ef-upload" type="file" accept="image/jpeg,image/png,image/webp" onChange={chooseImage} /></div>
         </label>
         {(imageFile || form.imageUrl) && <button type="button" className="ws-image-remove" onClick={() => { setImageFile(null); set("imageUrl", ""); if (fileInput.current) fileInput.current.value = ""; }}>Remove image</button>}
-        <details className="ws-image-link"><summary>Use an image link instead</summary><label className="mf-label" htmlFor="ef-image">Image URL</label><input className="mf-input" id="ef-image" type="url" placeholder="https://…" value={form.imageUrl} onChange={(e) => { setImageFile(null); set("imageUrl", e.target.value); if (fileInput.current) fileInput.current.value = ""; }} /></details>
         <p className="ws-form-section">02 / Event details</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2"><label className="mf-label" htmlFor="ef-title">Title *</label><input className="mf-input" id="ef-title" required placeholder="Mega Blood Donation Camp" value={form.title} onChange={(e) => set("title", e.target.value)} /></div>

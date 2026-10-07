@@ -3,7 +3,7 @@ const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { upload, storeWebp } = require("../lib/upload");
 const { convertToWebp } = require("../lib/webp");
-const { schema, defaults, categories, bad, revision, validateContent, imageFields, createSnapshotCache } = require("../lib/website");
+const { schema, defaults, categories, bad, revision, validateContent, imageFields, cleanContent, contentImageUrls, createSnapshotCache } = require("../lib/website");
 const { paginated } = require("../lib/pagination");
 const snapshots = createSnapshotCache(prisma);
 const wrap = (fn) => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(error => {
@@ -13,7 +13,7 @@ const wrap = (fn) => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(e
   res.status(500).json({error:"Website management is unavailable. Please try again."});
 });
 const pageFor = (id) => { const page = schema.pages.find(p=>p.id===id); if(!page) throw bad("Page not found.",404); return page; };
-const viewPage = (page,row) => ({ id:page.id, draft:{...defaults(page),...row?.draft}, published:{...defaults(page),...row?.published}, revision:row?.revision||0, publishedRevision:row?.publishedRevision||0, publishedAt:row?.publishedAt||null });
+const viewPage = (page,row) => ({ id:page.id, draft:{...defaults(page),...cleanContent(page,row?.draft)}, published:{...defaults(page),...cleanContent(page,row?.published)}, revision:row?.revision||0, publishedRevision:row?.publishedRevision||0, publishedAt:row?.publishedAt||null });
 
 router.get("/",wrap(async(req,res)=>{
   const snapshot=await snapshots.get();
@@ -29,6 +29,8 @@ router.get("/admin",wrap(async(req,res)=>{
 }));
 router.put("/pages/:id",wrap(async(req,res)=>{
   const page=pageFor(req.params.id), expected=revision(req.body.revision), draft=validateContent(page,req.body.content);
+  const urls=contentImageUrls(page,draft);
+  if(urls.length!==await prisma.websiteImage.count({where:{imageUrl:{in:urls},publicId:{not:null}}})) throw bad("Choose images uploaded through the admin image library.");
   const row=await prisma.$transaction(async tx=>{
     if(expected===0) return tx.websiteContent.create({data:{id:page.id,draft,published:{},revision:1}});
     const updated=await tx.websiteContent.updateMany({where:{id:page.id,revision:expected},data:{draft,revision:{increment:1}}});
@@ -53,6 +55,7 @@ router.post("/pages/:id/publish",wrap(async(req,res)=>{
 router.get("/images",wrap(async(req,res)=>{
   const {filter="gallery",q=""}=req.query;
   const where={
+    publicId:{not:null},
     ...(filter==="gallery"?{inGallery:true}:filter==="published"?{inGallery:true,status:"published"}:filter==="draft"?{inGallery:true,status:"draft"}:{}),
     ...(q.trim()?{OR:[{title:{contains:q.trim(),mode:"insensitive"}},{caption:{contains:q.trim(),mode:"insensitive"}},{category:{contains:q.trim(),mode:"insensitive"}}]}:{})
   };

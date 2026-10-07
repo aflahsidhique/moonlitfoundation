@@ -18,7 +18,7 @@ export default function UpcomingEventCard({ event, onRegister }) {
   return (
     <article className="mf-card grid md:grid-cols-[38%_1fr] mf-fade">
       <div className="relative">
-        <Img className="w-full h-56 md:h-full object-cover" src={event.imageUrl || "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80"} alt={event.title} />
+        <Img className="w-full h-56 md:h-full object-cover" src={event.imageUrl} alt={event.title} />
         <span className="mf-date-badge"><span className="d">{String(d.getDate()).padStart(2, "0")}</span><span className="m">{MONTHS[d.getMonth()]}</span></span>
       </div>
       <div className="p-7">

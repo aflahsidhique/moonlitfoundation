@@ -1,5 +1,5 @@
 /* Public image bytes only. No HTML, API, authentication, or volunteer documents. */
-const IMAGE_CACHE = "moonlit-public-images-v1";
+const IMAGE_CACHE = "moonlit-public-images-v2";
 const MAX_IMAGES = 100;
 const MAX_BYTES = 50 * 1024 * 1024;
 const MAX_AGE = 30 * 24 * 60 * 60 * 1000;

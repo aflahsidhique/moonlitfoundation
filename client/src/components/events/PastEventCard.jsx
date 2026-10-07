@@ -7,7 +7,7 @@ export default function PastEventCard({ event, onFeedback }) {
   return (
     <article className="mf-card p-3 mf-fade">
       <div className="relative">
-        <Img className="mf-card-img" src={event.imageUrl || "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80"} alt={event.title} />
+        <Img className="mf-card-img" src={event.imageUrl} alt={event.title} />
         <span className="mf-chip bg-acc-green absolute top-3 right-3">Completed</span>
       </div>
       <div className="p-3">

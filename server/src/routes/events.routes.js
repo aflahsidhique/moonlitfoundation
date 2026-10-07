@@ -3,8 +3,8 @@ const { publicCache } = require("../middleware/cache");
 const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
-const { parseEventImage, storeEventImage } = require("../lib/eventImage");
-const { emailConfigured, recipientsFor, shareEvent, safeUrl } = require("../lib/eventEmail");
+const { parseEventImage, storeEventImage, isStoredEventImage } = require("../lib/eventImage");
+const { emailConfigured, recipientsFor, shareEvent } = require("../lib/eventEmail");
 const { paginated } = require("../lib/pagination");
 
 const router = express.Router();
@@ -79,7 +79,7 @@ router.get("/admin", requireAuth, async (req, res, next) => {
 router.post("/", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, EVENT_FIELDS);
-    if (req.body.imageUrl && !safeUrl(req.body.imageUrl)) return res.status(400).json({ error: "Image URL must use http or https." });
+    if (req.body.imageUrl && !isStoredEventImage(req.body.imageUrl)) return res.status(400).json({ error: "Choose an event image uploaded through the admin." });
     const { title, category, description, location, eventDate, startTime, endTime, imageUrl, photoAlbumUrl, capacity, status, durationHours } = req.body;
 
     const event = await prisma.event.create({
@@ -107,7 +107,7 @@ router.post("/", requireAuth, async (req, res, next) => {
 // Admin — edit any field.
 router.put("/:id", requireAuth, async (req, res, next) => {
   try {
-    if (req.body.imageUrl && !safeUrl(req.body.imageUrl)) return res.status(400).json({ error: "Image URL must use http or https." });
+    if (req.body.imageUrl && !isStoredEventImage(req.body.imageUrl)) return res.status(400).json({ error: "Choose an event image uploaded through the admin." });
     const { title, category, description, location, eventDate, startTime, endTime, imageUrl, photoAlbumUrl, capacity, status, durationHours } = req.body;
     if (status !== undefined && !["draft", "published"].includes(status)) {
       return res.status(400).json({ error: "status must be draft or published." });

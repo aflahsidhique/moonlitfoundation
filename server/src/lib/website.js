@@ -1,6 +1,6 @@
 const { createHash } = require("node:crypto");
 const schema = require("../content/schema.json");
-const defaults = (page) => Object.fromEntries(page.fields.map((field) => [field.key, field.default]));
+const defaults = (page) => Object.fromEntries(page.fields.map((field) => [field.key, field.type === "image" ? "" : field.default]));
 const categories = ["blood", "welfare", "relief", "environment", "youth"];
 const bad = (message, status = 400) => Object.assign(new Error(message), { status });
 const revision = (value) => { if (!Number.isSafeInteger(value) || value < 0) throw bad("A valid revision is required. Reload and try again."); return value; };
@@ -8,6 +8,21 @@ function safeUrl(value, image = false) {
   if (typeof value !== "string" || /[\s\\\u0000-\u001f]/.test(value)) return false;
   if (/^\/(?!\/)/.test(value)) return !value.includes("..");
   try { const url = new URL(value); return !url.username && !url.password && (url.protocol === "https:" || (!image && ["mailto:", "tel:"].includes(url.protocol))); } catch { return false; }
+}
+function isStoredWebsiteImage(value) {
+  if (value === "") return true;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "res.cloudinary.com" && /\/image\/upload\/(?:[^/]+\/)*moonlit\/website\//.test(url.pathname);
+  } catch { return false; }
+}
+function cleanContent(page, values = {}) {
+  if (!page) return {};
+  const imageKeys = new Set(page.fields.filter(field => field.type === "image").map(field => field.key));
+  return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, imageKeys.has(key) && !isStoredWebsiteImage(value) ? "" : value]));
+}
+function contentImageUrls(page, values) {
+  return [...new Set(page.fields.filter(field => field.type === "image").map(field => values[field.key]).filter(Boolean))];
 }
 function validateContent(page, values) {
   if (!values || typeof values !== "object" || Array.isArray(values)) throw bad("Content must be a set of fields.");
@@ -20,7 +35,8 @@ function validateContent(page, values) {
       if (!Number.isSafeInteger(value) || value < 0 || value > 1_000_000_000) throw bad(`${field.label}: enter a whole number between 0 and 1 billion.`);
     } else {
       if (typeof value !== "string" || value.length > field.maxLength || value.includes("\u0000")) throw bad(`${field.label}: the value is too long or invalid.`);
-      if (["url", "image"].includes(field.type) && !safeUrl(value, field.type === "image")) throw bad(`${field.label}: use a secure URL or a local website path.`);
+      if (field.type === "image" && !isStoredWebsiteImage(value)) throw bad(`${field.label}: choose an image uploaded through the admin.`);
+      if (field.type === "url" && !safeUrl(value)) throw bad(`${field.label}: use a secure URL or a local website path.`);
     }
     result[key] = value;
   }
@@ -57,9 +73,9 @@ function createSnapshotCache(prisma) {
     const entry = { generation };
     entry.promise = Promise.all([
       prisma.websiteContent.findMany({ select: { published: true } }),
-      prisma.websiteImage.findMany({ where: { inGallery: true, status: "published", deletedAt: null }, orderBy: [{sortOrder:"asc"},{createdAt:"desc"}], select: {id:true,imageUrl:true,title:true,alt:true,caption:true,category:true,width:true,height:true} }),
+      prisma.websiteImage.findMany({ where: { inGallery: true, status: "published", deletedAt: null, publicId: { not: null } }, orderBy: [{sortOrder:"asc"},{createdAt:"desc"}], select: {id:true,imageUrl:true,title:true,alt:true,caption:true,category:true,width:true,height:true} }),
     ]).then(([pages, gallery]) => {
-      const body = { version: schema.version, content: Object.assign({}, ...schema.pages.map(defaults), ...pages.map(p=>p.published)), gallery };
+      const body = { version: schema.version, content: Object.assign({}, ...schema.pages.map(defaults), ...pages.map(row=>cleanContent(schema.pages.find(page=>page.id===row.id),row.published))), gallery };
       const result = { body, etag: '"' + createHash("sha256").update(JSON.stringify(body)).digest("hex") + '"', at: Date.now() };
       if (generation === entry.generation) cached = result;
       return result;
@@ -69,4 +85,4 @@ function createSnapshotCache(prisma) {
   }
   return { get, invalidate };
 }
-module.exports = { schema, defaults, categories, bad, revision, validateContent, imageFields, createSnapshotCache };
+module.exports = { schema, defaults, categories, bad, revision, validateContent, imageFields, cleanContent, contentImageUrls, createSnapshotCache };

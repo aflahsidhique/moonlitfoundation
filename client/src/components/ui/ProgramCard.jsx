@@ -3,11 +3,11 @@ import Img from "./Img";
 
 // accent: "red" | "green" | "blue" | "yellow" | "purple" — maps to the
 // bg-acc-* utility classes defined in index.css.
-export default function ProgramCard({ image, fallback, alt, icon, accent, title, description, to }) {
+export default function ProgramCard({ image, alt, icon, accent, title, description, to }) {
   return (
     <article className="mf-card p-3 mf-fade">
       <div className="relative">
-        <Img className="mf-card-img" src={image} fallback={fallback} alt={alt} />
+        <Img className="mf-card-img" src={image} alt={alt} />
         <span className={`mf-icon-bubble bg-acc-${accent} absolute top-3 left-3`}><i className={`fa-solid fa-${icon}`}></i></span>
       </div>
       <div className="p-3">

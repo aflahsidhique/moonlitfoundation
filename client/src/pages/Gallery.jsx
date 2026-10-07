@@ -46,7 +46,7 @@ export default function Gallery() {
             const meta = CATEGORY_META[p.cat] || CATEGORY_META.welfare;
             return (
               <button key={p.id} type="button" className="mf-gal-item mf-fade text-left" onClick={() => setLightboxIndex(i)}>
-                <Img src={p.thumb} fallback="/images/photo-placeholder.svg" alt={p.alt || p.caption} />
+                <Img src={p.thumb} alt={p.alt || p.caption} />
                 <div className="mf-gal-overlay">
                   <span className={`mf-chip ${meta.chip} self-start mb-2`}>{meta.label}</span>
                   <p className="text-sm font-medium">{p.caption} <i className="fa-solid fa-magnifying-glass-plus ml-2 text-[#F5B921]"></i></p>
