@@ -6,14 +6,14 @@ Open **Website Content** (`/admin/website`), choose a page, and expand its secti
 
 - **Save draft** stores edits without changing the public website.
 - **Publish page** saves any remaining edits and publishes that page. **View live page** opens the current public page.
-- **Upload image** converts a new image to WebP and selects it for the draft. **Choose from library** reuses an existing admin upload without uploading it again. **Remove image** clears the draft image.
+- **Upload image** converts a new image to WebP and selects it for the draft. **Choose from library** reuses an existing admin upload. **Use image URL** accepts a direct HTTPS image URL. **Remove image** clears the draft image.
 - If another administrator changes the page, saving returns a conflict instead of overwriting their work. Copy any unsaved changes before reloading the editor.
 
 Open **Gallery & Images** (`/admin/gallery`) to upload photos. Add a title, meaningful image description, optional caption, category, display order and visibility. Lower order numbers appear first. New photos default to Draft. Publish, hide, edit or remove photos from their cards. The **All website images** view includes images uploaded from the content editor; select **Include this photo in the website gallery** if one should also appear there.
 
 Removing a photo removes it from the library and public gallery. Its Cloudinary asset is retained because an existing page or draft may still reference it. To replace a page photo, upload/select a new image and publish the page. To replace a gallery photo, upload the new photo and hide or remove the old entry.
 
-Website pages, the gallery and event covers render only files uploaded through the authenticated admin tools. Empty image fields render nothing; stock, placeholder and external fallback images are not substituted.
+Website pages render images selected by an administrator through file upload, the image library, or a direct HTTPS URL. Gallery photos and event covers still use authenticated file uploads. Empty image fields render nothing; stock and placeholder fallbacks are not substituted.
 
 ## Server setup and deployment
 
