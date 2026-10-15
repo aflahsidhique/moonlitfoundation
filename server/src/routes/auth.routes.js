@@ -11,7 +11,6 @@ router.post("/login", async (req, res, next) => {
     requireFields(req.body, ["email", "password"]);
     const { email, password } = req.body;
     const admin = await prisma.admin.findUnique({ where: { email: email.toLowerCase().trim() } });
-    console.log("🚀 ~ admin:", admin)
     if (!admin) return res.status(401).json({ error: "Invalid email or password." });
     if (!admin.isActive) return res.status(403).json({ error: "This admin account is inactive." });
     const ok = await bcrypt.compare(password, admin.passwordHash);
