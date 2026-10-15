@@ -1,17 +1,15 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Brand from "../ui/Brand";
 import Icon from "../ui/Icon";
 import { useMotion } from "../../hooks/useMotion";
-
 const NAV_LINKS = [
   { to: "/about", label: "Our story" },
   { to: "/programs", label: "Our work" },
   { to: "/events", label: "Events" },
   { to: "/gallery", label: "Gallery" },
-  { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Contact" }
 ];
-
 export default function Header() {
   const [stuck, setStuck] = useState(false);
   const [open, setOpen] = useState(false);
@@ -19,25 +17,31 @@ export default function Header() {
   const menuRef = useRef(null);
   const location = useLocation();
   const { lenisRef } = useMotion();
-
   useEffect(() => {
     const scroll = () => setStuck(window.scrollY > 20);
     window.addEventListener("scroll", scroll, { passive: true });
     scroll();
     return () => window.removeEventListener("scroll", scroll);
   }, []);
-  useEffect(() => { setOpen(false); }, [location.pathname, location.hash]);
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.hash]);
   useEffect(() => {
     const dialog = dialogRef.current;
     const menuButton = menuRef.current;
-    if (!open) { if (dialog.open) dialog.close(); return; }
+    if (!open) {
+      if (dialog.open) dialog.close();
+      return;
+    }
     dialog.showModal();
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const lenis = lenisRef.current;
     lenis?.stop();
     const desktop = window.matchMedia("(min-width: 1100px)");
-    const resize = () => { if (desktop.matches) setOpen(false); };
+    const resize = () => {
+      if (desktop.matches) setOpen(false);
+    };
     desktop.addEventListener("change", resize);
     return () => {
       document.body.style.overflow = overflow;
@@ -47,7 +51,6 @@ export default function Header() {
       menuButton?.focus();
     };
   }, [open, lenisRef]);
-
   return <>
     <header className={`site-header${stuck ? " is-stuck" : ""}`}>
       <div className="site-header-inner site-container">
@@ -62,7 +65,9 @@ export default function Header() {
         </div>
       </div>
     </header>
-    <dialog ref={dialogRef} id="mobile-menu" className="mobile-menu" aria-label="Navigation menu" onCancel={() => setOpen(false)} onClick={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+    <dialog ref={dialogRef} id="mobile-menu" className="mobile-menu" aria-label="Navigation menu" onCancel={() => setOpen(false)} onClick={(event) => {
+    if (event.target === event.currentTarget) setOpen(false);
+  }}>
       <div className="mobile-menu-top"><Brand /><button className="menu-toggle" aria-label="Close menu" onClick={() => setOpen(false)}><Icon name="close" /></button></div>
       <p className="section-label">A little time. A lasting difference.</p>
       <nav aria-label="Mobile navigation">

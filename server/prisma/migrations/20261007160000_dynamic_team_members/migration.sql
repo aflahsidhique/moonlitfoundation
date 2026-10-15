@@ -1,4 +1,4 @@
--- Convert the fixed About-page team fields into an ordered collection.
+
 WITH members AS (
   SELECT * FROM jsonb_to_recordset(
     '[

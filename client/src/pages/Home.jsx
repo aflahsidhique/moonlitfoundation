@@ -7,20 +7,17 @@ import ReelsCarousel from "../components/ui/ReelsCarousel";
 import Img from "../components/ui/Img";
 import instagram from "../data/instagram-reels.json";
 import { useMotion } from "../hooks/useMotion";
-
 function Asterisk({ className = "" }) {
   return <svg className={className} viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0v100M0 50h100M15 15l70 70m0-70L15 85" stroke="currentColor" strokeWidth="16" /></svg>;
 }
-
 export default function Home() {
   const { field: cms } = useWebsite();
   const PROGRAMS = [
     { number: "01", title: cms("home.programs.title-a-little-of-you-a-life-for-someone"), category: cms("home.programs.category-blood-donation"), image: cms("home.programs.image-images-together-webp"), alt: cms("home.programs.alt-moonlit-volunteers-at-a-blood-donation-ce"), to: "/programs#blood", icon: "droplet", description: cms("home.programs.description-connecting-willing-donors-with-th") },
     { number: "02", title: cms("home.programs.title-for-a-greener-kinder-tomorrow"), category: cms("home.programs.category-environment"), image: cms("home.programs.image-images-community-webp"), alt: cms("home.programs.alt-moonlit-volunteers-cleaning-kozhikode-bea"), to: "/programs#environment", icon: "leaf", description: cms("home.programs.description-cleaner-shores-more-trees-a-share") },
-    { number: "03", title: cms("home.programs.title-young-people-limitless-potential"), category: cms("home.programs.category-youth-development"), image: cms("home.programs.image-images-volunteers-webp"), alt: cms("home.programs.alt-the-moonlit-volunteer-community-gathered-"), to: "/programs#youth", icon: "sun", description: cms("home.programs.description-turning-curiosity-and-compassion-") },
+    { number: "03", title: cms("home.programs.title-young-people-limitless-potential"), category: cms("home.programs.category-youth-development"), image: cms("home.programs.image-images-volunteers-webp"), alt: cms("home.programs.alt-the-moonlit-volunteer-community-gathered-"), to: "/programs#youth", icon: "sun", description: cms("home.programs.description-turning-curiosity-and-compassion-") }
   ];
-const STATS = [{ count: cms("home.stats.count-2000"), label: cms("home.stats.label-volunteers-one-purpose"), note: cms("home.stats.note-a-community-that-shows-up") }, { count: cms("home.stats.count-1000"), label: cms("home.stats.label-families-supported"), note: cms("home.stats.note-care-that-reaches-further") }, { count: cms("home.stats.count-30"), label: cms("home.stats.label-communities-reached"), note: cms("home.stats.note-change-close-to-home") }, { count: cms("home.stats.count-120"), label: cms("home.stats.label-relief-campaigns"), note: cms("home.stats.note-together-when-it-matters") }];
-
+  const STATS = [{ count: cms("home.stats.count-2000"), label: cms("home.stats.label-volunteers-one-purpose"), note: cms("home.stats.note-a-community-that-shows-up") }, { count: cms("home.stats.count-1000"), label: cms("home.stats.label-families-supported"), note: cms("home.stats.note-care-that-reaches-further") }, { count: cms("home.stats.count-30"), label: cms("home.stats.label-communities-reached"), note: cms("home.stats.note-change-close-to-home") }, { count: cms("home.stats.count-120"), label: cms("home.stats.label-relief-campaigns"), note: cms("home.stats.note-together-when-it-matters") }];
   const { enabled, reduced, toggle } = useMotion();
   return <PageFx className="home-page">
     <section className="home-hero site-container" aria-labelledby="hero-title">
@@ -48,7 +45,7 @@ const STATS = [{ count: cms("home.stats.count-2000"), label: cms("home.stats.lab
 
     <section className="story-section site-container" aria-labelledby="story-title">
       <div className="story-visual mf-fade"><div className="story-photo"><Img src={cms("home.story.image-images-volunteers-webp")} alt={cms("home.story.image-description-moonlit-s-project-sulaimani")} width="1000" height="750" loading="lazy" data-parallax="30" /></div><div className="story-note"><Asterisk /><p>{cms("home.story.a-shared-purpose")}<br />{cms("home.story.a-thousand-possibilities")}</p></div><a href={cms("home.story.link-https-www-instagram-com-reel-dxtm9gmd8yb")} className="story-watch" target="_blank" rel="noopener noreferrer"><span><Icon name="play" size={17} /></span>{cms("home.story.life-at-moonlit")}{" "}<Icon size={15} /></a></div>
-      <div className="story-copy mf-fade"><p className="section-label"><span className="tiny-star">✳</span>{" "}{cms("home.story.this-is-moonlit")}</p><h2 id="story-title">{cms("home.story.big-hearts")}<br />{cms("home.story.bigger")}{" "}<span className="serif-word">{cms("home.story.possibilities")}</span></h2><p className="story-lead">{cms("home.story.we-believe-the-world-changes-when-ordinary-pe")}</p><p>{cms("home.story.born-in-kerala-in-2021-moonlit-brings-young-p")}</p><Link className="text-link" to="/about">{cms("home.story.the-story-behind-the-movement")}{" "}<span className="round-arrow"><Icon size={18} /></span></Link><div className="story-values"><span><Icon name="heart" size={16} />{" "}{cms("home.story.people-first")}</span><span><Icon name="globe" size={16} />{" "}{cms("home.story.purpose-always")}</span><span><Icon name="sun" size={16} />{" "}{cms("home.story.youth-powered")}</span></div></div>
+      <div className="story-copy mf-fade"><p className="section-label"><span className="tiny-star">{"\u2733\uFE0E"}</span>{" "}{cms("home.story.this-is-moonlit")}</p><h2 id="story-title">{cms("home.story.big-hearts")}<br />{cms("home.story.bigger")}{" "}<span className="serif-word">{cms("home.story.possibilities")}</span></h2><p className="story-lead">{cms("home.story.we-believe-the-world-changes-when-ordinary-pe")}</p><p>{cms("home.story.born-in-kerala-in-2021-moonlit-brings-young-p")}</p><Link className="text-link" to="/about">{cms("home.story.the-story-behind-the-movement")}{" "}<span className="round-arrow"><Icon size={18} /></span></Link><div className="story-values"><span><Icon name="heart" size={16} />{" "}{cms("home.story.people-first")}</span><span><Icon name="globe" size={16} />{" "}{cms("home.story.purpose-always")}</span><span><Icon name="sun" size={16} />{" "}{cms("home.story.youth-powered")}</span></div></div>
     </section>
 
     <section className="programs-section" aria-labelledby="programs-title"><div className="site-container">

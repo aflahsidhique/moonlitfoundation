@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import AdminModal from "./AdminModal";
 import { adminFetch } from "../lib/adminApi";
-
 const CATEGORIES = ["Blood Donation", "Community Welfare", "Disaster Relief", "Environment", "Youth Development"];
-
 const BLANK = { title: "", category: CATEGORIES[0], status: "draft", description: "", location: "", eventDate: "", capacity: "", startTime: "", endTime: "", durationHours: "", imageUrl: "", photoAlbumUrl: "" };
-
 export default function EventFormModal({ open, event, onClose, onSaved }) {
   const [form, setForm] = useState(BLANK);
   const [error, setError] = useState("");
@@ -16,22 +13,31 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
   const [stage, setStage] = useState("");
   const fileInput = useRef(null);
   const submitting = useRef(false);
-
   useEffect(() => {
-    if (!imageFile) { setPreview(""); return; }
+    if (!imageFile) {
+      setPreview("");
+      return;
+    }
     const url = URL.createObjectURL(imageFile);
     setPreview(url);
     return () => URL.revokeObjectURL(url);
   }, [imageFile]);
-
   useEffect(() => {
     if (!open) return;
     if (event) {
       setForm({
-        title: event.title, category: event.category, status: event.status, description: event.description,
-        location: event.location, eventDate: new Date(event.eventDate).toISOString().slice(0, 10),
-        capacity: event.capacity || "", startTime: event.startTime, endTime: event.endTime,
-        durationHours: event.durationHours || "", imageUrl: event.imageUrl || "", photoAlbumUrl: event.photoAlbumUrl || "",
+        title: event.title,
+        category: event.category,
+        status: event.status,
+        description: event.description,
+        location: event.location,
+        eventDate: new Date(event.eventDate).toISOString().slice(0, 10),
+        capacity: event.capacity || "",
+        startTime: event.startTime,
+        endTime: event.endTime,
+        durationHours: event.durationHours || "",
+        imageUrl: event.imageUrl || "",
+        photoAlbumUrl: event.photoAlbumUrl || ""
       });
     } else {
       setForm(BLANK);
@@ -41,9 +47,9 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
     setEmailOnCreate(false);
     if (fileInput.current) fileInput.current.value = "";
   }, [open, event]);
-
-  function set(key, value) { setForm((f) => ({ ...f, [key]: value })); }
-
+  function set(key, value) {
+    setForm((f) => ({ ...f, [key]: value }));
+  }
   function chooseImage(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -55,37 +61,48 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
     setError("");
     setImageFile(file);
   }
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (submitting.current) return;
     submitting.current = true;
     setError("");
     const payload = {
-      title: form.title.trim(), category: form.category, status: form.status, description: form.description.trim(),
-      location: form.location.trim(), eventDate: form.eventDate, capacity: form.capacity || null,
-      startTime: form.startTime.trim(), endTime: form.endTime.trim(), durationHours: form.durationHours || null,
-      imageUrl: form.imageUrl.trim() || null, photoAlbumUrl: form.photoAlbumUrl.trim() || null,
+      title: form.title.trim(),
+      category: form.category,
+      status: form.status,
+      description: form.description.trim(),
+      location: form.location.trim(),
+      eventDate: form.eventDate,
+      capacity: form.capacity || null,
+      startTime: form.startTime.trim(),
+      endTime: form.endTime.trim(),
+      durationHours: form.durationHours || null,
+      imageUrl: form.imageUrl.trim() || null,
+      photoAlbumUrl: form.photoAlbumUrl.trim() || null
     };
     setSaving(true);
     try {
       if (imageFile) {
-        setStage("Uploading image…");
-        const data = new FormData(); data.append("image", imageFile);
+        setStage("Uploading image\u2026");
+        const data = new FormData();
+        data.append("image", imageFile);
         const uploaded = await adminFetch("/events/image", { method: "POST", body: data });
         payload.imageUrl = uploaded.imageUrl;
         set("imageUrl", uploaded.imageUrl);
         setImageFile(null);
       }
-      setStage("Saving event…");
+      setStage("Saving event\u2026");
       const body = await adminFetch(event ? `/events/${event.id}` : "/events", { method: event ? "PUT" : "POST", body: JSON.stringify(payload) });
       onSaved(event ? "Event updated." : "Event created.", body.event, !event && emailOnCreate && form.status === "published");
-    } catch (err) { setError(err.message); }
-    finally { setSaving(false); setStage(""); submitting.current = false; }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSaving(false);
+      setStage("");
+      submitting.current = false;
+    }
   }
-
-  return (
-    <AdminModal open={open} onClose={onClose} title={event ? "Edit event" : "Create an event"} wide busy={saving}>
+  return <AdminModal open={open} onClose={onClose} title={event ? "Edit event" : "Create an event"} wide busy={saving}>
       <form onSubmit={handleSubmit}>
         <fieldset disabled={saving}>
         <p className="ws-form-section">01 / The first impression</p>
@@ -93,7 +110,11 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
           {preview || form.imageUrl ? <img src={preview || form.imageUrl} alt="Event cover preview" /> : <i className="fa-regular fa-image" aria-hidden="true" />}
           <div><strong>Event cover image</strong><p>JPG, PNG or WebP · Up to 5 MB · Landscape works best</p><input ref={fileInput} id="ef-upload" type="file" accept="image/jpeg,image/png,image/webp" onChange={chooseImage} /></div>
         </label>
-        {(imageFile || form.imageUrl) && <button type="button" className="ws-image-remove" onClick={() => { setImageFile(null); set("imageUrl", ""); if (fileInput.current) fileInput.current.value = ""; }}>Remove image</button>}
+        {(imageFile || form.imageUrl) && <button type="button" className="ws-image-remove" onClick={() => {
+    setImageFile(null);
+    set("imageUrl", "");
+    if (fileInput.current) fileInput.current.value = "";
+  }}>Remove image</button>}
         <p className="ws-form-section">02 / Event details</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2"><label className="mf-label" htmlFor="ef-title">Title *</label><input className="mf-input" id="ef-title" required placeholder="Mega Blood Donation Camp" value={form.title} onChange={(e) => set("title", e.target.value)} /></div>
@@ -126,6 +147,5 @@ export default function EventFormModal({ open, event, onClose, onSaved }) {
           <button type="button" className="mf-btn mf-btn-outline" onClick={onClose} disabled={saving}>Cancel</button>
         </div>
       </form>
-    </AdminModal>
-  );
+    </AdminModal>;
 }

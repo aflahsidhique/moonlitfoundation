@@ -1,4 +1,4 @@
--- CreateTable
+
 CREATE TABLE "Admin" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "Admin" (
     CONSTRAINT "Admin_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "Volunteer" (
     "id" TEXT NOT NULL,
     "volunteerId" TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE "Volunteer" (
     CONSTRAINT "Volunteer_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "BloodRequest" (
     "id" TEXT NOT NULL,
     "patientName" TEXT NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE "BloodRequest" (
     CONSTRAINT "BloodRequest_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "BloodRequestResponse" (
     "id" TEXT NOT NULL,
     "bloodRequestId" TEXT NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE "BloodRequestResponse" (
     CONSTRAINT "BloodRequestResponse_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "BloodDonationRecord" (
     "id" TEXT NOT NULL,
     "volunteerId" TEXT NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE "BloodDonationRecord" (
     CONSTRAINT "BloodDonationRecord_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "PushSubscription" (
     "id" TEXT NOT NULL,
     "volunteerId" TEXT NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE "PushSubscription" (
     CONSTRAINT "PushSubscription_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "PartnerInquiry" (
     "id" TEXT NOT NULL,
     "organization" TEXT NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE "PartnerInquiry" (
     CONSTRAINT "PartnerInquiry_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "ContactMessage" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE "ContactMessage" (
     CONSTRAINT "ContactMessage_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "NewsletterSubscriber" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE "NewsletterSubscriber" (
     CONSTRAINT "NewsletterSubscriber_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "Event" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
@@ -186,7 +186,7 @@ CREATE TABLE "Event" (
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "EventRegistration" (
     "id" TEXT NOT NULL,
     "eventId" TEXT NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE "EventRegistration" (
     CONSTRAINT "EventRegistration_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "Attendance" (
     "id" TEXT NOT NULL,
     "volunteerId" TEXT NOT NULL,
@@ -214,7 +214,7 @@ CREATE TABLE "Attendance" (
     CONSTRAINT "Attendance_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "EventFeedback" (
     "id" TEXT NOT NULL,
     "eventId" TEXT NOT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE "EventFeedback" (
     CONSTRAINT "EventFeedback_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
+
 CREATE TABLE "Notification" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
@@ -241,54 +241,54 @@ CREATE TABLE "Notification" (
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "Volunteer_volunteerId_key" ON "Volunteer"("volunteerId");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "Volunteer_passwordResetToken_key" ON "Volunteer"("passwordResetToken");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "BloodRequestResponse_bloodRequestId_volunteerId_key" ON "BloodRequestResponse"("bloodRequestId", "volunteerId");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "PushSubscription_endpoint_key" ON "PushSubscription"("endpoint");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "NewsletterSubscriber_email_key" ON "NewsletterSubscriber"("email");
 
--- CreateIndex
+
 CREATE UNIQUE INDEX "Attendance_volunteerId_eventId_key" ON "Attendance"("volunteerId", "eventId");
 
--- AddForeignKey
+
 ALTER TABLE "BloodRequestResponse" ADD CONSTRAINT "BloodRequestResponse_bloodRequestId_fkey" FOREIGN KEY ("bloodRequestId") REFERENCES "BloodRequest"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "BloodRequestResponse" ADD CONSTRAINT "BloodRequestResponse_volunteerId_fkey" FOREIGN KEY ("volunteerId") REFERENCES "Volunteer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "BloodDonationRecord" ADD CONSTRAINT "BloodDonationRecord_volunteerId_fkey" FOREIGN KEY ("volunteerId") REFERENCES "Volunteer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "BloodDonationRecord" ADD CONSTRAINT "BloodDonationRecord_bloodRequestId_fkey" FOREIGN KEY ("bloodRequestId") REFERENCES "BloodRequest"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "PushSubscription" ADD CONSTRAINT "PushSubscription_volunteerId_fkey" FOREIGN KEY ("volunteerId") REFERENCES "Volunteer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "EventRegistration" ADD CONSTRAINT "EventRegistration_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "Attendance" ADD CONSTRAINT "Attendance_volunteerId_fkey" FOREIGN KEY ("volunteerId") REFERENCES "Volunteer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "Attendance" ADD CONSTRAINT "Attendance_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "EventFeedback" ADD CONSTRAINT "EventFeedback_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
+
 ALTER TABLE "Notification" ADD CONSTRAINT "Notification_volunteerId_fkey" FOREIGN KEY ("volunteerId") REFERENCES "Volunteer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 

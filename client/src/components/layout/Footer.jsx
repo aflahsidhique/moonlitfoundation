@@ -4,11 +4,8 @@ import Brand from "../ui/Brand";
 import Icon from "../ui/Icon";
 import MfForm from "../ui/MfForm";
 import { useMotion } from "../../hooks/useMotion";
-
 export default function Footer() {
   const { field: cms } = useWebsite();
-
-
   const { enabled, reduced, toggle } = useMotion();
   return <footer className="site-footer">
     <div className="site-container">
@@ -20,7 +17,7 @@ export default function Footer() {
         <div className="footer-newsletter"><h3>{cms("footer.page-content.a-little-good-in-your-inbox")}</h3><p>{cms("footer.page-content.stories-new-experiences-and-ways-to-help")}</p><MfForm endpoint="/newsletter" successMessage="You're on the list. Welcome to the Moonlit community!" className="newsletter-form"><label className="sr-only" htmlFor="newsletter-email">Your email address</label><input id="newsletter-email" name="email" type="email" required placeholder="Your email address" autoComplete="email" /><button type="submit" aria-label="Subscribe to newsletter"><Icon name="arrow-right" size={22} /></button></MfForm><a href={cms("footer.page-content.link-mailto-moonlitfoundation-gmail-com")}>{cms("footer.page-content.moonlitfoundation-gmail-com")}</a><a href={cms("footer.page-content.link-tel-919048414851")}>{cms("footer.page-content.91-9048-414-851")}</a></div>
       </div>
       <div className="footer-wordmark" aria-hidden="true">moonlit<span>®</span><svg viewBox="0 0 100 100" fill="none"><path d="M50 0v100M0 50h100M15 15l70 70m0-70L15 85" stroke="currentColor" strokeWidth="15" /></svg></div>
-      <div className="footer-bottom"><p>© {new Date().getFullYear()}{" "}{cms("footer.page-content.moonlit-foundation-made-for-a-better-tomorrow")}</p><button className="motion-toggle" onClick={toggle} disabled={reduced} aria-pressed={enabled} aria-label={reduced ? "Motion disabled by your system preference" : enabled ? "Pause animations" : "Enable animations"}><Icon name={enabled ? "pause" : "play"} size={13} />{reduced ? "Reduced motion" : `Motion ${enabled ? "on" : "off"}`}</button><span>{cms("footer.page-content.small-acts-lasting-impact")}</span></div>
+      <div className="footer-bottom"><p>© {( new Date()).getFullYear()}{" "}{cms("footer.page-content.moonlit-foundation-made-for-a-better-tomorrow")}</p><button className="motion-toggle" onClick={toggle} disabled={reduced} aria-pressed={enabled} aria-label={reduced ? "Motion disabled by your system preference" : enabled ? "Pause animations" : "Enable animations"}><Icon name={enabled ? "pause" : "play"} size={13} />{reduced ? "Reduced motion" : `Motion ${enabled ? "on" : "off"}`}</button><span>{cms("footer.page-content.small-acts-lasting-impact")}</span></div>
     </div>
   </footer>;
 }

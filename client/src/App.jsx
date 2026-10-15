@@ -1,14 +1,14 @@
-﻿import { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
+import LoadingScreen from "./components/ui/LoadingScreen";
 const About = lazy(() => import("./pages/About"));
 const Programs = lazy(() => import("./pages/Programs"));
 const Events = lazy(() => import("./pages/Events"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const GetInvolved = lazy(() => import("./pages/GetInvolved"));
 const Contact = lazy(() => import("./pages/Contact"));
-
 const AdminLogin = lazy(() => import("./admin/pages/AdminLogin"));
 const RequireAdminAuth = lazy(() => import("./admin/components/RequireAdminAuth"));
 const AdminLayout = lazy(() => import("./admin/components/AdminLayout"));
@@ -25,7 +25,8 @@ const AdminRegistrations = lazy(() => import("./admin/pages/Registrations"));
 const AdminCheckin = lazy(() => import("./admin/pages/Checkin"));
 const AdminFeedback = lazy(() => import("./admin/pages/Feedback"));
 const AdminNotifications = lazy(() => import("./admin/pages/Notifications"));
-
+const AdminUsers = lazy(() => import("./admin/pages/AdminUsers"));
+const RequireAdminPermission = lazy(() => import("./admin/components/RequireAdminPermission"));
 const PortalLogin = lazy(() => import("./portal/pages/PortalLogin"));
 const ForgotPassword = lazy(() => import("./portal/pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./portal/pages/ResetPassword"));
@@ -42,10 +43,8 @@ const PortalBlood = lazy(() => import("./portal/pages/Blood"));
 const PortalProfile = lazy(() => import("./portal/pages/Profile"));
 const PortalNotifications = lazy(() => import("./portal/pages/Notifications"));
 const PortalDownloads = lazy(() => import("./portal/pages/Downloads"));
-
 export default function App() {
-  return (
-    <Suspense fallback={<div className="route-loading" role="status">Loading Moonlit…</div>}><Routes>
+  return <Suspense fallback={<LoadingScreen />}><Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
@@ -60,18 +59,19 @@ export default function App() {
       <Route path="admin" element={<RequireAdminAuth />}>
         <Route element={<AdminLayout />}>
           <Route index element={<AdminOverview />} />
-          <Route path="website" element={<AdminWebsiteContent />} />
-          <Route path="gallery" element={<AdminGallery />} />
-          <Route path="volunteers" element={<AdminVolunteers />} />
-          <Route path="blood-requests" element={<AdminBloodRequests />} />
-          <Route path="partners" element={<AdminPartners />} />
-          <Route path="messages" element={<AdminMessages />} />
-          <Route path="newsletter" element={<AdminNewsletter />} />
-          <Route path="events" element={<AdminEvents />} />
-          <Route path="registrations" element={<AdminRegistrations />} />
-          <Route path="checkin" element={<AdminCheckin />} />
-          <Route path="feedback" element={<AdminFeedback />} />
-          <Route path="notifications" element={<AdminNotifications />} />
+          <Route element={<RequireAdminPermission permission="website" />}><Route path="website" element={<AdminWebsiteContent />} /></Route>
+          <Route element={<RequireAdminPermission permission="gallery" />}><Route path="gallery" element={<AdminGallery />} /></Route>
+          <Route element={<RequireAdminPermission permission="volunteers" />}><Route path="volunteers" element={<AdminVolunteers />} /></Route>
+          <Route element={<RequireAdminPermission permission="blood_requests" />}><Route path="blood-requests" element={<AdminBloodRequests />} /></Route>
+          <Route element={<RequireAdminPermission permission="partners" />}><Route path="partners" element={<AdminPartners />} /></Route>
+          <Route element={<RequireAdminPermission permission="messages" />}><Route path="messages" element={<AdminMessages />} /></Route>
+          <Route element={<RequireAdminPermission permission="newsletter" />}><Route path="newsletter" element={<AdminNewsletter />} /></Route>
+          <Route element={<RequireAdminPermission permission="events" />}><Route path="events" element={<AdminEvents />} /></Route>
+          <Route element={<RequireAdminPermission permission="registrations" />}><Route path="registrations" element={<AdminRegistrations />} /></Route>
+          <Route element={<RequireAdminPermission permission="checkin" />}><Route path="checkin" element={<AdminCheckin />} /></Route>
+          <Route element={<RequireAdminPermission permission="feedback" />}><Route path="feedback" element={<AdminFeedback />} /></Route>
+          <Route element={<RequireAdminPermission permission="notifications" />}><Route path="notifications" element={<AdminNotifications />} /></Route>
+          <Route element={<RequireAdminPermission superAdmin />}><Route path="admin-users" element={<AdminUsers />} /></Route>
         </Route>
       </Route>
 
@@ -93,7 +93,5 @@ export default function App() {
           <Route path="downloads" element={<PortalDownloads />} />
         </Route>
       </Route>
-    </Routes></Suspense>
-  );
+    </Routes></Suspense>;
 }
-

@@ -1,6 +1,5 @@
 const yesNo = (value) => value ? "Yes" : "No";
-const valueOrBlank = (value) => value === null || value === undefined ? "" : String(value);
-
+const valueOrBlank = (value) => value === null || value === void 0 ? "" : String(value);
 function dateValue(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -10,7 +9,6 @@ function dateValue(value) {
     year: "numeric"
   });
 }
-
 function dateTimeValue(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -22,12 +20,10 @@ function dateTimeValue(value) {
     minute: "2-digit"
   });
 }
-
 function donationHistory(value) {
   if (!Array.isArray(value)) return "";
   return value.map((record) => [dateValue(record.donationDate), record.location, record.notes].filter(Boolean).join(" - ")).join("; ");
 }
-
 const BASIC_FIELDS = [
   { label: "Volunteer ID", value: (v) => v.volunteerId },
   { label: "Full Name", value: (v) => v.fullName },
@@ -42,7 +38,6 @@ const BASIC_FIELDS = [
   { label: "Status", value: (v) => v.status },
   { label: "Submitted", value: (v) => dateTimeValue(v.createdAt) }
 ];
-
 const BLOOD_FIELDS = [
   { label: "Blood Group", value: (v) => v.bloodGroup },
   { label: "Blood Donor", value: (v) => yesNo(v.isBloodDonor) },
@@ -55,7 +50,6 @@ const BLOOD_FIELDS = [
   { label: "Weight (kg)", value: (v) => v.weight },
   { label: "Medical Conditions", value: (v) => v.medicalConditions }
 ];
-
 const ALL_FIELDS = [
   { label: "Database ID", value: (v) => v.id },
   ...BASIC_FIELDS.slice(0, 7),
@@ -84,13 +78,11 @@ const ALL_FIELDS = [
   ...BASIC_FIELDS.slice(10),
   { label: "Updated", value: (v) => dateTimeValue(v.updatedAt) }
 ];
-
 export const VOLUNTEER_EXPORT_PRESETS = {
   all: { label: "All fields", description: "Every registration, address, emergency, blood, social and verification field.", fields: ALL_FIELDS },
   contact: { label: "Basic contact fields", description: "Identity, phone, email, location, status and submission date.", fields: BASIC_FIELDS },
   blood: { label: "Basic fields + blood data", description: "Contact fields plus donor status, eligibility and donation details.", fields: [...BASIC_FIELDS, ...BLOOD_FIELDS] }
 };
-
 export function volunteerExportTable(volunteers, preset) {
   const fields = VOLUNTEER_EXPORT_PRESETS[preset]?.fields || BASIC_FIELDS;
   return {
@@ -98,19 +90,16 @@ export function volunteerExportTable(volunteers, preset) {
     rows: volunteers.map((volunteer) => fields.map((field) => valueOrBlank(field.value(volunteer))))
   };
 }
-
 function localDateStamp() {
-  const now = new Date();
+  const now =  new Date();
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const day = String(now.getDate()).padStart(2, "0");
   return `${now.getFullYear()}-${month}-${day}`;
 }
-
 export async function exportVolunteers(volunteers, preset, format) {
   const definition = VOLUNTEER_EXPORT_PRESETS[preset] || VOLUNTEER_EXPORT_PRESETS.contact;
   const { headers, rows } = volunteerExportTable(volunteers, preset);
   const baseName = `moonlit-volunteers-${preset}-${localDateStamp()}`;
-
   if (format === "xlsx") {
     const XLSX = await import("xlsx");
     const worksheet = XLSX.utils.aoa_to_sheet([headers, ...rows]);
@@ -124,7 +113,6 @@ export async function exportVolunteers(volunteers, preset, format) {
     XLSX.writeFile(workbook, `${baseName}.xlsx`, { compression: true });
     return `${definition.label} exported as Excel.`;
   }
-
   const [{ jsPDF }, tableModule] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
   const autoTable = tableModule.default || tableModule.autoTable;
   const isWide = headers.length > 12;

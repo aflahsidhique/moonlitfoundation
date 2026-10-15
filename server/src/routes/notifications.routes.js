@@ -3,24 +3,17 @@ const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
-// Admin — broadcast to every volunteer, or target one specific volunteer
-// (identified by their human-readable Volunteer ID, e.g. "MLF202500001" —
-// resolved here to the internal record id the Notification relation uses).
 router.post("/", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, ["title", "message"]);
     const { title, message, volunteerId } = req.body;
-
     let targetId = null;
     if (volunteerId) {
       const volunteer = await prisma.volunteer.findUnique({ where: { volunteerId: volunteerId.trim() } });
       if (!volunteer) return res.status(404).json({ error: "No volunteer found with that ID." });
       targetId = volunteer.id;
     }
-
     const notification = await prisma.notification.create({
       data: { title, message, audience: targetId ? "volunteer" : "all", volunteerId: targetId }
     });
@@ -29,8 +22,6 @@ router.post("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
-// Admin — everything sent, newest first.
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { rows: notifications, pagination } = await paginated(prisma.notification, req.query, {
@@ -42,7 +33,6 @@ router.get("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.notification.delete({ where: { id: req.params.id } });
@@ -51,5 +41,4 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

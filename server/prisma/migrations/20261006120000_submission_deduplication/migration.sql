@@ -1,7 +1,7 @@
 ALTER TABLE "BloodRequest" ADD COLUMN "submissionKey" TEXT;
 ALTER TABLE "PartnerInquiry" ADD COLUMN "submissionKey" TEXT;
 
--- Canonical values make email case and common Indian phone formats equivalent.
+
 UPDATE "Volunteer"
 SET "email" = LOWER(BTRIM("email"));
 

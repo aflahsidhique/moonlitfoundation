@@ -1,9 +1,8 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { portalFetch } from "../lib/portalApi";
 import { fmtDate } from "../lib/format";
 import StatusBadge from "../components/StatusBadge";
-
 export default function PortalEvents() {
   const [state, setState] = useState({ status: "loading" });
   const [filter, setFilter] = useState("upcoming");

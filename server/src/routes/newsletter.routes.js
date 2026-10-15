@@ -3,35 +3,24 @@ const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
-// Public — footer newsletter form submits here.
 router.post("/", async (req, res, next) => {
   try {
     requireFields(req.body, ["email"]);
     const email = req.body.email.toLowerCase().trim();
-
     const existing = await prisma.newsletterSubscriber.findUnique({ where: { email } });
     if (existing) return res.status(200).json({ subscriber: existing, alreadySubscribed: true });
-
-    // email is unique at the DB level regardless of soft-delete status, so
-    // someone who previously unsubscribed (soft-deleted) needs their old
-    // row reactivated rather than a new one created — a plain .create()
-    // would hit the unique constraint since their row still exists.
     const deleted = await prisma.newsletterSubscriber.findFirst({ where: { email, deletedAt: { not: null } } });
     if (deleted) {
-      const subscriber = await prisma.newsletterSubscriber.update({ where: { id: deleted.id }, data: { deletedAt: null } });
-      return res.status(201).json({ subscriber, resubscribed: true });
+      const subscriber2 = await prisma.newsletterSubscriber.update({ where: { id: deleted.id }, data: { deletedAt: null } });
+      return res.status(201).json({ subscriber: subscriber2, resubscribed: true });
     }
-
     const subscriber = await prisma.newsletterSubscriber.create({ data: { email } });
     res.status(201).json({ subscriber });
   } catch (err) {
     next(err);
   }
 });
-
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { rows: subscribers, pagination } = await paginated(prisma.newsletterSubscriber, req.query, { orderBy: { createdAt: "desc" } });
@@ -40,7 +29,6 @@ router.get("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.newsletterSubscriber.delete({ where: { id: req.params.id } });
@@ -49,5 +37,4 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

@@ -6,16 +6,15 @@ const { requireFields } = require("../lib/validate");
 const { parseEventImage, storeEventImage, isStoredEventImage } = require("../lib/eventImage");
 const { emailConfigured, recipientsFor, shareEvent } = require("../lib/eventEmail");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
 const EVENT_FIELDS = ["title", "category", "description", "location", "eventDate", "startTime", "endTime"];
-
-// Protected uploads use the same media storage as volunteer photos.
 router.post("/image", requireAuth, parseEventImage, async (req, res, next) => {
-  try { res.status(201).json({ imageUrl: await storeEventImage(req.file) }); } catch (error) { next(error); }
+  try {
+    res.status(201).json({ imageUrl: await storeEventImage(req.file) });
+  } catch (error) {
+    next(error);
+  }
 });
-
 router.get("/:id/email-preview", requireAuth, async (req, res, next) => {
   try {
     const event = await prisma.event.findUnique({ where: { id: req.params.id } });
@@ -23,18 +22,19 @@ router.get("/:id/email-preview", requireAuth, async (req, res, next) => {
     const audience = req.query.audience || "volunteers";
     const { recipients, skipped } = await recipientsFor(prisma, event.id, audience);
     res.json({ count: recipients.length, skipped, configured: emailConfigured() });
-  } catch (error) { next(error); }
+  } catch (error) {
+    next(error);
+  }
 });
-
 router.post("/:id/share", requireAuth, async (req, res, next) => {
   try {
     const event = await prisma.event.findUnique({ where: { id: req.params.id } });
     if (!event) return res.status(404).json({ error: "Event not found." });
     res.json({ delivery: await shareEvent(prisma, event, req.body) });
-  } catch (error) { next(error); }
+  } catch (error) {
+    next(error);
+  }
 });
-
-// Public — published events only, split into upcoming/past by the caller.
 router.get("/", publicCache({ maxAge: 60, swr: 600 }), async (req, res, next) => {
   try {
     const events = await prisma.event.findMany({
@@ -47,19 +47,17 @@ router.get("/", publicCache({ maxAge: 60, swr: 600 }), async (req, res, next) =>
     next(err);
   }
 });
-
-// Admin — every event regardless of status, with registration counts.
 router.get("/admin", requireAuth, async (req, res, next) => {
   try {
     const { status, q, from, order } = req.query;
     const where = {
-      ...(status && status !== "all" ? { status } : {}),
-      ...(from ? { eventDate: { gte: new Date(from) } } : {}),
-      ...(q?.trim() ? { OR: [
+      ...status && status !== "all" ? { status } : {},
+      ...from ? { eventDate: { gte: new Date(from) } } : {},
+      ...q?.trim() ? { OR: [
         { title: { contains: q.trim(), mode: "insensitive" } },
         { category: { contains: q.trim(), mode: "insensitive" } },
         { location: { contains: q.trim(), mode: "insensitive" } }
-      ] } : {})
+      ] } : {}
     };
     const [{ rows: events, pagination }, published] = await Promise.all([
       paginated(prisma.event, req.query, {
@@ -74,14 +72,11 @@ router.get("/admin", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
-// Admin — create (defaults to draft unless status:"published" is sent).
 router.post("/", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, EVENT_FIELDS);
     if (req.body.imageUrl && !isStoredEventImage(req.body.imageUrl)) return res.status(400).json({ error: "Choose an event image uploaded through the admin." });
     const { title, category, description, location, eventDate, startTime, endTime, imageUrl, photoAlbumUrl, capacity, status, durationHours } = req.body;
-
     const event = await prisma.event.create({
       data: {
         title,
@@ -103,30 +98,28 @@ router.post("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
-// Admin — edit any field.
 router.put("/:id", requireAuth, async (req, res, next) => {
   try {
     if (req.body.imageUrl && !isStoredEventImage(req.body.imageUrl)) return res.status(400).json({ error: "Choose an event image uploaded through the admin." });
     const { title, category, description, location, eventDate, startTime, endTime, imageUrl, photoAlbumUrl, capacity, status, durationHours } = req.body;
-    if (status !== undefined && !["draft", "published"].includes(status)) {
+    if (status !== void 0 && !["draft", "published"].includes(status)) {
       return res.status(400).json({ error: "status must be draft or published." });
     }
     const event = await prisma.event.update({
       where: { id: req.params.id },
       data: {
-        ...(title !== undefined && { title }),
-        ...(category !== undefined && { category }),
-        ...(description !== undefined && { description }),
-        ...(location !== undefined && { location }),
-        ...(eventDate !== undefined && { eventDate: new Date(eventDate) }),
-        ...(startTime !== undefined && { startTime }),
-        ...(endTime !== undefined && { endTime }),
-        ...(durationHours !== undefined && { durationHours: durationHours ? Number(durationHours) : null }),
-        ...(imageUrl !== undefined && { imageUrl }),
-        ...(photoAlbumUrl !== undefined && { photoAlbumUrl: photoAlbumUrl || null }),
-        ...(capacity !== undefined && { capacity: capacity ? Number(capacity) : null }),
-        ...(status !== undefined && { status })
+        ...title !== void 0 && { title },
+        ...category !== void 0 && { category },
+        ...description !== void 0 && { description },
+        ...location !== void 0 && { location },
+        ...eventDate !== void 0 && { eventDate: new Date(eventDate) },
+        ...startTime !== void 0 && { startTime },
+        ...endTime !== void 0 && { endTime },
+        ...durationHours !== void 0 && { durationHours: durationHours ? Number(durationHours) : null },
+        ...imageUrl !== void 0 && { imageUrl },
+        ...photoAlbumUrl !== void 0 && { photoAlbumUrl: photoAlbumUrl || null },
+        ...capacity !== void 0 && { capacity: capacity ? Number(capacity) : null },
+        ...status !== void 0 && { status }
       }
     });
     res.json({ event });
@@ -134,8 +127,6 @@ router.put("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
-// Admin — publish/unpublish.
 router.patch("/:id/status", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, ["status"]);
@@ -149,7 +140,6 @@ router.patch("/:id/status", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.event.delete({ where: { id: req.params.id } });
@@ -158,13 +148,10 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
-// Public — register for a published event, capacity-aware.
 router.post("/:id/register", async (req, res, next) => {
   try {
     requireFields(req.body, ["name", "email", "phone"]);
     const { name, email, phone } = req.body;
-
     const event = await prisma.event.findUnique({
       where: { id: req.params.id },
       include: { _count: { select: { registrations: true } } }
@@ -175,7 +162,6 @@ router.post("/:id/register", async (req, res, next) => {
     if (event.capacity && event._count.registrations >= event.capacity) {
       return res.status(409).json({ error: "This event is full." });
     }
-
     const registration = await prisma.eventRegistration.create({
       data: { eventId: event.id, name, email, phone }
     });
@@ -184,10 +170,6 @@ router.post("/:id/register", async (req, res, next) => {
     next(err);
   }
 });
-
-// Public — leave feedback on an event that has already taken place.
-// No login required, loosely matched by name/email (same trust model as
-// registration). Only allowed once the event's date has passed.
 router.post("/:id/feedback", async (req, res, next) => {
   try {
     requireFields(req.body, ["name", "email", "rating"]);
@@ -196,15 +178,13 @@ router.post("/:id/feedback", async (req, res, next) => {
     if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
       return res.status(400).json({ error: "rating must be a whole number from 1 to 5." });
     }
-
     const event = await prisma.event.findUnique({ where: { id: req.params.id } });
     if (!event || event.status !== "published") {
       return res.status(404).json({ error: "Event not found." });
     }
-    if (new Date(event.eventDate) > new Date()) {
+    if (new Date(event.eventDate) >  new Date()) {
       return res.status(400).json({ error: "You can leave feedback once the event has taken place." });
     }
-
     const feedback = await prisma.eventFeedback.create({
       data: { eventId: event.id, name, email, rating, comment: comment || null }
     });
@@ -213,8 +193,6 @@ router.post("/:id/feedback", async (req, res, next) => {
     next(err);
   }
 });
-
-// Admin — registrations for one event.
 router.get("/:id/registrations", requireAuth, async (req, res, next) => {
   try {
     const { rows: registrations, pagination } = await paginated(prisma.eventRegistration, req.query, {
@@ -226,5 +204,4 @@ router.get("/:id/registrations", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

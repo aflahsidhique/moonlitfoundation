@@ -92,6 +92,28 @@ Then add whatever origin you're serving from to `CORS_ORIGINS` in `.env`
 
 ## API surface
 
+### Admin roles and permissions
+
+The first admin is a protected `super_admin`. The admin roles migration
+promotes every pre-existing admin so an upgrade cannot lock out the current
+operator. Super admins can open **Admin Users** in the workspace to create,
+edit, deactivate, or remove regular admin accounts and assign access by area.
+
+Permissions are enforced by the API on every request, not only by the client
+menu. Changing an admin's permissions or deactivating the account takes effect
+immediately for existing login tokens. Apply the migration before starting the
+updated API:
+
+```bash
+npm run prisma:deploy
+npx prisma generate
+```
+
+The API limits each process to three database connections by default so the
+admin dashboard does not exhaust small hosted PostgreSQL plans. Override this
+only when the database has sufficient capacity by setting
+`DB_CONNECTION_LIMIT`.
+
 All routes are prefixed `/api`. Public routes need no auth. Admin routes
 require `Authorization: Bearer <token>` from `POST /api/auth/login`.
 Volunteer-portal routes require a *separate* token from

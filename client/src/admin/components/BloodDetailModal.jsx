@@ -7,15 +7,12 @@ import { fmtDate } from "../lib/format";
 import { adminFetch } from "../lib/adminApi";
 import { useToast } from "../../hooks/useToast";
 import AdminPagination from "./AdminPagination";
-
 const RESPONSE_STATUSES = ["notified", "accepted", "declined", "unavailable", "reached_hospital", "completed"];
-
 function BloodDocLinks({ csv }) {
   const urls = (csv || "").split(",").map((s) => s.trim()).filter(Boolean);
   if (!urls.length) return <span className="text-[#9CA3AF]">None uploaded</span>;
   return urls.map((u, i) => <span key={u}><FileLink url={u} label={`Document ${i + 1}`} /><br /></span>);
 }
-
 export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }) {
   const showToast = useToast();
   const [note, setNote] = useState("");
@@ -26,71 +23,59 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
   const [responsePagination, setResponsePagination] = useState(null);
   const [responsePage, setResponsePage] = useState(1);
   const [responsePageSize, setResponsePageSize] = useState(20);
-
   useEffect(() => {
-    if (!b) { setResponses(null); return; }
+    if (!b) {
+      setResponses(null);
+      return;
+    }
     setNote(b.adminNote || "");
     setStrategy("all");
     setResponsePage(1);
     loadResponses(b.id, 1, responsePageSize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [b?.id]);
-
   function loadResponses(id, page = responsePage, pageSize = responsePageSize) {
     setResponses(null);
-    adminFetch(`/blood-requests/${id}/responses?page=${page}&pageSize=${pageSize}`, { force: true })
-      .then((body) => { setResponses(body.responses); setResponsePagination(body.pagination); })
-      .catch((err) => setResponses([]) || showToast(err.message));
+    adminFetch(`/blood-requests/${id}/responses?page=${page}&pageSize=${pageSize}`, { force: true }).then((body) => {
+      setResponses(body.responses);
+      setResponsePagination(body.pagination);
+    }).catch((err) => setResponses([]) || showToast(err.message));
   }
-
   function changeResponsePage(page) {
     setResponsePage(page);
     loadResponses(b.id, page, responsePageSize);
   }
-
   function changeResponsePageSize(pageSize) {
     const size = Number(pageSize);
     setResponsePage(1);
     setResponsePageSize(size);
     loadResponses(b.id, 1, size);
   }
-
   function setStatus(status) {
-    adminFetch(`/blood-requests/${b.id}`, { method: "PATCH", body: JSON.stringify({ status, adminNote: note.trim() }) })
-      .then((body) => {
-        showToast(`Blood request ${body.bloodRequest.status.replace("_", " ")}.`);
-        onUpdated(body.bloodRequest);
-      })
-      .catch((err) => showToast(err.message));
+    adminFetch(`/blood-requests/${b.id}`, { method: "PATCH", body: JSON.stringify({ status, adminNote: note.trim() }) }).then((body) => {
+      showToast(`Blood request ${body.bloodRequest.status.replace("_", " ")}.`);
+      onUpdated(body.bloodRequest);
+    }).catch((err) => showToast(err.message));
   }
-
   function notify() {
     const payload = { strategy };
     if (strategy === "nearby") payload.radiusKm = Number(radius);
     setNotifying(true);
-    adminFetch(`/blood-requests/${b.id}/notify`, { method: "POST", body: JSON.stringify(payload) })
-      .then((body) => {
-        const s = body.summary;
-        showToast(`Notified ${s.targeted} volunteer(s) — SMS ${s.sms.sent}/${s.sms.sent + s.sms.failed}, Email ${s.email.sent}/${s.email.sent + s.email.failed}.`);
-        setResponsePage(1);
-        loadResponses(b.id, 1, responsePageSize);
-      })
-      .catch((err) => showToast(err.message))
-      .finally(() => setNotifying(false));
+    adminFetch(`/blood-requests/${b.id}/notify`, { method: "POST", body: JSON.stringify(payload) }).then((body) => {
+      const s = body.summary;
+      showToast(`Notified ${s.targeted} volunteer(s) \u2014 SMS ${s.sms.sent}/${s.sms.sent + s.sms.failed}, Email ${s.email.sent}/${s.email.sent + s.email.failed}.`);
+      setResponsePage(1);
+      loadResponses(b.id, 1, responsePageSize);
+    }).catch((err) => showToast(err.message)).finally(() => setNotifying(false));
   }
-
   function updateResponseStatus(id, status) {
-    adminFetch(`/blood-requests/responses/${id}`, { method: "PATCH", body: JSON.stringify({ status }) })
-      .then(() => { showToast("Response updated."); loadResponses(b.id); })
-      .catch((err) => showToast(err.message));
+    adminFetch(`/blood-requests/responses/${id}`, { method: "PATCH", body: JSON.stringify({ status }) }).then(() => {
+      showToast("Response updated.");
+      loadResponses(b.id);
+    }).catch((err) => showToast(err.message));
   }
-
   const canNotify = b?.status === "approved";
-
-  return (
-    <AdminModal open={!!b} onClose={onClose} title="Blood Request" wide>
-      {b && (
-        <div>
+  return <AdminModal open={!!b} onClose={onClose} title="Blood Request" wide>
+      {b && <div>
           <div className="mf-vd-header"><div><p className="text-lg font-bold">{b.patientName}</p><p className="mt-1"><StatusBadge status={b.status} /></p></div></div>
 
           <VdSection>Request Details</VdSection>
@@ -120,8 +105,7 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
           </div>
 
           <VdSection>Notify Volunteers</VdSection>
-          {canNotify ? (
-            <div className="flex flex-wrap items-end gap-2">
+          {canNotify ? <div className="flex flex-wrap items-end gap-2">
               <div>
                 <label className="mf-label" htmlFor="notify-strategy">Target</label>
                 <select className="mf-input" id="notify-strategy" value={strategy} onChange={(e) => setStrategy(e.target.value)}>
@@ -130,45 +114,30 @@ export default function BloodDetailModal({ bloodRequest: b, onClose, onUpdated }
                   <option value="nearby">Nearby (within radius)</option>
                 </select>
               </div>
-              {strategy === "nearby" && (
-                <div>
+              {strategy === "nearby" && <div>
                   <label className="mf-label" htmlFor="notify-radius">Radius</label>
                   <select className="mf-input" id="notify-radius" value={radius} onChange={(e) => setRadius(e.target.value)}>
                     <option value="20">20 km</option><option value="50">50 km</option><option value="100">100 km</option>
                   </select>
-                </div>
-              )}
-              <button className="mf-btn mf-btn-primary" disabled={notifying} onClick={notify}><i className="fa-solid fa-paper-plane"></i> Notify</button>
-            </div>
-          ) : (
-            <p className="text-[13px] text-[#9CA3AF]">Approve the request first to notify volunteers.</p>
-          )}
+                </div>}
+              <button className="mf-btn mf-btn-primary" disabled={notifying} onClick={notify}><i className="fa-solid fa-paper-plane" /> Notify</button>
+            </div> : <p className="text-[13px] text-[#9CA3AF]">Approve the request first to notify volunteers.</p>}
 
           <VdSection>Response Pipeline</VdSection>
-          {responses === null ? (
-            <p className="text-[13px] text-[#9CA3AF]">Loading…</p>
-          ) : !responses.length ? (
-            <p className="text-[13px] text-[#9CA3AF]">No volunteers notified yet.</p>
-          ) : (
-            <div className="mf-admin-table-wrap">
+          {responses === null ? <p className="text-[13px] text-[#9CA3AF]">Loading…</p> : !responses.length ? <p className="text-[13px] text-[#9CA3AF]">No volunteers notified yet.</p> : <div className="mf-admin-table-wrap">
               <table className="mf-admin-table">
                 <thead><tr><th>Volunteer</th><th>Contact</th><th>Response</th><th>Status</th></tr></thead>
                 <tbody>
-                  {responses.map((r) => (
-                    <tr key={r.id}>
-                      <td><strong>{r.volunteer.fullName}</strong><br /><span className="text-xs text-[#4B5563]">{r.volunteer.volunteerId} · {r.volunteer.bloodGroup || "—"}</span></td>
+                  {responses.map((r) => <tr key={r.id}>
+                      <td><strong>{r.volunteer.fullName}</strong><br /><span className="text-xs text-[#4B5563]">{r.volunteer.volunteerId} · {r.volunteer.bloodGroup || "\u2014"}</span></td>
                       <td>{r.volunteer.mobile}</td>
                       <td>{r.response ? r.response.replace(/_/g, " ") : <span className="text-[#9CA3AF]">Awaiting</span>}</td>
                       <td><StatusSelect value={r.status} statuses={RESPONSE_STATUSES} onChange={(v) => updateResponseStatus(r.id, v)} /></td>
-                    </tr>
-                  ))}
+                    </tr>)}
                 </tbody>
               </table>
-            </div>
-          )}
+            </div>}
           <AdminPagination pagination={responsePagination} onPageChange={changeResponsePage} pageSize={responsePageSize} onPageSizeChange={changeResponsePageSize} busy={responses === null} />
-        </div>
-      )}
-    </AdminModal>
-  );
+        </div>}
+    </AdminModal>;
 }

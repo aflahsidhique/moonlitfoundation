@@ -744,10 +744,10 @@
         },
         {
           "key": "home.belong.your-people-are-here",
-          "label": "Your people are here. ↗",
+          "label": "Your people are here. ",
           "group": "Find your people. Find your purpose.",
           "type": "text",
-          "default": "Your people are here. ↗",
+          "default": "Your people are here. ",
           "maxLength": 300
         },
         {
@@ -1710,7 +1710,23 @@
         },
         {
           "key": "programs.blood.image-https-images-unsplash-com-photo-1615461",
-          "label": "Image",
+          "label": "Slider image 1",
+          "group": "blood",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.blood.slider-image-2",
+          "label": "Slider image 2",
+          "group": "blood",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.blood.slider-image-3",
+          "label": "Slider image 3",
           "group": "blood",
           "type": "image",
           "default": "",
@@ -1814,7 +1830,23 @@
         },
         {
           "key": "programs.welfare.image-https-images-unsplash-com-photo-1593113",
-          "label": "Image",
+          "label": "Slider image 1",
+          "group": "welfare",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.welfare.slider-image-2",
+          "label": "Slider image 2",
+          "group": "welfare",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.welfare.slider-image-3",
+          "label": "Slider image 3",
           "group": "welfare",
           "type": "image",
           "default": "",
@@ -1918,7 +1950,23 @@
         },
         {
           "key": "programs.relief.image-https-images-unsplash-com-photo-1547683",
-          "label": "Image",
+          "label": "Slider image 1",
+          "group": "relief",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.relief.slider-image-2",
+          "label": "Slider image 2",
+          "group": "relief",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.relief.slider-image-3",
+          "label": "Slider image 3",
           "group": "relief",
           "type": "image",
           "default": "",
@@ -2022,7 +2070,23 @@
         },
         {
           "key": "programs.environment.image-https-images-unsplash-com-photo-1618477",
-          "label": "Image",
+          "label": "Slider image 1",
+          "group": "environment",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.environment.slider-image-2",
+          "label": "Slider image 2",
+          "group": "environment",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.environment.slider-image-3",
+          "label": "Slider image 3",
           "group": "environment",
           "type": "image",
           "default": "",
@@ -2126,7 +2190,23 @@
         },
         {
           "key": "programs.youth.image-https-images-unsplash-com-photo-1529390",
-          "label": "Image",
+          "label": "Slider image 1",
+          "group": "youth",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.youth.slider-image-2",
+          "label": "Slider image 2",
+          "group": "youth",
+          "type": "image",
+          "default": "",
+          "maxLength": 2048
+        },
+        {
+          "key": "programs.youth.slider-image-3",
+          "label": "Slider image 3",
           "group": "youth",
           "type": "image",
           "default": "",

@@ -4,6 +4,7 @@
   "description": "Admin backend API for Moonlit Foundation — volunteer registrations, blood requests, partner inquiries, contact messages, newsletter and event management.",
   "main": "src/index.js",
   "scripts": {
+    "test": "node --test --test-isolation=none test/adminPermissions.test.js",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "prisma:migrate": "prisma migrate dev",

@@ -8,68 +8,63 @@ import MfForm from "../components/ui/MfForm";
 import { TextField, TextareaField, SelectField, FileField, CheckboxGrid } from "../components/ui/FormField";
 import { useLocationCascade } from "../hooks/useLocationCascade";
 import { KERALA_DISTRICTS } from "../lib/kerala";
-
-const BLOOD_GROUPS = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
+const BLOOD_GROUPS = ["A+", "A\u2212", "B+", "B\u2212", "O+", "O\u2212", "AB+", "AB\u2212"];
 const SKILLS = ["Disaster Relief", "Event Management", "Medical Support", "Social Media", "Photography", "Fundraising", "Teaching", "Others"];
 const AVAILABLE_TIMES = ["Morning", "Afternoon", "Weekend", "Full Time"];
-
 export default function GetInvolved() {
   const { field: cms } = useWebsite();
-
   const cascade = useLocationCascade();
   const [isBloodDonor, setIsBloodDonor] = useState(false);
-
-  return (
-    <PageFx>
+  return <PageFx>
       <PageHero
-        crumb="Get Involved"
-        eyebrow={cms("get-involved.page-introduction.eyebrow-get-involved")}
-        heading={<>{cms("get-involved.page-introduction.be-part-of-the")}{" "}<span className="mf-hl mf-stroke">{cms("get-involved.page-introduction.change")}</span></>}
-        description={cms("get-involved.page-introduction.description-three-ways-to-stand-with-us-give-")}
-      />
+    crumb="Get Involved"
+    eyebrow={cms("get-involved.page-introduction.eyebrow-get-involved")}
+    heading={<>{cms("get-involved.page-introduction.be-part-of-the")}{" "}<span className="mf-hl mf-stroke">{cms("get-involved.page-introduction.change")}</span></>}
+    description={cms("get-involved.page-introduction.description-three-ways-to-stand-with-us-give-")}
+  />
 
-      {/* PATHWAY CARDS */}
+
       <section className="max-w-7xl mx-auto px-5 py-14">
         <div className="grid md:grid-cols-3 gap-6">
           <a href="#volunteer" className="mf-card p-8 text-center block mf-fade">
-            <span className="mf-icon-bubble bg-[#14338C] mx-auto mb-4"><i className="fa-solid fa-users"></i></span>
+            <span className="mf-icon-bubble bg-[#14338C] mx-auto mb-4"><i className="fa-solid fa-users" /></span>
             <h3 className="text-lg mb-2">{cms("get-involved.max-w-7xl.become-a-volunteer")}</h3>
             <p className="text-[13.5px]">{cms("get-involved.max-w-7xl.join-2-500-young-people-serving-communities-a")}</p>
-            <span className="mf-mini-arrow bg-[#14338C] mt-5 inline-flex"><i className="fa-solid fa-arrow-down"></i></span>
+            <span className="mf-mini-arrow bg-[#14338C] mt-5 inline-flex"><i className="fa-solid fa-arrow-down" /></span>
           </a>
           <a href="#blood" className="mf-card p-8 text-center block mf-fade">
-            <span className="mf-icon-bubble bg-acc-red mx-auto mb-4"><i className="fa-solid fa-droplet"></i></span>
+            <span className="mf-icon-bubble bg-acc-red mx-auto mb-4"><i className="fa-solid fa-droplet" /></span>
             <h3 className="text-lg mb-2">{cms("get-involved.max-w-7xl.request-blood")}</h3>
             <p className="text-[13.5px]">{cms("get-involved.max-w-7xl.need-blood-support-urgently-our-donor-network")}</p>
-            <span className="mf-mini-arrow bg-acc-red mt-5 inline-flex"><i className="fa-solid fa-arrow-down"></i></span>
+            <span className="mf-mini-arrow bg-acc-red mt-5 inline-flex"><i className="fa-solid fa-arrow-down" /></span>
           </a>
           <a href="#partner" className="mf-card p-8 text-center block mf-fade">
-            <span className="mf-icon-bubble bg-acc-yellow !text-[#0A1F44] mx-auto mb-4"><i className="fa-solid fa-handshake"></i></span>
+            <span className="mf-icon-bubble bg-acc-yellow !text-[#0A1F44] mx-auto mb-4"><i className="fa-solid fa-handshake" /></span>
             <h3 className="text-lg mb-2">{cms("get-involved.max-w-7xl.partner-with-us")}</h3>
             <p className="text-[13.5px]">{cms("get-involved.max-w-7xl.csr-programs-campus-chapters-and-ngo-collabor")}</p>
-            <span className="mf-mini-arrow bg-acc-yellow mt-5 inline-flex"><i className="fa-solid fa-arrow-down"></i></span>
+            <span className="mf-mini-arrow bg-acc-yellow mt-5 inline-flex"><i className="fa-solid fa-arrow-down" /></span>
           </a>
         </div>
       </section>
 
-      {/* VOLUNTEER */}
+
       <section id="volunteer" className="max-w-7xl mx-auto px-5 py-14 grid lg:grid-cols-2 gap-14 items-start scroll-mt-24">
         <div className="mf-fade">
           <p className="mf-eyebrow mb-3">{cms("get-involved.volunteer.volunteer-with-us")}</p>
           <h2 className="text-3xl md:text-4xl">{cms("get-involved.volunteer.give-your-time")}<br />{cms("get-involved.volunteer.gain-a")}{" "}<span className="mf-hl mf-stroke">{cms("get-involved.volunteer.community")}</span></h2>
-          <div className="mf-divider my-6"></div>
+          <div className="mf-divider my-6" />
           <p className="text-[15px] mb-6">{cms("get-involved.volunteer.whether-you-can-give-one-weekend-a-month-or-o")}</p>
           <ul className="space-y-3 mb-10">
-            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]"></i><span className="text-[14px]">{cms("get-involved.volunteer.hands-on-roles-across-all-five-programs-match")}</span></li>
-            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]"></i><span className="text-[14px]">{cms("get-involved.volunteer.free-training-in-first-response-event-managem")}</span></li>
-            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]"></i><span className="text-[14px]">{cms("get-involved.volunteer.volunteer-certificates-and-letters-of-recomme")}</span></li>
-            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]"></i><span className="text-[14px]">{cms("get-involved.volunteer.a-statewide-network-of-friends-who-show-up-fo")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]" /><span className="text-[14px]">{cms("get-involved.volunteer.hands-on-roles-across-all-five-programs-match")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]" /><span className="text-[14px]">{cms("get-involved.volunteer.free-training-in-first-response-event-managem")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]" /><span className="text-[14px]">{cms("get-involved.volunteer.volunteer-certificates-and-letters-of-recomme")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-[#14338C]" /><span className="text-[14px]">{cms("get-involved.volunteer.a-statewide-network-of-friends-who-show-up-fo")}</span></li>
           </ul>
           <div className="relative max-w-sm">
             <div className="mf-blob-frame"><div className="mf-blob h-[240px]">
               <Img src={cms("get-involved.volunteer.image-https-images-unsplash-com-photo-1559027")} alt={cms("get-involved.volunteer.image-description-moonlit-volunteers-together")} />
             </div></div>
-            <div className="mf-dots absolute -bottom-4 -right-4 hidden md:block" aria-hidden="true"></div>
+            <div className="mf-dots absolute -bottom-4 -right-4 hidden md:block" aria-hidden="true" />
           </div>
         </div>
 
@@ -123,8 +118,7 @@ export default function GetInvolved() {
                 <label className="flex items-center gap-2 text-[14px]"><input type="radio" name="isBloodDonor" value="no" className="accent-[#DC2626]" checked={!isBloodDonor} onChange={() => setIsBloodDonor(false)} /> No</label>
               </div>
             </div>
-            {isBloodDonor && (
-              <>
+            {isBloodDonor && <>
                 <SelectField label="Blood Group" name="bloodGroup">
                   <option value="">Select group</option>
                   {BLOOD_GROUPS.map((g) => <option key={g}>{g}</option>)}
@@ -132,16 +126,15 @@ export default function GetInvolved() {
                 <TextField label="Last Blood Donation" name="lastBloodDonationDate" type="date" hint="(if any)" />
                 <TextField label="Weight (kg)" name="weight" type="number" min={30} max={200} placeholder="e.g. 60" />
                 <TextareaField label="Medical Conditions" name="medicalConditions" hint="(optional)" span rows={2} placeholder="Anything we should know about" />
-              </>
-            )}
+              </>}
 
             <h4 className="mf-form-section sm:col-span-2">Available Time</h4>
             <CheckboxGrid legend="Available Time" name="availableTime" options={AVAILABLE_TIMES} cols="grid-cols-2 sm:grid-cols-4" />
 
             <h4 className="mf-form-section sm:col-span-2">Social Media <span className="text-[#9CA3AF] font-normal normal-case tracking-normal">(optional)</span></h4>
-            <TextField label={<><i className="fa-brands fa-instagram mr-1"></i> Instagram</>} name="instagram" placeholder="@handle" />
-            <TextField label={<><i className="fa-brands fa-facebook mr-1"></i> Facebook</>} name="facebook" placeholder="Profile link" />
-            <TextField label={<><i className="fa-brands fa-linkedin mr-1"></i> LinkedIn</>} name="linkedin" span placeholder="Profile link" />
+            <TextField label={<><i className="fa-brands fa-instagram mr-1" /> Instagram</>} name="instagram" placeholder="@handle" />
+            <TextField label={<><i className="fa-brands fa-facebook mr-1" /> Facebook</>} name="facebook" placeholder="Profile link" />
+            <TextField label={<><i className="fa-brands fa-linkedin mr-1" /> LinkedIn</>} name="linkedin" span placeholder="Profile link" />
 
             <h4 className="mf-form-section sm:col-span-2">ID Verification</h4>
             <SelectField label="ID Type" name="idType">
@@ -152,21 +145,21 @@ export default function GetInvolved() {
             <TextareaField label="Message" name="message" span rows={3} placeholder="Tell us a little about yourself (optional)" />
           </div>
           <button type="submit" className="mf-btn mf-btn-primary mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
-            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <>Join as a Volunteer <i className="fa-solid fa-arrow-right"></i></>}
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true" /> Submitting...</> : <>Join as a Volunteer <i className="fa-solid fa-arrow-right" /></>}
           </button>
           </>}
         </MfForm>
       </section>
 
-      {/* REQUEST BLOOD */}
+
       <section id="blood" className="max-w-7xl mx-auto px-5 py-14 grid lg:grid-cols-2 gap-14 items-start scroll-mt-24">
         <div className="mf-fade lg:order-2">
           <p className="mf-eyebrow mb-3" style={{ color: "var(--mf-red)" }}>{cms("get-involved.blood.blood-support")}</p>
           <h2 className="text-3xl md:text-4xl">{cms("get-involved.blood.need-blood")}<br />{cms("get-involved.blood.we-re")}{" "}<span className="mf-hl mf-stroke">{cms("get-involved.blood.here-to-help")}</span></h2>
-          <div className="mf-divider my-6" style={{ background: "var(--mf-red)" }}></div>
+          <div className="mf-divider my-6" style={{ background: "var(--mf-red)" }} />
           <p className="text-[15px] mb-6">{cms("get-involved.blood.fill-in-the-request-and-our-donor-coordinatio")}</p>
           <div className="mf-card p-5 flex items-center gap-4 border-l-4" style={{ borderColor: "var(--mf-red)" }}>
-            <i className="fa-solid fa-phone-volume text-2xl" style={{ color: "var(--mf-red)" }}></i>
+            <i className="fa-solid fa-phone-volume text-2xl" style={{ color: "var(--mf-red)" }} />
             <p className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.blood.for-emergencies-call-us-directly")}</strong><br /><a className="font-bold text-[#14338C]" href={cms("get-involved.blood.link-tel-919048414851")}>{cms("get-involved.blood.91-9048-414-851")}</a>{" "}{cms("get-involved.blood.available-24-7")}</p>
           </div>
         </div>
@@ -195,23 +188,23 @@ export default function GetInvolved() {
             <FileField label="Supporting Documents" name="documents" span hint="(prescription, referral — JPG or PNG, up to 3 files, 5MB each)" multiple />
           </div>
           <button type="submit" className="mf-btn mf-btn-red-solid mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
-            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <><i className="fa-solid fa-droplet"></i> Submit Request</>}
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true" /> Submitting...</> : <><i className="fa-solid fa-droplet" /> Submit Request</>}
           </button>
           </>}
         </MfForm>
       </section>
 
-      {/* PARTNER WITH US */}
+
       <section id="partner" className="max-w-7xl mx-auto px-5 py-14 grid lg:grid-cols-2 gap-14 items-start scroll-mt-24">
         <div className="mf-fade">
           <p className="mf-eyebrow mb-3">{cms("get-involved.partner.partnerships")}</p>
           <h2 className="text-3xl md:text-4xl">{cms("get-involved.partner.stronger")}{" "}<span className="mf-hl mf-stroke">{cms("get-involved.partner.together")}</span></h2>
-          <div className="mf-divider my-6"></div>
+          <div className="mf-divider my-6" />
           <p className="text-[15px] mb-6">{cms("get-involved.partner.we-work-with-companies-colleges-and-fellow-ng")}</p>
           <ul className="space-y-3">
-            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]"></i><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.csr-partnerships")}</strong>{" "}{cms("get-involved.partner.sponsor-relief-campaigns-plantation-drives-or")}</span></li>
-            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]"></i><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.campus-chapters")}</strong>{" "}{cms("get-involved.partner.start-a-moonlit-volunteer-unit-in-your-colleg")}</span></li>
-            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]"></i><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.ngo-collaborations")}</strong>{" "}{cms("get-involved.partner.joint-drives-shared-donor-networks-faster-res")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]" /><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.csr-partnerships")}</strong>{" "}{cms("get-involved.partner.sponsor-relief-campaigns-plantation-drives-or")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]" /><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.campus-chapters")}</strong>{" "}{cms("get-involved.partner.start-a-moonlit-volunteer-unit-in-your-colleg")}</span></li>
+            <li className="mf-check"><i className="fa-solid fa-check bg-acc-yellow !text-[#0A1F44]" /><span className="text-[14px]"><strong className="text-[#111827]">{cms("get-involved.partner.ngo-collaborations")}</strong>{" "}{cms("get-involved.partner.joint-drives-shared-donor-networks-faster-res")}</span></li>
           </ul>
         </div>
         <MfForm endpoint="/partners" successMessage="Thank you! Our partnerships team will reach out within a week." className="mf-form-card mf-fade">
@@ -224,16 +217,15 @@ export default function GetInvolved() {
             <TextareaField label="Message" name="message" required rows={4} placeholder="Tell us what you have in mind" error="Please add a short message." />
           </div>
           <button type="submit" className="mf-btn mf-btn-primary mt-6 w-full justify-center" disabled={submitting} aria-busy={submitting}>
-            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Submitting...</> : <>Send Inquiry <i className="fa-solid fa-arrow-right"></i></>}
+            {submitting ? <><i className="fa-solid fa-spinner fa-spin" aria-hidden="true" /> Submitting...</> : <>Send Inquiry <i className="fa-solid fa-arrow-right" /></>}
           </button>
           </>}
         </MfForm>
       </section>
 
-      {/* IMPACT STRIP */}
+
       <section className="max-w-7xl mx-auto px-5 py-10 pb-20 mf-fade">
         <ImpactBand compact />
       </section>
-    </PageFx>
-  );
+    </PageFx>;
 }

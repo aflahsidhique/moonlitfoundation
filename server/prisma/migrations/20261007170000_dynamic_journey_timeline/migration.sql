@@ -1,4 +1,4 @@
--- Convert the fixed About-page journey fields into ordered, image-ready milestones.
+
 WITH milestones AS (
   SELECT * FROM jsonb_to_recordset(
     '[

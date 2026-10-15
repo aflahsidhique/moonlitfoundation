@@ -1,14 +1,11 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { portalFetch } from "../lib/portalApi";
 import { fmtDate } from "../lib/format";
-
 export default function Overview() {
   const [state, setState] = useState({ status: "loading" });
   useEffect(() => {
-    Promise.all([portalFetch("/volunteer-auth/me"), portalFetch("/volunteer-auth/attendance"), portalFetch("/volunteer-auth/events"), portalFetch("/volunteer-auth/notifications")])
-      .then(([me, attendance, events, notifs]) => setState({ status: "ok", v: me.volunteer, attendance, events, latest: notifs.notifications[0] }))
-      .catch((err) => setState({ status: "error", message: err.message }));
+    Promise.all([portalFetch("/volunteer-auth/me"), portalFetch("/volunteer-auth/attendance"), portalFetch("/volunteer-auth/events"), portalFetch("/volunteer-auth/notifications")]).then(([me, attendance2, events2, notifs]) => setState({ status: "ok", v: me.volunteer, attendance: attendance2, events: events2, latest: notifs.notifications[0] })).catch((err) => setState({ status: "error", message: err.message }));
   }, []);
   if (state.status === "loading") return <p className="ws-empty" role="status">Getting your impact snapshot…</p>;
   if (state.status === "error") return <p className="ws-error" role="alert">{state.message}</p>;
@@ -17,7 +14,7 @@ export default function Overview() {
     { n: attendance.totalHours, label: "Hours of kindness", icon: "clock", to: "attendance" },
     { n: events.upcoming.length, label: "Upcoming events", icon: "calendar-days", to: "events" },
     { n: attendance.attendances.length, label: "Events attended", icon: "hands-holding-circle", to: "attendance" },
-    { n: v.isBloodDonor ? (v.bloodGroup || "Yes") : "Join", label: v.isBloodDonor ? "Your blood group" : "Become a blood donor", icon: "droplet", to: "blood" },
+    { n: v.isBloodDonor ? v.bloodGroup || "Yes" : "Join", label: v.isBloodDonor ? "Your blood group" : "Become a blood donor", icon: "droplet", to: "blood" }
   ];
   return <>
     <section className="ws-welcome"><div><p className="ws-eyebrow">Welcome back, {v.fullName.split(" ")[0]}</p><h2>Your small acts.<br /><em>Your lasting impact.</em></h2><p>Every hour you give brings us closer to a kinder world. Thank you for being part of the Moonlit community.</p><Link to="/events" className="mf-btn">Find your next event <i className="fa-solid fa-arrow-right" aria-hidden="true" /></Link></div><div className="ws-orbit" aria-hidden="true"><span /></div></section>

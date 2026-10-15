@@ -2,16 +2,11 @@ import AdminModal from "./AdminModal";
 import StatusBadge from "./StatusBadge";
 import { VdSection, VdGrid, VdField, ChipList, FileLink } from "./VdHelpers";
 import { resolveFileUrl, fmtDate } from "../lib/format";
-
 export default function VolunteerDetailModal({ volunteer: v, onClose }) {
-  return (
-    <AdminModal open={!!v} onClose={onClose} title="Volunteer Profile" wide>
-      {v && (
-        <div>
+  return <AdminModal open={!!v} onClose={onClose} title="Volunteer Profile" wide>
+      {v && <div>
           <div className="mf-vd-header">
-            {v.photoUrl
-              ? <img className="mf-vd-photo" src={resolveFileUrl(v.photoUrl)} alt="" />
-              : <div className="mf-vd-photo flex items-center justify-center text-[#9CA3AF]"><i className="fa-solid fa-user"></i></div>}
+            {v.photoUrl ? <img className="mf-vd-photo" src={resolveFileUrl(v.photoUrl)} alt="" /> : <div className="mf-vd-photo flex items-center justify-center text-[#9CA3AF]"><i className="fa-solid fa-user" /></div>}
             <div>
               <p className="text-lg font-bold">{v.fullName} {v.volunteerId && <span className="text-sm font-normal text-[#4B5563]">({v.volunteerId})</span>}</p>
               <p className="mt-1"><StatusBadge status={v.status} /></p>
@@ -63,15 +58,11 @@ export default function VolunteerDetailModal({ volunteer: v, onClose }) {
             <VdField label="Next Eligible">{v.nextEligibleDate ? fmtDate(v.nextEligibleDate) : null}</VdField>
             <VdField label="Weight">{v.weight ? `${v.weight} kg` : null}</VdField>
           </VdGrid>
-          {v.bloodDonations?.length > 0 && (
-            <>
+          {v.bloodDonations?.length > 0 && <>
               <VdSection>Donation History</VdSection>
-              {v.bloodDonations.map((d) => (
-                <p key={d.id} className="text-[13px]">{fmtDate(d.donationDate)}{d.location ? ` — ${d.location}` : ""}</p>
-              ))}
-            </>
-          )}
-          {v.medicalConditions && (<><VdSection>Medical Conditions</VdSection><p className="text-[13px]">{v.medicalConditions}</p></>)}
+              {v.bloodDonations.map((d) => <p key={d.id} className="text-[13px]">{fmtDate(d.donationDate)}{d.location ? ` \u2014 ${d.location}` : ""}</p>)}
+            </>}
+          {v.medicalConditions && <><VdSection>Medical Conditions</VdSection><p className="text-[13px]">{v.medicalConditions}</p></>}
 
           <VdSection>Social Media</VdSection>
           <VdGrid>
@@ -86,9 +77,7 @@ export default function VolunteerDetailModal({ volunteer: v, onClose }) {
             <VdField label="Document"><FileLink url={v.idUploadUrl} label="View document" /></VdField>
           </VdGrid>
 
-          {v.message && (<><VdSection>Message</VdSection><p className="text-[13px]">{v.message}</p></>)}
-        </div>
-      )}
-    </AdminModal>
-  );
+          {v.message && <><VdSection>Message</VdSection><p className="text-[13px]">{v.message}</p></>}
+        </div>}
+    </AdminModal>;
 }

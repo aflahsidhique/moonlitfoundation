@@ -3,10 +3,7 @@ const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
-// Public — contact form submits here.
 router.post("/", async (req, res, next) => {
   try {
     requireFields(req.body, ["name", "email", "subject", "message"]);
@@ -19,12 +16,11 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
-
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
     const [{ rows: messages, pagination }, unread] = await Promise.all([
-      paginated(prisma.contactMessage, req.query, { where: status ? { status } : undefined, orderBy: { createdAt: "desc" } }),
+      paginated(prisma.contactMessage, req.query, { where: status ? { status } : void 0, orderBy: { createdAt: "desc" } }),
       prisma.contactMessage.count({ where: { status: "unread", deletedAt: null } })
     ]);
     res.json({ messages, pagination, summary: { unread } });
@@ -32,7 +28,6 @@ router.get("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.patch("/:id", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, ["status"]);
@@ -46,7 +41,6 @@ router.patch("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.contactMessage.delete({ where: { id: req.params.id } });
@@ -55,5 +49,4 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

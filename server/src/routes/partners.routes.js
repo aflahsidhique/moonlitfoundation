@@ -4,22 +4,17 @@ const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { makeSubmissionKey, normalizeEmail, isUniqueConstraintError } = require("../lib/dedupe");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
-// Public — partnership inquiry form submits here.
 router.post("/", async (req, res, next) => {
   try {
     requireFields(req.body, ["organization", "contactPerson", "email", "message"]);
     const { organization, contactPerson, email, message } = req.body;
     const normalizedEmail = normalizeEmail(email);
     const submissionKey = makeSubmissionKey([normalizedEmail, organization, contactPerson, message]);
-
     const duplicate = await prisma.partnerInquiry.findFirst({ where: { submissionKey }, select: { id: true } });
     if (duplicate) {
       return res.status(409).json({ error: "This partnership inquiry was already submitted. Please wait before submitting it again." });
     }
-
     const partner = await prisma.partnerInquiry.create({
       data: { submissionKey, organization, contactPerson, email: normalizedEmail, message }
     });
@@ -31,12 +26,11 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
-
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
     const [{ rows: partners, pagination }, pending] = await Promise.all([
-      paginated(prisma.partnerInquiry, req.query, { where: status ? { status } : undefined, orderBy: { createdAt: "desc" } }),
+      paginated(prisma.partnerInquiry, req.query, { where: status ? { status } : void 0, orderBy: { createdAt: "desc" } }),
       prisma.partnerInquiry.count({ where: { status: "pending", deletedAt: null } })
     ]);
     res.json({ partners, pagination, summary: { pending } });
@@ -44,7 +38,6 @@ router.get("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.patch("/:id", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, ["status"]);
@@ -58,7 +51,6 @@ router.patch("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.partnerInquiry.delete({ where: { id: req.params.id } });
@@ -67,5 +59,4 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

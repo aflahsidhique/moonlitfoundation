@@ -2,9 +2,7 @@ export default function AdminPagination({ pagination, onPageChange, pageSize, on
   if (!pagination || pagination.total === 0) return null;
   const start = (pagination.page - 1) * pagination.pageSize + 1;
   const end = Math.min(pagination.total, start + pagination.pageSize - 1);
-
-  return (
-    <nav className="ws-pagination" aria-label="Pagination" aria-busy={busy}>
+  return <nav className="ws-pagination" aria-label="Pagination" aria-busy={busy}>
       <p>Showing <strong>{start}-{end}</strong> of <strong>{pagination.total}</strong></p>
       <label>
         Rows
@@ -17,6 +15,5 @@ export default function AdminPagination({ pagination, onPageChange, pageSize, on
         <span>Page {pagination.page} of {pagination.totalPages}</span>
         <button type="button" onClick={() => onPageChange(pagination.page + 1)} disabled={!pagination.hasNext || busy} aria-label="Next page"><i className="fa-solid fa-chevron-right" aria-hidden="true" /></button>
       </div>
-    </nav>
-  );
+    </nav>;
 }

@@ -15,7 +15,7 @@ export default function Icon({ name = "arrow-up-right", size = 20, className = "
     pause: <path d="M9 5v14M15 5v14" />,
     instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5h.01" /></>,
     pin: <><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z" /><circle cx="12" cy="10" r="2" /></>,
-    check: <path d="m5 12 4 4L19 6" />,
+    check: <path d="m5 12 4 4L19 6" />
   };
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" {...props}>{paths[name] || paths["arrow-up-right"]}</svg>;
 }

@@ -6,43 +6,41 @@ import AdminDataTable from "../components/AdminDataTable";
 import { DeleteButton } from "../components/AdminButtons";
 import NotificationFormModal from "../components/NotificationFormModal";
 import { fmtDate } from "../lib/format";
-
 export default function Notifications() {
   const showToast = useToast();
   const { rows, loading, fetching, error, refresh, pagination, pageSize, setPage, setPageSize } = useAdminList("/notifications", "notifications");
   const [formOpen, setFormOpen] = useState(false);
-
   function remove(id) {
     adminFetch(`/notifications/${id}`, { method: "DELETE" }).then(refresh);
   }
-
   if (error) return <p className="mf-admin-empty">{error.message}</p>;
   if (loading) return <p className="mf-admin-empty">Loading…</p>;
-
-  return (
-    <>
+  return <>
       <div className="flex justify-end mb-4">
-        <button className="mf-btn mf-btn-primary" onClick={() => setFormOpen(true)}><i className="fa-solid fa-plus"></i> New Notification</button>
+        <button className="mf-btn mf-btn-primary" onClick={() => setFormOpen(true)}><i className="fa-solid fa-plus" /> New Notification</button>
       </div>
       <AdminDataTable
-        rows={rows}
-        columns={[
-          { label: "Title / Message", render: (n) => <><strong>{n.title}</strong><br /><span className="text-xs text-[#4B5563]">{n.message}</span></> },
-          { label: "Audience", render: (n) => n.audience === "all" ? "All volunteers" : `1 volunteer: ${n.volunteer ? `${n.volunteer.fullName} (${n.volunteer.volunteerId})` : "—"}` },
-          { label: "Sent", render: (n) => fmtDate(n.createdAt) },
-          { label: "Actions", isActions: true, render: (n) => <DeleteButton onDelete={() => remove(n.id)} /> },
-        ]}
-        pagination={pagination}
-        onPageChange={setPage}
-        pageSize={pageSize}
-        onPageSizeChange={setPageSize}
-        busy={fetching}
-      />
+    rows={rows}
+    columns={[
+      { label: "Title / Message", render: (n) => <><strong>{n.title}</strong><br /><span className="text-xs text-[#4B5563]">{n.message}</span></> },
+      { label: "Audience", render: (n) => n.audience === "all" ? "All volunteers" : `1 volunteer: ${n.volunteer ? `${n.volunteer.fullName} (${n.volunteer.volunteerId})` : "\u2014"}` },
+      { label: "Sent", render: (n) => fmtDate(n.createdAt) },
+      { label: "Actions", isActions: true, render: (n) => <DeleteButton onDelete={() => remove(n.id)} /> }
+    ]}
+    pagination={pagination}
+    onPageChange={setPage}
+    pageSize={pageSize}
+    onPageSizeChange={setPageSize}
+    busy={fetching}
+  />
       <NotificationFormModal
-        open={formOpen}
-        onClose={() => setFormOpen(false)}
-        onSent={() => { setFormOpen(false); showToast("Notification sent."); refresh(); }}
-      />
-    </>
-  );
+    open={formOpen}
+    onClose={() => setFormOpen(false)}
+    onSent={() => {
+      setFormOpen(false);
+      showToast("Notification sent.");
+      refresh();
+    }}
+  />
+    </>;
 }

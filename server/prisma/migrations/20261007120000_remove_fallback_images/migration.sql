@@ -1,4 +1,4 @@
--- Remove legacy/demo images while preserving files uploaded through admin.
+
 UPDATE "WebsiteContent"
 SET "draft" = COALESCE((
   SELECT jsonb_object_agg(entry.key,
@@ -23,11 +23,11 @@ SET "draft" = COALESCE((
   FROM jsonb_each("WebsiteContent"."published") AS entry
 ), '{}'::jsonb);
 
--- Rows without a Cloudinary public ID are the legacy external gallery seeds,
--- not files uploaded through the admin image library.
+
+
 DELETE FROM "WebsiteImage" WHERE "publicId" IS NULL;
 
--- Event covers must also come from the protected admin upload endpoint.
+
 UPDATE "Event"
 SET "imageUrl" = NULL
 WHERE "imageUrl" IS NOT NULL

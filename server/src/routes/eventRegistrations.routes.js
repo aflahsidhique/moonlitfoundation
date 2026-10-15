@@ -3,15 +3,12 @@ const prisma = require("../lib/prisma");
 const { requireAuth } = require("../middleware/auth");
 const { requireFields } = require("../lib/validate");
 const { paginated } = require("../lib/pagination");
-
 const router = express.Router();
-
-// Admin — every registration across every event, newest first.
 router.get("/", requireAuth, async (req, res, next) => {
   try {
     const { status } = req.query;
     const { rows: registrations, pagination } = await paginated(prisma.eventRegistration, req.query, {
-      where: status ? { status } : undefined,
+      where: status ? { status } : void 0,
       orderBy: { createdAt: "desc" },
       include: { event: { select: { id: true, title: true, eventDate: true } } }
     });
@@ -20,7 +17,6 @@ router.get("/", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.patch("/:id", requireAuth, async (req, res, next) => {
   try {
     requireFields(req.body, ["status"]);
@@ -34,7 +30,6 @@ router.patch("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 router.delete("/:id", requireAuth, async (req, res, next) => {
   try {
     await prisma.eventRegistration.delete({ where: { id: req.params.id } });
@@ -43,5 +38,4 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
-
 module.exports = router;

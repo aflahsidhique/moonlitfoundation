@@ -1,56 +1,64 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useMotion } from "./useMotion";
-
 gsap.registerPlugin(ScrollTrigger);
-
 export function useScrollFx(containerRef) {
   const { enabled } = useMotion();
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
     const counters = [...container.querySelectorAll("[data-count]")];
-    const finalCount = (element) => { element.textContent = Number(element.dataset.count).toLocaleString("en-IN") + (element.dataset.suffix ?? "+"); };
+    const finalCount = (element) => {
+      element.textContent = Number(element.dataset.count).toLocaleString("en-IN") + (element.dataset.suffix ?? "+");
+    };
     counters.forEach(finalCount);
     if (!enabled) return;
     const cleanups = [];
-    const counterTweens = new Map();
+    const counterTweens =  new Map();
     let active = true;
     const context = gsap.context(() => {
       const lines = container.querySelectorAll(".hero-line > span");
       if (lines.length) gsap.from(lines, { yPercent: 115, rotation: 3, duration: 1.15, stagger: 0.1, ease: "power4.out", clearProps: "all" });
       const heroElements = container.querySelectorAll(".hero-reveal");
       if (heroElements.length) gsap.from(heroElements, { y: 24, autoAlpha: 0, duration: 0.85, stagger: 0.065, delay: 0.15, ease: "power3.out", clearProps: "all" });
-
       const faders = [...container.querySelectorAll(".mf-fade")].filter((element) => !element.parentElement.closest(".mf-fade"));
       faders.forEach((element) => {
         gsap.fromTo(element, { y: 34, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 0.9, ease: "power3.out", clearProps: "all",
-          scrollTrigger: { trigger: element, start: "top 94%", once: true },
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: { trigger: element, start: "top 94%", once: true }
         });
       });
       container.querySelectorAll(".mf-journey-timeline").forEach((timeline) => {
         gsap.fromTo(timeline, { "--journey-scale": 0 }, {
-          "--journey-scale": 1, ease: "none",
-          scrollTrigger: { trigger: timeline, start: "top 78%", end: "bottom 72%", scrub: 0.45 },
+          "--journey-scale": 1,
+          ease: "none",
+          scrollTrigger: { trigger: timeline, start: "top 78%", end: "bottom 72%", scrub: 0.45 }
         });
         const desktop = window.matchMedia("(min-width: 701px)").matches;
         timeline.querySelectorAll(".mf-journey-item").forEach((item) => {
-          const card=item.querySelector(".mf-journey-card"),date=item.querySelector(".mf-journey-date"),marker=item.querySelector(".mf-journey-marker");
-          const direction=desktop?(item.classList.contains("is-right")?1:-1):1;
-          const trigger={trigger:item,start:"top 88%",once:true};
-          gsap.fromTo(card,{x:direction*(desktop?72:34),autoAlpha:0},{x:0,autoAlpha:1,duration:.9,ease:"power3.out",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
-          gsap.fromTo(date,{x:direction*(desktop?-32:20),autoAlpha:0},{x:0,autoAlpha:1,duration:.65,delay:.12,ease:"power2.out",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
-          gsap.fromTo(marker,{scale:0,autoAlpha:0},{scale:1,autoAlpha:1,duration:.45,delay:.18,ease:"back.out(2)",clearProps:"transform,opacity,visibility",scrollTrigger:trigger});
+          const card = item.querySelector(".mf-journey-card"), date = item.querySelector(".mf-journey-date"), marker = item.querySelector(".mf-journey-marker");
+          const direction = desktop ? item.classList.contains("is-right") ? 1 : -1 : 1;
+          const trigger = { trigger: item, start: "top 88%", once: true };
+          gsap.fromTo(card, { x: direction * (desktop ? 72 : 34), autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.9, ease: "power3.out", clearProps: "transform,opacity,visibility", scrollTrigger: trigger });
+          gsap.fromTo(date, { x: direction * (desktop ? -32 : 20), autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.65, delay: 0.12, ease: "power2.out", clearProps: "transform,opacity,visibility", scrollTrigger: trigger });
+          gsap.fromTo(marker, { scale: 0, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.45, delay: 0.18, ease: "back.out(2)", clearProps: "transform,opacity,visibility", scrollTrigger: trigger });
         });
       });
       counters.forEach((element) => {
         const value = { count: 0 };
         const tween = gsap.to(value, {
-          count: Number(element.dataset.count), duration: 1.8, ease: "power2.out",
+          count: Number(element.dataset.count),
+          duration: 1.8,
+          ease: "power2.out",
           scrollTrigger: { trigger: element, start: "top 96%", once: true },
-          onUpdate: () => { element.textContent = Math.round(value.count).toLocaleString("en-IN") + (element.dataset.suffix ?? "+"); },
+          onUpdate: () => {
+            element.textContent = Math.round(value.count).toLocaleString("en-IN") + (element.dataset.suffix ?? "+");
+          }
         });
         counterTweens.set(element, tween);
       });
@@ -75,28 +83,50 @@ export function useScrollFx(containerRef) {
             x(px * (tilt ? 6 : 12));
             y(py * (tilt ? -6 : 10));
           };
-          const reset = () => { x(0); y(0); };
+          const reset = () => {
+            x(0);
+            y(0);
+          };
           element.addEventListener("pointermove", move);
           element.addEventListener("pointerleave", reset);
-          cleanups.push(() => { element.removeEventListener("pointermove", move); element.removeEventListener("pointerleave", reset); x.tween.kill(); y.tween.kill(); });
+          cleanups.push(() => {
+            element.removeEventListener("pointermove", move);
+            element.removeEventListener("pointerleave", reset);
+            x.tween.kill();
+            y.tween.kill();
+          });
         });
       }
     }, container);
-
-    const refresh = () => { if (active) ScrollTrigger.refresh(); };
+    const refresh = () => {
+      if (active) ScrollTrigger.refresh();
+    };
     const frame = requestAnimationFrame(refresh);
     document.fonts?.ready.then(refresh);
-    // Published figures can arrive after the animation was created. Stop the
-    // old tween so it cannot write its previous value over the new CMS number.
     const counterChanges = new MutationObserver((records) => {
-      records.forEach(({ target }) => { counterTweens.get(target)?.kill(); finalCount(target); });
+      records.forEach(({ target }) => {
+        counterTweens.get(target)?.kill();
+        finalCount(target);
+      });
     });
     counterChanges.observe(container, { subtree: true, attributes: true, attributeFilter: ["data-count", "data-suffix"] });
-    // Includes replacement photos and newly loaded gallery cards.
     container.addEventListener("load", refresh, true);
     let resizeFrame;
-    const resize = new ResizeObserver(() => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(refresh); });
+    const resize = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(refresh);
+    });
     resize.observe(container);
-    return () => { active = false; cancelAnimationFrame(frame); cancelAnimationFrame(resizeFrame); resize.disconnect(); counterChanges.disconnect(); container.removeEventListener("load", refresh, true); cleanups.forEach((cleanup) => cleanup()); context.revert(); counters.forEach(finalCount); };
+    return () => {
+      active = false;
+      cancelAnimationFrame(frame);
+      cancelAnimationFrame(resizeFrame);
+      resize.disconnect();
+      counterChanges.disconnect();
+      container.removeEventListener("load", refresh, true);
+      cleanups.forEach((cleanup) => cleanup());
+      context.revert();
+      counters.forEach(finalCount);
+    };
   }, [containerRef, enabled]);
 }

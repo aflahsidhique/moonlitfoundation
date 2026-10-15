@@ -3,45 +3,39 @@ import { portalFetch } from "../lib/portalApi";
 import { fmtDate } from "../lib/format";
 import { useToast } from "../../hooks/useToast";
 import ChipList from "../components/ChipList";
-
 export default function Profile() {
   const showToast = useToast();
   const [state, setState] = useState({ status: "loading" });
   const [pw, setPw] = useState({ current: "", next: "", confirm: "" });
   const [pwError, setPwError] = useState("");
   const [updating, setUpdating] = useState(false);
-
   useEffect(() => {
-    portalFetch("/volunteer-auth/me")
-      .then((body) => setState({ status: "ok", v: body.volunteer }))
-      .catch((err) => setState({ status: "error", message: err.message }));
+    portalFetch("/volunteer-auth/me").then((body) => setState({ status: "ok", v: body.volunteer })).catch((err) => setState({ status: "error", message: err.message }));
   }, []);
-
   function handlePwSubmit(e) {
     e.preventDefault();
     setPwError("");
-    if (pw.next.length < 8) { setPwError("New password must be at least 8 characters."); return; }
-    if (pw.next !== pw.confirm) { setPwError("New passwords don't match."); return; }
-
+    if (pw.next.length < 8) {
+      setPwError("New password must be at least 8 characters.");
+      return;
+    }
+    if (pw.next !== pw.confirm) {
+      setPwError("New passwords don't match.");
+      return;
+    }
     setUpdating(true);
-    portalFetch("/volunteer-auth/change-password", { method: "POST", body: JSON.stringify({ currentPassword: pw.current, newPassword: pw.next }) })
-      .then(() => { showToast("Password updated."); setPw({ current: "", next: "", confirm: "" }); })
-      .catch((err) => setPwError(err.message))
-      .finally(() => setUpdating(false));
+    portalFetch("/volunteer-auth/change-password", { method: "POST", body: JSON.stringify({ currentPassword: pw.current, newPassword: pw.next }) }).then(() => {
+      showToast("Password updated.");
+      setPw({ current: "", next: "", confirm: "" });
+    }).catch((err) => setPwError(err.message)).finally(() => setUpdating(false));
   }
-
   if (state.status === "loading") return <p className="text-[14px] text-[#4B5563]">Loading…</p>;
   if (state.status === "error") return <p className="text-[14px] text-[#DC2626]">{state.message}</p>;
-
   const v = state.v;
-
-  return (
-    <>
+  return <>
       <div className="mf-form-card">
         <div className="mf-pf-header">
-          {v.photoUrl
-            ? <img className="mf-pf-photo" src={v.photoUrl} alt="" />
-            : <div className="mf-pf-photo flex items-center justify-center text-[#9CA3AF]"><i className="fa-solid fa-user text-2xl"></i></div>}
+          {v.photoUrl ? <img className="mf-pf-photo" src={v.photoUrl} alt="" /> : <div className="mf-pf-photo flex items-center justify-center text-[#9CA3AF]"><i className="fa-solid fa-user text-2xl" /></div>}
           <div>
             <p className="text-xl font-bold">{v.fullName}</p>
             <p className="text-sm text-[#4B5563] mt-1">{v.volunteerId}</p>
@@ -53,7 +47,7 @@ export default function Profile() {
           <div><dt>Date of Birth</dt><dd>{fmtDate(v.dob)}</dd></div>
           <div><dt>Gender</dt><dd>{v.gender}</dd></div>
           <div><dt>Mobile</dt><dd>{v.mobile}</dd></div>
-          <div><dt>WhatsApp</dt><dd>{v.whatsapp || "—"}</dd></div>
+          <div><dt>WhatsApp</dt><dd>{v.whatsapp || "\u2014"}</dd></div>
           <div><dt>Email</dt><dd>{v.email}</dd></div>
         </dl>
 
@@ -97,9 +91,8 @@ export default function Profile() {
             <input className="mf-input" id="cp-confirm" type="password" required minLength={8} autoComplete="new-password" value={pw.confirm} onChange={(e) => setPw((p) => ({ ...p, confirm: e.target.value }))} />
           </div>
           {pwError && <p className="mf-error-msg mb-2" style={{ display: "block" }}>{pwError}</p>}
-          <button className="mf-btn mf-btn-primary" type="submit" disabled={updating}>{updating ? "Updating…" : "Update Password"}</button>
+          <button className="mf-btn mf-btn-primary" type="submit" disabled={updating}>{updating ? "Updating\u2026" : "Update Password"}</button>
         </form>
       </div>
-    </>
-  );
+    </>;
 }

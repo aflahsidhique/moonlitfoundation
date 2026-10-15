@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "../../styles/workspace.css";
-
 export default function AuthFrame({ admin = false, children }) {
   return <div className="ws-auth">
     <section className="ws-auth-story">
