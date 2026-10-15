@@ -1,6 +1,6 @@
 import { cachedFetch, invalidate } from "./cache";
 export { cachedFetch, invalidate } from "./cache";
-const PROD_API_BASE = import.meta.env.VITE_API_BASE_PROD || "https://moonlit-website-api.onrender.com/api";
+const PROD_API_BASE = import.meta.env.VITE_API_BASE_PROD || "https://moonlitfoundation.onrender.com/api";
 const LOCAL_API_BASE = import.meta.env.VITE_API_BASE_LOCAL || "http://localhost:4000/api";
 const isLocal = ["localhost", "127.0.0.1", ""].includes(window.location.hostname);
 export const API_BASE = import.meta.env.VITE_API_BASE || (isLocal ? LOCAL_API_BASE : PROD_API_BASE);

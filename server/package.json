@@ -6,8 +6,11 @@
   "scripts": {
     "test": "node --test --test-isolation=none test/adminPermissions.test.js",
     "dev": "nodemon src/index.js",
+    "prestart": "npm run prisma:generate",
     "start": "node src/index.js",
+    "deploy": "npm run prisma:generate && npm run prisma:deploy && npm run seed",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "seed": "node prisma/seed.js",
     "prisma:deploy": "prisma migrate deploy"

@@ -12,8 +12,7 @@ to, and everything the admin panel manages.
 cd server
 npm install
 cp .env.example .env        # then edit DATABASE_URL / ADMIN_EMAIL / ADMIN_PASSWORD / JWT_SECRET / CLOUDINARY_*
-npx prisma migrate deploy   # applies the existing migration history to your DATABASE_URL
-npm run seed                 # creates the admin login + 2 sample events
+npm run deploy              # generates Prisma, applies migrations, and refreshes the admin login
 npm run dev                   # http://localhost:4000
 ```
 
@@ -24,9 +23,9 @@ with, use `migrate deploy` (applies existing migrations only) day-to-day;
 only use `migrate dev --name ...` when you're intentionally adding a new
 migration, since it can prompt to reset the database on drift.
 
-`npm run seed` is idempotent — safe to re-run. It only creates the admin
-account if one doesn't already exist for `ADMIN_EMAIL`, and only seeds
-sample events if the events table is empty.
+`npm run seed` is idempotent — safe to re-run. It creates or refreshes the
+`ADMIN_EMAIL` account as the active super admin using `ADMIN_NAME` and
+`ADMIN_PASSWORD`, and only seeds sample events if the events table is empty.
 
 **Cloudinary** — the volunteer form's photo and ID document uploads are
 streamed straight to Cloudinary (never written to local disk). Set
@@ -37,10 +36,8 @@ input's `accept` attribute and server-side via multer's `fileFilter`),
 5MB max per file. Uploads land in the `moonlit/volunteer-photos` and
 `moonlit/volunteer-ids` folders in your Cloudinary account.
 
-**Change the seeded admin password** after your first login — there's no
-"change password" endpoint yet, so for now: update `ADMIN_PASSWORD` in
-`.env`, delete the admin row via `npx prisma studio`, and re-run
-`npm run seed`.
+**Change the seeded admin password** by updating `ADMIN_PASSWORD` in `.env`
+and re-running `npm run seed`. There is no change-password endpoint yet.
 
 ## Volunteer approval → credentials → portal
 
@@ -109,6 +106,10 @@ npm run prisma:deploy
 npx prisma generate
 ```
 
+`npm start` regenerates the Prisma client before starting the API. This keeps
+cached production installs from running an older generated client that omits
+new fields such as `Admin.isActive`.
+
 The API limits each process to three database connections by default so the
 admin dashboard does not exhaust small hosted PostgreSQL plans. Override this
 only when the database has sufficient capacity by setting
@@ -145,24 +146,22 @@ support in Prisma):
 
 `datasource db` in `prisma/schema.prisma` is set to `postgresql` (SQLite
 is dev-only — Render's disk is ephemeral, so a file-based DB gets wiped on
-every redeploy). `render.yaml` at the repo root defines two services:
+every redeploy). Configure these two services in Render:
 
-- **`moonlit-website-api`** — this Express app (`rootDir: server`). Build
-  command runs `npm install`, generates the Prisma client, applies pending
-  migrations (`prisma migrate deploy`), and re-runs the idempotent seed.
+- **`moonlitfoundation`** — this Express app (`rootDir: server`). Use
+  `npm install && npm run deploy` as the Build Command. It generates the
+  Prisma client, applies pending migrations, and re-runs the idempotent seed.
 - **`moonlit-website`** — the React/Vite SPA (`client/`), built with
   `npm run build` and served from `client/dist` with an SPA-fallback
   rewrite (`/* → /index.html`) so client-side routes resolve on refresh.
 
 To deploy:
 1. Push this repo to GitHub (already done if you're reading this on Render).
-2. In the Render dashboard: **New → Blueprint**, point it at the repo. It
-   reads `render.yaml` and creates both services.
-3. Render will prompt for every env var marked `sync: false` in
-   `render.yaml` — paste in your real values (`DATABASE_URL` from your
-   Postgres provider, `JWT_SECRET`, `ADMIN_EMAIL`/`ADMIN_PASSWORD`,
-   `CLOUDINARY_*`, `GMAIL_*`, `SMSGATE_*`, `VAPID_*`). These are never
-   committed to the repo.
+2. In the Render dashboard, configure the API with root directory `server`,
+   Build Command `npm install && npm run deploy`, and Start Command `npm start`.
+3. Add the real values for `DATABASE_URL`, `JWT_SECRET`,
+   `ADMIN_EMAIL`/`ADMIN_PASSWORD`, `CLOUDINARY_*`, `GMAIL_*`, `SMSGATE_*`,
+   and `VAPID_*`. These are never committed to the repo.
 4. If you rename either service, update the cross-references: the API's
    `CORS_ORIGINS`/`PORTAL_URL` env vars point at the static site's URL, and
    `client/src/lib/api.js`'s `PROD_API_BASE` points at the API's URL.

@@ -8,8 +8,12 @@ async function main() {
   const name = process.env.ADMIN_NAME || "Moonlit Admin";
   const existing = await prisma.admin.findUnique({ where: { email } });
   if (existing) {
-    await prisma.admin.update({ where: { id: existing.id }, data: { role: "super_admin", isActive: true } });
-    console.log(`Admin ${email} already exists; ensured it is the active super admin.`);
+    const passwordHash = await bcrypt.hash(password, 10);
+    await prisma.admin.update({
+      where: { id: existing.id },
+      data: { name, passwordHash, role: "super_admin", isActive: true }
+    });
+    console.log(`Admin ${email} already exists; refreshed it as the active super admin.`);
   } else {
     const passwordHash = await bcrypt.hash(password, 10);
     await prisma.admin.create({ data: { email, passwordHash, name, role: "super_admin" } });
